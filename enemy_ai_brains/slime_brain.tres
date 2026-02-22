@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Enemy_Brain" load_steps=2 format=3 uid="uid://b346xrbst2irl"]
+
+[ext_resource type="Script" uid="uid://dd241cwd74qgx" path="res://scripts/enemy_ai/enemy_brain.gd" id="1_fdx0u"]
+
+[resource]
+script = ExtResource("1_fdx0u")
+skill_weight = 3
+attack_weight = 7
+intelligence = 0.5
+metadata/_custom_type_script = "uid://dd241cwd74qgx"

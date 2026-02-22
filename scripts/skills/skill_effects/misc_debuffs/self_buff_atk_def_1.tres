@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Self_Buff" load_steps=2 format=3 uid="uid://ph2d1q67oj17"]
+
+[ext_resource type="Script" uid="uid://ctx76detw60c1" path="res://scripts/skills/skill_effects_scripts/self_buff.gd" id="1_flsm0"]
+
+[resource]
+script = ExtResource("1_flsm0")
+atk_buff = 1.0
+def_buff = 1.0
+crit_buff = 1
+metadata/_custom_type_script = "uid://ctx76detw60c1"

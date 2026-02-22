@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Player_Data" load_steps=3 format=3 uid="uid://btrmwen81pynd"]
+
+[ext_resource type="Script" uid="uid://djyxh3ytb5htx" path="res://scripts/data/player_data.gd" id="1_g1wvs"]
+[ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="2_kx38p"]
+
+[resource]
+script = ExtResource("1_g1wvs")
+hp = Vector2i(40, 40)
+abilities = Vector3i(8, 6, 6)
+metadata/_custom_type_script = "uid://djyxh3ytb5htx"

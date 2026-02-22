@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://drrc8d1f6xk3c"]
+
+[ext_resource type="Script" uid="uid://b1ky0fne46e7k" path="res://scripts/ui/tokens/buff_counter_container.gd" id="1_t7fbn"]
+[ext_resource type="Texture2D" uid="uid://b3ktu6ldxdxm5" path="res://ui/tokens/test_projectile.png" id="2_rjp0j"]
+
+[node name="CounterContainer" type="BoxContainer"]
+custom_minimum_size = Vector2(6, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("1_t7fbn")
+
+[node name="Counter" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_rjp0j")
+expand_mode = 3
+
+[node name="Counter2" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_rjp0j")
+expand_mode = 3

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://clbwpqgutra43"]
+
+[ext_resource type="Script" uid="uid://b5gg0oyx3y4ui" path="res://scripts/ui/battlehud/buttons/skill_button.gd" id="1_o8opt"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(60, 60)
+size_flags_vertical = 4
+text = "Skill 1"
+script = ExtResource("1_o8opt")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

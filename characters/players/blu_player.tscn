@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdg4slj77gca3"]
+
+[ext_resource type="Script" uid="uid://bfhkyey5kr6yu" path="res://scripts/player/player_controller.gd" id="1_y5y4t"]
+[ext_resource type="Resource" uid="uid://cu76856g8h5yh" path="res://dialogue/player_quips/crescent.tres" id="2_auu6t"]
+[ext_resource type="Script" uid="uid://bm801yc5miabv" path="res://scripts/general/character.gd" id="2_kjuie"]
+[ext_resource type="AudioStream" uid="uid://bjeyij230y6t1" path="res://audio/voices/player/crescent.wav" id="3_a7ju7"]
+[ext_resource type="PackedScene" uid="uid://cnlc23gohfmty" path="res://animations/players/player_animation_node.tscn" id="3_y5y4t"]
+[ext_resource type="Texture2D" uid="uid://didf64ukdiubj" path="res://sprites/players/crescent.png" id="4_kjuie"]
+[ext_resource type="PackedScene" uid="uid://bjvmx7hn82haj" path="res://characters/character_essentials.tscn" id="9_3p33f"]
+[ext_resource type="PackedScene" uid="uid://bb5l5lx7e14gk" path="res://ui/actor_components/actor_ui.tscn" id="10_c6umf"]
+
+[node name="BLU_PLAYER" type="Node2D" groups=["Players"]]
+y_sort_enabled = true
+script = ExtResource("1_y5y4t")
+player_type = 4
+
+[node name="Character" type="Node" parent="."]
+script = ExtResource("2_kjuie")
+chara_name = "Crescent"
+metadata/_custom_type_script = "uid://bm801yc5miabv"
+
+[node name="PlayerAnimationNode" parent="." instance=ExtResource("3_y5y4t")]
+y_sort_enabled = true
+sprite_sheet = ExtResource("4_kjuie")
+
+[node name="ActorUI" parent="." instance=ExtResource("10_c6umf")]
+offset_top = 22.0
+offset_bottom = 22.0
+
+[node name="CharacterEssentials" parent="." instance=ExtResource("9_3p33f")]
+voice = ExtResource("3_a7ju7")
+quips = ExtResource("2_auu6t")
+
+[node name="DialogueMarker" parent="CharacterEssentials" index="0"]
+position = Vector2(0, -18)
+
+[node name="DamageMarker" parent="CharacterEssentials" index="1"]
+position = Vector2(-10, -10)
+
+[editable path="CharacterEssentials"]

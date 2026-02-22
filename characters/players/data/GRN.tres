@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Player_Data" load_steps=7 format=3 uid="uid://r6uv07k34pab"]
+
+[ext_resource type="Script" uid="uid://djyxh3ytb5htx" path="res://scripts/data/player_data.gd" id="1_bfi7m"]
+[ext_resource type="Resource" uid="uid://7ttngypsa0a0" path="res://scripts/skills/player_skills/valeria/grn_attack.tres" id="1_fs1mv"]
+[ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="2_qabm6"]
+[ext_resource type="Resource" uid="uid://dd3otyv04iq1n" path="res://scripts/skills/player_skills/valeria/wild_cure.tres" id="5_scnu5"]
+[ext_resource type="Resource" uid="uid://4205krkwctoe" path="res://scripts/skills/test_skills/test_debuff.tres" id="6_av07w"]
+[ext_resource type="Resource" uid="uid://ce7hbmnooxdc7" path="res://scripts/skills/player_skills/valeria/huntress_mark.tres" id="6_fs1mv"]
+
+[resource]
+script = ExtResource("1_bfi7m")
+hp = Vector2i(30, 30)
+abilities = Vector3i(4, 8, 4)
+skill_list = Array[ExtResource("2_qabm6")]([ExtResource("6_fs1mv"), ExtResource("5_scnu5"), ExtResource("6_av07w")])
+char_attack = ExtResource("1_fs1mv")
+metadata/_custom_type_script = "uid://djyxh3ytb5htx"

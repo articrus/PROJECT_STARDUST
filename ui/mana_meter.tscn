@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbi1mfmmt3425"]
+
+[ext_resource type="Script" uid="uid://dejjdth1a8368" path="res://scripts/ui/mana_meter.gd" id="1_h3hlr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c3jtk"]
+bg_color = Color(0, 1, 0.74509805, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3jy1"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h3hlr"]
+bg_color = Color(0, 0.6666667, 1, 1)
+
+[node name="ManaMeter" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_h3hlr")
+
+[node name="BottomBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -17.5
+offset_right = 125.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_c3jtk")
+value = 35.0
+show_percentage = false
+
+[node name="TopBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -17.5
+offset_right = 125.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y3jy1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h3hlr")
+value = 25.0

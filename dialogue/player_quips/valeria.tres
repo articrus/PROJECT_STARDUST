@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Dialogue_Tree" load_steps=2 format=3 uid="uid://bc88swfiy80jr"]
+
+[ext_resource type="Script" uid="uid://b7uwnj8w45sb4" path="res://scripts/dialogue/character_quips.gd" id="1_er4dl"]
+
+[resource]
+script = ExtResource("1_er4dl")
+text_color = Color(0, 0.7058824, 0, 1)
+skip_quotes = Array[String](["I'll pass", "Give me a moment", "I need a second", "Just skip me", "Don't wait up for me", "Aspettare"])
+crit_quotes = Array[String](["Bullseye", "I never miss", "Facile", "Fare centro", "Perfetto"])
+metadata/_custom_type_script = "uid://b7uwnj8w45sb4"

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmbncja42tfxh"]
+
+[ext_resource type="Script" uid="uid://fe2hvy7xiiys" path="res://scripts/player/core_controller.gd" id="1_katpf"]
+[ext_resource type="Texture2D" uid="uid://csjlcfm5ph047" path="res://sprites/heart.png" id="1_xlkgw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_katpf"]
+radius = 4.0
+height = 10.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_50rvp"]
+radius = 7.0
+height = 32.0
+
+[node name="CORE" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_katpf")
+move_speed = 250.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_xlkgw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 12)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_katpf")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_50rvp")
+debug_color = Color(0.873795, 0.124743, 0.783798, 0.42)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+position_smoothing_enabled = true

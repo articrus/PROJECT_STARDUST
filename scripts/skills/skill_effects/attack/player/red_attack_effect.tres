@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Attack_Effect" load_steps=6 format=3 uid="uid://dyvacon3lrc2b"]
+
+[ext_resource type="Script" uid="uid://3tni8mbuetvh" path="res://scripts/skills/skill_effects_scripts/skill_effect.gd" id="1_1k3dh"]
+[ext_resource type="Resource" uid="uid://bbm2xqxuw8jfd" path="res://scripts/skills/skill_effects/healing/heal_10.tres" id="2_4qrva"]
+[ext_resource type="Script" uid="uid://3u43jex5m5y0" path="res://scripts/skills/skill_effects_scripts/attack.gd" id="3_7cvqc"]
+[ext_resource type="PackedScene" uid="uid://ihytbq288iyj" path="res://fx/hit_fx/player/red_hit.tscn" id="3_xxas5"]
+[ext_resource type="PackedScene" uid="uid://b6ex0iu8wbs65" path="res://fx/hit_fx/player/red_r_hit.tscn" id="4_7cvqc"]
+
+[resource]
+script = ExtResource("3_7cvqc")
+additional_effects_self = Array[ExtResource("1_1k3dh")]([ExtResource("2_4qrva")])
+can_combo = true
+melee_fx = ExtResource("3_xxas5")
+ranged_fx = ExtResource("4_7cvqc")
+metadata/_custom_type_script = "uid://3u43jex5m5y0"

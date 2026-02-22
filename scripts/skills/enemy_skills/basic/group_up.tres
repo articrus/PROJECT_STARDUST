@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://cjawptygs5p35"]
+
+[ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="1_pibnk"]
+[ext_resource type="Script" uid="uid://3tni8mbuetvh" path="res://scripts/skills/skill_effects_scripts/skill_effect.gd" id="2_r75jw"]
+[ext_resource type="Resource" uid="uid://cf5ftyfu7ifc3" path="res://scripts/skills/skill_effects/defense/def_stage_1.tres" id="3_xhpv1"]
+[ext_resource type="Resource" uid="uid://cv2gvrjvfjtjg" path="res://scripts/skills/skill_effects/damage_buff/atk_stage_1.tres" id="4_vfnye"]
+[ext_resource type="Resource" uid="uid://ph2d1q67oj17" path="res://scripts/skills/skill_effects/misc_debuffs/self_buff_atk_def_1.tres" id="5_vfnye"]
+
+[resource]
+script = ExtResource("1_pibnk")
+skill_name = "Group Up"
+skill_description = "Increase self and target's ATK and DEF"
+skill_target = 2
+skill_effects = Array[ExtResource("2_r75jw")]([ExtResource("3_xhpv1"), ExtResource("4_vfnye"), ExtResource("5_vfnye")])
+metadata/_custom_type_script = "uid://dcmm7hpqos27p"

@@ -1,0 +1,194 @@
+[gd_scene load_steps=11 format=3 uid="uid://bftnuo2e8h6yn"]
+
+[ext_resource type="Script" uid="uid://dch6yowujxr58" path="res://scripts/ui/battlehud/battle_hud.gd" id="1_rj6uh"]
+[ext_resource type="Script" uid="uid://c3v4nocoklmxv" path="res://scripts/ui/battlehud/buttons/option_button.gd" id="2_4to8j"]
+[ext_resource type="Script" uid="uid://dyoviw2jwd6ad" path="res://scripts/ui/battlehud/description_box.gd" id="4_d1oia"]
+[ext_resource type="Texture2D" uid="uid://cbor7k7yacuhu" path="res://ui/buttons/option_atk.tres" id="4_sft6s"]
+[ext_resource type="Texture2D" uid="uid://c8pd0e7pyqo8c" path="res://ui/buttons/option_skl.tres" id="6_guxl1"]
+[ext_resource type="Texture2D" uid="uid://c0q3626syn3hv" path="res://ui/buttons/option_mve.tres" id="7_5qs3c"]
+[ext_resource type="Texture2D" uid="uid://duwuvtopeh2ep" path="res://ui/buttons/option_itm.tres" id="7_jg505"]
+[ext_resource type="Texture2D" uid="uid://deoe3sseobcpy" path="res://ui/buttons/option_hlp.tres" id="9_wpe1y"]
+[ext_resource type="Texture2D" uid="uid://qlyqiglmrr2v" path="res://ui/buttons/option_skp.tres" id="10_rd5di"]
+[ext_resource type="PackedScene" uid="uid://bbi1mfmmt3425" path="res://ui/mana_meter.tscn" id="11_ohton"]
+
+[node name="BattleHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rj6uh")
+
+[node name="Border" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.1
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.745098)
+
+[node name="ProfileBox" type="HBoxContainer" parent="Border"]
+custom_minimum_size = Vector2(175, 75)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 260.0
+offset_bottom = 105.0
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="ManaMeter" parent="Border" instance=ExtResource("11_ohton")]
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = 73.0
+offset_bottom = 73.0
+grow_vertical = 1
+
+[node name="BottomBorder" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.745098)
+
+[node name="DescriptionBox" type="VBoxContainer" parent="BottomBorder"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.4
+anchor_bottom = 1.0
+grow_horizontal = 2
+theme_override_constants/separation = 5
+script = ExtResource("4_d1oia")
+
+[node name="SkillName" type="RichTextLabel" parent="BottomBorder/DescriptionBox"]
+layout_mode = 2
+bbcode_enabled = true
+text = "TEST / TEST"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Damage" type="RichTextLabel" parent="BottomBorder/DescriptionBox"]
+layout_mode = 2
+text = "TEST"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="Label" parent="BottomBorder/DescriptionBox"]
+layout_mode = 2
+text = "TEST"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerButtons" type="BoxContainer" parent="BottomBorder"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 10
+
+[node name="Attack" type="Button" parent="BottomBorder/PlayerButtons"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+icon = ExtResource("4_sft6s")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_4to8j")
+
+[node name="Skill" type="Button" parent="BottomBorder/PlayerButtons"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+text = "
+"
+icon = ExtResource("6_guxl1")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_4to8j")
+option_name = "Skill"
+option_desc = "Select a skill from the character's skill list"
+
+[node name="Item" type="Button" parent="BottomBorder/PlayerButtons"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+icon = ExtResource("7_jg505")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_4to8j")
+option_name = "Item"
+option_desc = "Use an item"
+
+[node name="Move" type="Button" parent="BottomBorder/PlayerButtons"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+text = "
+"
+icon = ExtResource("7_5qs3c")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_4to8j")
+option_name = "Move"
+option_desc = "Change character's positions "
+
+[node name="Help" type="Button" parent="BottomBorder/PlayerButtons"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+icon = ExtResource("9_wpe1y")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_4to8j")
+option_name = "Help"
+option_desc = "Revive a fallen ally"
+
+[node name="EndTurn" type="Button" parent="BottomBorder/PlayerButtons"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_vertical = 4
+icon = ExtResource("10_rd5di")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_4to8j")
+option_name = "Skip Turn"
+option_desc = "Skip this character's turn"
+
+[node name="SkillContainer" type="BoxContainer" parent="BottomBorder"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_right = 0.8
+anchor_bottom = 1.0
+
+[connection signal="mouse_entered" from="BottomBorder/PlayerButtons/Attack" to="BottomBorder/PlayerButtons/Attack" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BottomBorder/PlayerButtons/Attack" to="BottomBorder/PlayerButtons/Attack" method="_on_mouse_exited"]
+[connection signal="pressed" from="BottomBorder/PlayerButtons/Attack" to="." method="_on_attack_pressed"]
+[connection signal="mouse_entered" from="BottomBorder/PlayerButtons/Skill" to="BottomBorder/PlayerButtons/Skill" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BottomBorder/PlayerButtons/Skill" to="BottomBorder/PlayerButtons/Skill" method="_on_mouse_exited"]
+[connection signal="pressed" from="BottomBorder/PlayerButtons/Skill" to="." method="_on_skill_pressed"]
+[connection signal="mouse_entered" from="BottomBorder/PlayerButtons/Item" to="BottomBorder/PlayerButtons/Item" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BottomBorder/PlayerButtons/Item" to="BottomBorder/PlayerButtons/Item" method="_on_mouse_exited"]
+[connection signal="pressed" from="BottomBorder/PlayerButtons/Item" to="." method="_on_item_pressed"]
+[connection signal="mouse_entered" from="BottomBorder/PlayerButtons/Move" to="BottomBorder/PlayerButtons/Move" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BottomBorder/PlayerButtons/Move" to="BottomBorder/PlayerButtons/Move" method="_on_mouse_exited"]
+[connection signal="pressed" from="BottomBorder/PlayerButtons/Move" to="." method="_on_move_pressed"]
+[connection signal="mouse_entered" from="BottomBorder/PlayerButtons/Help" to="BottomBorder/PlayerButtons/Help" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BottomBorder/PlayerButtons/Help" to="BottomBorder/PlayerButtons/Help" method="_on_mouse_exited"]
+[connection signal="pressed" from="BottomBorder/PlayerButtons/Help" to="." method="_on_help_pressed"]
+[connection signal="mouse_entered" from="BottomBorder/PlayerButtons/EndTurn" to="BottomBorder/PlayerButtons/EndTurn" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BottomBorder/PlayerButtons/EndTurn" to="BottomBorder/PlayerButtons/EndTurn" method="_on_mouse_exited"]
+[connection signal="pressed" from="BottomBorder/PlayerButtons/EndTurn" to="." method="_on_end_turn_pressed"]

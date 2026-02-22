@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Dialogue_Tree" load_steps=2 format=3 uid="uid://cmopuf7wc8ybk"]
+
+[ext_resource type="Script" uid="uid://b7uwnj8w45sb4" path="res://scripts/dialogue/character_quips.gd" id="1_4il56"]
+
+[resource]
+script = ExtResource("1_4il56")
+skip_quotes = Array[String](["*wobble wobble*"])
+crit_quotes = Array[String](["*wobble wobble*"])
+metadata/_custom_type_script = "uid://b7uwnj8w45sb4"

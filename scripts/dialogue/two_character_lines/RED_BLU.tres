@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Character_Dialogue_Tree" load_steps=6 format=3 uid="uid://408foyalqaxt"]
+
+[ext_resource type="Script" uid="uid://claymc10c1d6h" path="res://scripts/dialogue/dialogue_line.gd" id="1_scnaj"]
+[ext_resource type="Script" uid="uid://cb1sj4vo1bow6" path="res://scripts/dialogue/char_dialogue_tree.gd" id="2_4qg8d"]
+
+[sub_resource type="Resource" id="Resource_scnaj"]
+script = ExtResource("1_scnaj")
+player_type = 4
+text = "Are we stopping for food? I'm kinda hingry"
+metadata/_custom_type_script = "uid://claymc10c1d6h"
+
+[sub_resource type="Resource" id="Resource_4qg8d"]
+script = ExtResource("1_scnaj")
+text = "I can kill boar if you want"
+metadata/_custom_type_script = "uid://claymc10c1d6h"
+
+[sub_resource type="Resource" id="Resource_gq56y"]
+script = ExtResource("1_scnaj")
+player_type = 4
+text = "I... Nevermind"
+metadata/_custom_type_script = "uid://claymc10c1d6h"
+
+[resource]
+script = ExtResource("2_4qg8d")
+passive_dialogue = Array[ExtResource("1_scnaj")]([SubResource("Resource_scnaj"), SubResource("Resource_4qg8d"), SubResource("Resource_gq56y")])
+metadata/_custom_type_script = "uid://cb1sj4vo1bow6"

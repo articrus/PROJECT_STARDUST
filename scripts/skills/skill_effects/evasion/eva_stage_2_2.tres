@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Evasion_Effect" load_steps=2 format=3 uid="uid://b0ht1jwuyrwxl"]
+
+[ext_resource type="Script" uid="uid://dyxsgd8ip87q4" path="res://scripts/skills/skill_effects_scripts/evasion_effect.gd" id="1_vl8h4"]
+
+[resource]
+script = ExtResource("1_vl8h4")
+buff_stage = 20
+metadata/_custom_type_script = "uid://dyxsgd8ip87q4"

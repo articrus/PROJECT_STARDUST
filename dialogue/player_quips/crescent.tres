@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Dialogue_Tree" load_steps=2 format=3 uid="uid://cu76856g8h5yh"]
+
+[ext_resource type="Script" uid="uid://b7uwnj8w45sb4" path="res://scripts/dialogue/character_quips.gd" id="1_fwtld"]
+
+[resource]
+script = ExtResource("1_fwtld")
+text_color = Color(0, 0.4509804, 1, 1)
+skip_quotes = Array[String](["Pass", "Attend un moment", "Aspettare", "I'll sit this turn out", "Eh...", "I'll just..."])
+crit_quotes = Array[String](["I never miss", "Troppo facile ", "Had enough?", "I've got more than that", "Parfait"])
+metadata/_custom_type_script = "uid://b7uwnj8w45sb4"

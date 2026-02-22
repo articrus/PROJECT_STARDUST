@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://qh3majxohggk"]
+
+[ext_resource type="Script" uid="uid://dp16aia7up5vr" path="res://scripts/managers/party_manager.gd" id="1_8g42y"]
+[ext_resource type="PackedScene" uid="uid://bmbncja42tfxh" path="res://characters/players/core.tscn" id="2_6nn5q"]
+
+[node name="Party" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_8g42y")
+
+[node name="CORE" parent="." instance=ExtResource("2_6nn5q")]

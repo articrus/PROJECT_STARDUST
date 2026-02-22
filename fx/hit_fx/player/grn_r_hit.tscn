@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://7q3aierlg6tv"]
+
+[ext_resource type="Script" uid="uid://ceb35uhfhjqbh" path="res://scripts/fx/hit_fx.gd" id="1_aneb7"]
+[ext_resource type="Texture2D" uid="uid://cf87bd8c7yv0i" path="res://sprites/fx/hit/player/grn_r.png" id="2_aneb7"]
+[ext_resource type="Texture2D" uid="uid://ffo2ecfadd43" path="res://sprites/fx/hit_v1.png" id="3_akj4c"]
+
+[sub_resource type="Animation" id="Animation_kg3ry"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_nctvm"]
+resource_name = "hit_fx"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6s2h6"]
+_data = {
+&"RESET": SubResource("Animation_kg3ry"),
+&"hit_fx": SubResource("Animation_nctvm")
+}
+
+[node name="HitFX" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_aneb7")
+custom_sprite = ExtResource("2_aneb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_akj4c")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6s2h6")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

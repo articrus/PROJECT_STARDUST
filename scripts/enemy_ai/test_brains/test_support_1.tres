@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Support_AI" load_steps=7 format=3 uid="uid://nd00pm5cjqk"]
+
+[ext_resource type="Script" uid="uid://ikl8s68bspx4" path="res://scripts/enemy_ai/brain_scripts/support.gd" id="1_mfjha"]
+[ext_resource type="Resource" uid="uid://cd0en0iiweoas" path="res://scripts/skills/enemy_skills/self_destruct.tres" id="1_wxr8w"]
+[ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="2_d766d"]
+[ext_resource type="Resource" uid="uid://doe8f61vi3c22" path="res://scripts/skills/test_skills/test_heal.tres" id="3_wxr8w"]
+[ext_resource type="Resource" uid="uid://dek0ppbwqgc1a" path="res://scripts/skills/test_skills/test_stat_buff.tres" id="5_g5tt7"]
+[ext_resource type="Resource" uid="uid://4205krkwctoe" path="res://scripts/skills/test_skills/test_debuff.tres" id="6_g3puj"]
+
+[resource]
+script = ExtResource("1_mfjha")
+intelligence = 0.5
+attack = ExtResource("1_wxr8w")
+signature_skill = ExtResource("3_wxr8w")
+skill_list = Array[ExtResource("2_d766d")]([ExtResource("5_g5tt7"), ExtResource("6_g3puj")])
+metadata/_custom_type_script = "uid://ikl8s68bspx4"

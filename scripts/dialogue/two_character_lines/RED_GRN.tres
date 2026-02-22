@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Character_Dialogue_Tree" load_steps=6 format=3 uid="uid://dfrderghd3kpn"]
+
+[ext_resource type="Script" uid="uid://claymc10c1d6h" path="res://scripts/dialogue/dialogue_line.gd" id="1_6js8j"]
+[ext_resource type="Script" uid="uid://cb1sj4vo1bow6" path="res://scripts/dialogue/char_dialogue_tree.gd" id="2_x01gr"]
+
+[sub_resource type="Resource" id="Resource_6js8j"]
+script = ExtResource("1_6js8j")
+text = "Valeria, why do you use shovel?"
+metadata/_custom_type_script = "uid://claymc10c1d6h"
+
+[sub_resource type="Resource" id="Resource_x01gr"]
+script = ExtResource("1_6js8j")
+player_type = 3
+text = "I can use it to dig holes"
+metadata/_custom_type_script = "uid://claymc10c1d6h"
+
+[sub_resource type="Resource" id="Resource_axg65"]
+script = ExtResource("1_6js8j")
+text = "I see"
+metadata/_custom_type_script = "uid://claymc10c1d6h"
+
+[resource]
+script = ExtResource("2_x01gr")
+passive_dialogue = Array[ExtResource("1_6js8j")]([SubResource("Resource_6js8j"), SubResource("Resource_x01gr"), SubResource("Resource_axg65")])
+metadata/_custom_type_script = "uid://cb1sj4vo1bow6"

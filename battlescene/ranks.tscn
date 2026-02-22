@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw2bjqbq15fyu"]
+
+[ext_resource type="Texture2D" uid="uid://bsevbs0a2j40h" path="res://sprites/ui/shadow.png" id="1_dbkyu"]
+[ext_resource type="Script" uid="uid://cv0k7uw5qy8d" path="res://scripts/managers/battle_scene/rank_manager.gd" id="1_j72xf"]
+
+[node name="Ranks" type="Node2D"]
+script = ExtResource("1_j72xf")
+
+[node name="Rank 1" type="Marker2D" parent="."]
+position = Vector2(45, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rank 1"]
+texture = ExtResource("1_dbkyu")
+
+[node name="Rank 2" type="Marker2D" parent="."]
+position = Vector2(5, 25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rank 2"]
+texture = ExtResource("1_dbkyu")
+
+[node name="Rank 3" type="Marker2D" parent="."]
+position = Vector2(-5, -25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rank 3"]
+texture = ExtResource("1_dbkyu")
+
+[node name="Rank 4" type="Marker2D" parent="."]
+position = Vector2(-45, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Rank 4"]
+texture = ExtResource("1_dbkyu")

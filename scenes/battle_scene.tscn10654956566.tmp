@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://ce3jrk18e5djc"]
+
+[ext_resource type="Script" uid="uid://xp2vr1bek8lm" path="res://scripts/managers/battle_manager.gd" id="1_rum4d"]
+[ext_resource type="PackedScene" uid="uid://bftnuo2e8h6yn" path="res://ui/battle_hud.tscn" id="2_pxwbd"]
+[ext_resource type="PackedScene" uid="uid://drqil0uv41l22" path="res://characters/players/red_player.tscn" id="2_rca61"]
+[ext_resource type="PackedScene" uid="uid://bhwqamy1yenic" path="res://characters/players/grn_player.tscn" id="3_8qdv8"]
+[ext_resource type="PackedScene" uid="uid://cw2bjqbq15fyu" path="res://battlescene/ranks.tscn" id="3_svpld"]
+[ext_resource type="PackedScene" uid="uid://clrnsxdcmxkr1" path="res://characters/enemies/slime.tscn" id="4_8qdv8"]
+[ext_resource type="PackedScene" uid="uid://r0003kmvyu2y" path="res://battlescene/enemy_ranks.tscn" id="4_rum4d"]
+[ext_resource type="PackedScene" uid="uid://dqtelk0e4uhoc" path="res://characters/npcs/sprite.tscn" id="6_1i8jf"]
+
+[node name="BattleScene" type="Node2D"]
+script = ExtResource("1_rum4d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BattleHUD" parent="CanvasLayer" instance=ExtResource("2_pxwbd")]
+
+[node name="Ranks" parent="." instance=ExtResource("3_svpld")]
+position = Vector2(85, 200)
+
+[node name="EnemyRanks" parent="." instance=ExtResource("4_rum4d")]
+position = Vector2(300, 200)
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="RED_PLAYER" parent="Players" instance=ExtResource("2_rca61")]
+current_state = 2
+
+[node name="GRN_PLAYER" parent="Players" instance=ExtResource("3_8qdv8")]
+visible = true
+position = Vector2(1061, 1104)
+current_state = 2
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2(23, 80)
+
+[node name="Slime" parent="Enemies" instance=ExtResource("4_8qdv8")]
+position = Vector2(291, 193)
+
+[node name="Slime2" parent="Enemies" instance=ExtResource("4_8qdv8")]
+position = Vector2(291, 193)
+
+[node name="BattleCam" type="Camera2D" parent="."]
+position = Vector2(213, 167)
+zoom = Vector2(3, 3)
+
+[node name="Sprite" parent="." instance=ExtResource("6_1i8jf")]
+position = Vector2(290, 176)
+
+[node name="TurnChange" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="TurnChange" to="." method="_on_turn_change_timeout"]

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Crit_Buff" load_steps=2 format=3 uid="uid://dl45kf8nfa0ut"]
+
+[ext_resource type="Script" uid="uid://bkwg4die6ivh6" path="res://scripts/skills/skill_effects_scripts/crit_buff.gd" id="1_3tvpa"]
+
+[resource]
+script = ExtResource("1_3tvpa")
+amount = 2
+metadata/_custom_type_script = "uid://bkwg4die6ivh6"

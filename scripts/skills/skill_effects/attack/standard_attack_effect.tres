@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Attack_Effect" load_steps=3 format=3 uid="uid://dw5dgcvog3r6j"]
+
+[ext_resource type="Script" uid="uid://3u43jex5m5y0" path="res://scripts/skills/skill_effects_scripts/attack.gd" id="1_seqt4"]
+[ext_resource type="Script" uid="uid://3tni8mbuetvh" path="res://scripts/skills/skill_effects_scripts/skill_effect.gd" id="1_ywwpq"]
+
+[resource]
+script = ExtResource("1_seqt4")
+metadata/_custom_type_script = "uid://3u43jex5m5y0"

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Character_Dialogue_Tree" load_steps=6 format=3 uid="uid://scdbgp0l1lrf"]
+
+[ext_resource type="Script" uid="uid://claymc10c1d6h" path="res://scripts/dialogue/dialogue_line.gd" id="1_5p5i8"]
+[ext_resource type="Script" uid="uid://cb1sj4vo1bow6" path="res://scripts/dialogue/char_dialogue_tree.gd" id="2_3rmyj"]
+
+[sub_resource type="Resource" id="Resource_5p5i8"]
+script = ExtResource("1_5p5i8")
+player_type = 3
+text = "Hey Crescent"
+metadata/_custom_type_script = "uid://claymc10c1d6h"
+
+[sub_resource type="Resource" id="Resource_3rmyj"]
+script = ExtResource("1_5p5i8")
+player_type = 4
+text = "Yeah?"
+metadata/_custom_type_script = "uid://claymc10c1d6h"
+
+[sub_resource type="Resource" id="Resource_ii4n8"]
+script = ExtResource("1_5p5i8")
+player_type = 3
+text = "Stop stealing my lines"
+metadata/_custom_type_script = "uid://claymc10c1d6h"
+
+[resource]
+script = ExtResource("2_3rmyj")
+passive_dialogue = Array[ExtResource("1_5p5i8")]([SubResource("Resource_5p5i8"), SubResource("Resource_3rmyj"), SubResource("Resource_ii4n8")])
+metadata/_custom_type_script = "uid://cb1sj4vo1bow6"

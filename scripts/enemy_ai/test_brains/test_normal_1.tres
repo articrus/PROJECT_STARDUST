@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Normal_AI" load_steps=6 format=3 uid="uid://cc5iq5qpkb1bn"]
+
+[ext_resource type="Resource" uid="uid://cssbun0kcxr3g" path="res://scripts/skills/attacks/standard_attack.tres" id="1_jc5hp"]
+[ext_resource type="Script" uid="uid://bla5pm3kelcft" path="res://scripts/enemy_ai/brain_scripts/normal.gd" id="1_k6j60"]
+[ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="2_hh74l"]
+[ext_resource type="Resource" uid="uid://dek0ppbwqgc1a" path="res://scripts/skills/test_skills/test_stat_buff.tres" id="5_gk3hy"]
+[ext_resource type="Resource" uid="uid://4205krkwctoe" path="res://scripts/skills/test_skills/test_debuff.tres" id="5_jc5hp"]
+
+[resource]
+script = ExtResource("1_k6j60")
+skill_weight = 3
+attack_weight = 7
+intelligence = 0.5
+attack = ExtResource("1_jc5hp")
+skill_list = Array[ExtResource("2_hh74l")]([ExtResource("5_gk3hy"), ExtResource("5_jc5hp")])
+can_buff_self = true
+metadata/_custom_type_script = "uid://bla5pm3kelcft"

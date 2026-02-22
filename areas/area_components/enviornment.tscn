@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvuah4vdyumyc"]
+
+[ext_resource type="PackedScene" uid="uid://qh3majxohggk" path="res://areas/area_components/party_manager.tscn" id="3_xcif5"]
+
+[node name="Enviornment" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
+
+[node name="Party" parent="." instance=ExtResource("3_xcif5")]
