@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created / Modified : 04-10-2025 / 12-02-2026
+# Date Created / Modified : 04-10-2025 / 27-02-2026
 # Scene Components
 @onready var animation_node = $PlayerAnimationNode
 @onready var char_stats = $Character
@@ -18,6 +18,7 @@ extends Node2D
 @export var player_type: enums.PLAYERS
 # Other Vars
 var pending_data
+var pending_quips
 # Follower variables
 var ACCELERATION: float
 var FRICTION: float
@@ -28,6 +29,7 @@ var is_init: bool = false #Prevent physics from running too early
 
 func _ready() -> void:
 	char_stats._load_player_data(pending_data)
+	essentials._load_player_quips(pending_quips)
 	char_stats.hp_changed.connect(actor_ui._update_hp_bar)
 	actor_ui._inital_values(char_stats)
 	actor_ui.visible = false

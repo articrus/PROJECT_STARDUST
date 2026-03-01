@@ -49,6 +49,7 @@ offset_bottom = 20.0
 [node name="CharacterEssentials" parent="." instance=ExtResource("13_hm4ux")]
 voice = ExtResource("4_v2bpy")
 quips = ExtResource("3_4pilr")
+text_color = Color(1, 1, 1, 1)
 
 [node name="DialogueMarker" parent="CharacterEssentials" index="0"]
 position = Vector2(0, -2)

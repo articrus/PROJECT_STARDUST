@@ -1,0 +1,5 @@
+{
+	"B_START": ["Targets spotted!", "Incomming!", "Look out!", "Cover me!"],
+	"CRIT": ["I never miss", "Bullseye", "Perfetto", "Did that with my eyes closed", "Hah!"],
+	"SKIP": ["Just skip me", "I need a better opening", "Hold on...", "Aspettare", "Cover me", "Not yet..."]
+}

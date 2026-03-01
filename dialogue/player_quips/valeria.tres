@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Dialogue_Tree" load_steps=2 format=3 uid="uid://bc88swfiy80jr"]
+[gd_resource type="Resource" script_class="Character_Quips" load_steps=2 format=3 uid="uid://bc88swfiy80jr"]
 
 [ext_resource type="Script" uid="uid://b7uwnj8w45sb4" path="res://scripts/dialogue/character_quips.gd" id="1_er4dl"]
 

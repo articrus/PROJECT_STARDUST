@@ -142,7 +142,6 @@ position = Vector2(-24, 25)
 texture = ExtResource("3_tjibp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="TestUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -194,6 +193,7 @@ text = "ADD MANA"
 layout_mode = 2
 text = "REMOVE MANA"
 
+[connection signal="pressed" from="CanvasLayer/TestUI/Panel/HBoxContainer/QuipButton" to="CanvasLayer/TestUI" method="_on_quip_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TestUI/Panel/HBoxContainer/ChatButton" to="CanvasLayer/TestUI" method="_on_chat_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TestUI/Panel/HBoxContainer/ManaAdd" to="CanvasLayer/TestUI" method="_on_mana_add_pressed"]
 [connection signal="pressed" from="CanvasLayer/TestUI/Panel/HBoxContainer/ManaRem" to="CanvasLayer/TestUI" method="_on_mana_rem_pressed"]

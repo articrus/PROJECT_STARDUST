@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created / Modified: 24-10-2025 / 12-02-2026
+# Date Created / Modified: 24-10-2025 / 27-02-2026
 @onready var core = $CORE
 # The current party, the character at 0 is the leader/in control
 @export var party = []
@@ -17,6 +17,7 @@ func _init_players(current_party):
 		call_deferred("add_child", new_player)
 		party.append(new_player)
 		new_player.pending_data = GameManager.player_data_saves[player_type].duplicate(true)
+		new_player.pending_quips = Dialogue_Parser._get_player_quip_lines(player_type)
 	party[0].current_state = enums.PLAYER_CONTROL_STATUS.CONTROLLED
 	core._add_followers(party)
 

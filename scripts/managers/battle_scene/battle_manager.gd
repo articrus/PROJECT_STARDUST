@@ -398,6 +398,7 @@ func _load_players_into_scene(current_party):
 		var new_player = GameManager.player_templates[player_type].instantiate()
 		call_deferred("_add_child_to_party_node", new_player)
 		new_player.pending_data = GameManager.player_data_saves[player_type].duplicate(true)
+		new_player.pending_quips = Dialogue_Parser._get_player_quip_lines(player_type)
 		_add_entry_to_dictionary(new_player) # New Things
 	await get_tree().process_frame
 	_scene_set_up()
