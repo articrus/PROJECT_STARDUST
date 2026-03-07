@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created / Modified: 24-10-2025 / 27-02-2026
+# Date Created / Modified: 24-10-2025 / 06-03-2026
 @onready var core = $CORE
 # The current party, the character at 0 is the leader/in control
 @export var party = []
@@ -19,7 +19,17 @@ func _init_players(current_party):
 		new_player.pending_data = GameManager.player_data_saves[player_type].duplicate(true)
 		new_player.pending_quips = Dialogue_Parser._get_player_quip_lines(player_type)
 	party[0].current_state = enums.PLAYER_CONTROL_STATUS.CONTROLLED
+	_init_dialogue(current_party)
 	core._add_followers(party)
+
+func _init_dialogue(current_party):
+	# Init Two-Character resources (testing to see sorting)
+	var party_source = current_party.duplicate()
+	party_source.shuffle()
+	var key_one = _generate_dialogue_key([party_source[0], party_source[1]])
+	var key_two = _generate_dialogue_key([party_source[0], party_source[2]])
+	var key_three = _generate_dialogue_key([party_source[1], party_source[2]])
+	print(str(key_one) + " " + str(key_two) + " " + str(key_three))
 
 # Tweak a little but yeah
 func _apply_new_player_data():

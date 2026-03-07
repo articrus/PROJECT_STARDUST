@@ -5,20 +5,13 @@ class_name Dialogue_Parser
 
 static func _get_player_quip_lines(player: enums.PLAYERS) -> Character_Quips:
 	var quips: Character_Quips = Character_Quips.new()
-	match player:
-		enums.PLAYERS.RED:
-			quips = _create_quips_from_json(JSON_Strings.red_quips_path)
-		enums.PLAYERS.ORG:
-			pass
-		enums.PLAYERS.YLW:
-			pass
-		enums.PLAYERS.GRN:
-			quips = _create_quips_from_json(JSON_Strings.grn_quips_path)
-		enums.PLAYERS.BLU:
-			quips = _create_quips_from_json(JSON_Strings.blu_quips_path)
-		enums.PLAYERS.PUR:
-			pass
+	quips = _create_quips_from_json(JSON_Strings.player_quips[player])
 	return quips
+
+static func _get_two_character_dialogue(key: String) -> Character_Dialogue_Tree:
+	var dialogue: Character_Dialogue_Tree = Character_Dialogue_Tree.new()
+	dialogue = _create_two_char_from_json(JSON_Strings.two_char_dialogue[key])
+	return dialogue
 
 static func _create_quips_from_json(path: String) -> Character_Quips:
 	var quips: Character_Quips = Character_Quips.new()
@@ -28,6 +21,16 @@ static func _create_quips_from_json(path: String) -> Character_Quips:
 		quips.crit_quotes = lines["CRIT"]
 		quips.skip_quotes = lines["SKIP"]
 	return quips
+
+static func _create_two_char_from_json(path: String) -> Character_Dialogue_Tree:
+	var dialogue: Character_Dialogue_Tree = Character_Dialogue_Tree.new()
+	var tree = _load_json_file(path)
+	if tree != null:
+		var passive_collection: Array[Dialogue_Collection]
+		var lines = tree["PASSIVE"] # The passive dialogue collection
+		for line in lines.get_children(): 
+			print(line)
+	return dialogue
 
 # Loads the JSON file 
 static func _load_json_file(path: String):
@@ -42,3 +45,8 @@ static func _load_json_file(path: String):
 	else:
 		print("ERROR: FILE NOT FOUND")
 		return null
+
+# Get the dialogue key from actors name
+static func _generate_dialogue_key(actors) -> String:
+	actors.sort()
+	return str(enums.PLAYERS_STRING[actors[0]] + "_" + enums.PLAYERS_STRING[actors[1]])

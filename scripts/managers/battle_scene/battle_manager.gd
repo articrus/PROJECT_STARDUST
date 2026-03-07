@@ -388,6 +388,7 @@ func _scene_set_up():
 # Called when everything is loaded
 func _on_battle_scene_ready():
 	_load_players_into_scene(GameManager.current_party)
+	#_load_enemies_into_scene(encounter_data) #Instantiates enemies (make a manager class?)
 
 func _add_child_to_party_node(child):
 	party_node.add_child(child)

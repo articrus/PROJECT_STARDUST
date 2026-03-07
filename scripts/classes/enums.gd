@@ -11,12 +11,12 @@ enum PLAYERS {
 }
 
 const PLAYERS_STRING = {
-	PLAYERS.RED : "RED",
-	PLAYERS.ORG : "ORG",
-	PLAYERS.YLW : "YLW",
-	PLAYERS.GRN : "GRN",
-	PLAYERS.BLU : "BLU",
-	PLAYERS.PUR : "PUR",
+	PLAYERS.RED : "red",
+	PLAYERS.ORG : "org",
+	PLAYERS.YLW : "ylw",
+	PLAYERS.GRN : "grn",
+	PLAYERS.BLU : "blu",
+	PLAYERS.PUR : "pur",
 }
 
 enum PLAYER_CONTROL_STATUS 
