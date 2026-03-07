@@ -19,6 +19,15 @@ const PLAYERS_STRING = {
 	PLAYERS.PUR : "pur",
 }
 
+const STRING_TO_PLAYER = {
+	"red": enums.PLAYERS.RED,
+	"org": enums.PLAYERS.ORG,
+	"ylw": enums.PLAYERS.YLW,
+	"grn": enums.PLAYERS.GRN,
+	"blu": enums.PLAYERS.BLU,
+	"pur": enums.PLAYERS.PUR,
+}
+
 enum PLAYER_CONTROL_STATUS 
 {
 	CONTROLLED,

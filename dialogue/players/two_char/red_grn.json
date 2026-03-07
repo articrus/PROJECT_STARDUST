@@ -1,7 +1,7 @@
 {
 	"PASSIVE": 
 	[
-		[["RED", "TEXT"],["GRN", "Text"]],
-		[["RED", "How long have you used bow?"],["GRN", "My dad taught me when I was young"]]
+		[["red", "TEXT"],["grn", "Text"]],
+		[["red", "How long have you used bow?"],["grn", "My dad taught me when I was young"]]
 	]
 }

@@ -1,7 +1,7 @@
 {
 	"PASSIVE": 
 	[
-		[["GRN", "TEXT"],["BLU", "Text"]],
-		[["GRN", "I hate you"],["BLU", "Pffffft."]]
+		[["grn", "TEXT"],["blu", "Text"]],
+		[["grn", "I hate you"],["blu", "Pffffft."]]
 	]
 }

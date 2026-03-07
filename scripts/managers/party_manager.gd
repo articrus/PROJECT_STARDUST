@@ -23,13 +23,16 @@ func _init_players(current_party):
 	core._add_followers(party)
 
 func _init_dialogue(current_party):
-	# Init Two-Character resources (testing to see sorting)
-	var party_source = current_party.duplicate()
+	var party_source = current_party.duplicate() # Init Two-Character resources (testing to see sorting)
 	party_source.shuffle()
 	var key_one = _generate_dialogue_key([party_source[0], party_source[1]])
 	var key_two = _generate_dialogue_key([party_source[0], party_source[2]])
 	var key_three = _generate_dialogue_key([party_source[1], party_source[2]])
-	print(str(key_one) + " " + str(key_two) + " " + str(key_three))
+	# Assign Dialogue Trees to manager
+	DialogueManager.two_chara_dialogue[key_one] = Dialogue_Parser._get_two_character_dialogue(key_one)
+	DialogueManager.two_chara_dialogue[key_two] = Dialogue_Parser._get_two_character_dialogue(key_two)
+	DialogueManager.two_chara_dialogue[key_three] = Dialogue_Parser._get_two_character_dialogue(key_three)
+	#print(str(key_one) + " " + str(key_two) + " " + str(key_three))
 
 # Tweak a little but yeah
 func _apply_new_player_data():

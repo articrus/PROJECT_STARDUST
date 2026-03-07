@@ -1,12 +1,9 @@
 extends Node
 # Written By: Gianni Coladonato
-# Date Created / Modified: 20-11-2025 / 23-02-2026
+# Date Created / Modified: 20-11-2025 / 06-03-2026
 @onready var dialogue_label: PackedScene = preload("res://ui/text/floating_text.tscn")
-@onready var two_char_key = {
-	"RED_GRN": preload("res://scripts/dialogue/two_character_lines/RED_GRN.tres"),
-	"RED_BLU": preload("res://scripts/dialogue/two_character_lines/RED_BLU.tres"),
-	"GRN_BLU": preload("res://scripts/dialogue/two_character_lines/GRN_BLU.tres")
-}
+# Two Character Dialogue (Stored Here)
+@export var two_chara_dialogue: Dictionary[String, Character_Dialogue_Tree] = {}
 
 # Display dialogue line
 func _display_dialogue(text: String, actor: Node2D) -> void:
@@ -18,8 +15,8 @@ func _display_dialogue(text: String, actor: Node2D) -> void:
 
 # For two character dialogue, waits for a signal before displaying the next line
 func _two_chara_dialogue(actorA: Node2D, actorB: Node2D, key: String) -> void:
-	var dialogue_lines = two_char_key[key]
-	var dialogue = dialogue_lines.passive_dialogue[0] #For now just use zero
+	var dialogue_lines = two_chara_dialogue[key]
+	var dialogue = dialogue_lines.passive_dialogue[1] #For now just use zero
 	for line in dialogue.dialogue_lines:
 		if line.player_type == actorA.player_type:
 			_display_dialogue(line.text, actorA)
@@ -28,17 +25,17 @@ func _two_chara_dialogue(actorA: Node2D, actorB: Node2D, key: String) -> void:
 		await Signalbus.text_finished
 
 # For whole party/three character dialogue
-func _threee_chara_dialogue(actorA: Node2D, actorB: Node2D, actorC: Node2D, key: String) -> void:
-	var dialogue_lines = two_char_key[key]
-	var dialogue = dialogue_lines.passive_dialogue[0] #For now just use zero
-	for line in dialogue.dialogue_lines:
-		if line.player_type == actorA.player_type:
-			_display_dialogue(line.text, actorA)
-		elif line.player_type == actorB.player_type:
-			_display_dialogue(line.text, actorB)
-		else:
-			_display_dialogue(line.text, actorC)
-		await Signalbus.text_finished
+#func _threee_chara_dialogue(actorA: Node2D, actorB: Node2D, actorC: Node2D, key: String) -> void:
+	#var dialogue_lines = two_char_key[key]
+	#var dialogue = dialogue_lines.passive_dialogue[0] #For now just use zero
+	#for line in dialogue.dialogue_lines:
+		#if line.player_type == actorA.player_type:
+			#_display_dialogue(line.text, actorA)
+		#elif line.player_type == actorB.player_type:
+			#_display_dialogue(line.text, actorB)
+		#else:
+			#_display_dialogue(line.text, actorC)
+		#await Signalbus.text_finished
 
 func _skip_quip(actor: Node2D) -> void:
 	var text = actor.essentials.quips._get_skip_quote()

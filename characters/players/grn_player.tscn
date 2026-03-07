@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhwqamy1yenic"]
+[gd_scene load_steps=8 format=3 uid="uid://bhwqamy1yenic"]
 
 [ext_resource type="Script" uid="uid://bfhkyey5kr6yu" path="res://scripts/player/player_controller.gd" id="1_tb88w"]
 [ext_resource type="Texture2D" uid="uid://xekbv4sk8d0l" path="res://sprites/players/valeria.png" id="2_g1122"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cnlc23gohfmty" path="res://animations/players/player_animation_node.tscn" id="3_uywb8"]
 [ext_resource type="PackedScene" uid="uid://bb5l5lx7e14gk" path="res://ui/actor_components/actor_ui.tscn" id="5_p3ey0"]
 [ext_resource type="AudioStream" uid="uid://b11hshdxlj54a" path="res://audio/voices/player/valeria.wav" id="7_5locy"]
-[ext_resource type="Resource" uid="uid://bc88swfiy80jr" path="res://dialogue/player_quips/valeria.tres" id="9_5locy"]
 [ext_resource type="PackedScene" uid="uid://bjvmx7hn82haj" path="res://characters/character_essentials.tscn" id="9_sj85k"]
 
 [node name="GRN_PLAYER" type="Node2D" groups=["Players"]]
@@ -28,7 +27,6 @@ offset_bottom = 22.0
 
 [node name="CharacterEssentials" parent="." instance=ExtResource("9_sj85k")]
 voice = ExtResource("7_5locy")
-quips = ExtResource("9_5locy")
 text_color = Color(0, 0.7058824, 0, 1)
 
 [node name="DialogueMarker" parent="CharacterEssentials" index="0"]

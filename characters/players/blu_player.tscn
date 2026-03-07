@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdg4slj77gca3"]
+[gd_scene load_steps=8 format=3 uid="uid://cdg4slj77gca3"]
 
 [ext_resource type="Script" uid="uid://bfhkyey5kr6yu" path="res://scripts/player/player_controller.gd" id="1_y5y4t"]
-[ext_resource type="Resource" uid="uid://cu76856g8h5yh" path="res://dialogue/player_quips/crescent.tres" id="2_auu6t"]
 [ext_resource type="Script" uid="uid://bm801yc5miabv" path="res://scripts/general/character.gd" id="2_kjuie"]
 [ext_resource type="AudioStream" uid="uid://bjeyij230y6t1" path="res://audio/voices/player/crescent.wav" id="3_a7ju7"]
 [ext_resource type="PackedScene" uid="uid://cnlc23gohfmty" path="res://animations/players/player_animation_node.tscn" id="3_y5y4t"]
@@ -29,7 +28,6 @@ offset_bottom = 22.0
 
 [node name="CharacterEssentials" parent="." instance=ExtResource("9_3p33f")]
 voice = ExtResource("3_a7ju7")
-quips = ExtResource("2_auu6t")
 text_color = Color(0, 0.4509804, 1, 1)
 
 [node name="DialogueMarker" parent="CharacterEssentials" index="0"]
