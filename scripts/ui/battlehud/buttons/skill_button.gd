@@ -1,15 +1,15 @@
 extends Button
 # Written By: Gianni Coladonato
-# Date Created / Modified : 05-11-2025 / 04-12-2025
-var skill_index = 0
+# Date Created / Modified : 05-11-2025 / 13-03-2026
+var option_skill: Skill
 var option_name: String
 var option_dmg: String
 var option_desc: String
 
 # Init the button name and other things
-func _set_up_button(skill: Skill, new_index: int):
+func _set_up_button(skill: Skill) -> void:
+	option_skill = skill
 	self.text = skill.skill_name 
-	skill_index = new_index
 	_set_skill_option_text(skill)
 
 func _set_skill_option_text(skill: Skill) -> void:
@@ -39,10 +39,10 @@ func _set_skill_option_text(skill: Skill) -> void:
 
 # When pressed, emit the pressed signal and the index of the selected skill
 func _on_pressed() -> void:
-	Signalbus.skill_button_pressed.emit(skill_index)
+	Signalbus.skill_button_pressed.emit(option_skill)
 
 func _on_mouse_entered() -> void:
 	Signalbus.display_option_info.emit(option_name, option_desc, option_dmg)
 
 func _on_mouse_exited() -> void:
-	Signalbus.display_option_info.emit("", "", "")
+	Signalbus.clear_option_text.emit()

@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 27-10-2025 | 17-02-2026
+# Date Created/Modificed: 27-10-2025 | 13-03-2026
 # Scene Components
 @onready var party_node = $Players
 @onready var enemies_node = $Enemies
@@ -111,13 +111,11 @@ func _move_option_selected():
 	_adjust_targeting(rank_manager.get_child(0))
 
 func _skill_option_selected():
-	var player = party_node.get_child(turn_index)
-	battle_hud._populate_skill_container(player.char_stats)
+	battle_hud._populate_skill_container(current_player.char_stats)
 	current_state = enums.STATE.CHOOSING_SKILL
 
 # Handle logic of a specific skill chosen (assigning target)
-func _skill_selected(skill_index : int):
-	var skill = current_player.char_stats.skill_list[skill_index]
+func _skill_selected(skill: Skill):
 	player_dictionary[current_player].Choice = enums.PLAYER_CHOICE.SKILL 
 	player_dictionary[current_player].Skill = skill 
 	battle_hud._toggle_skill_list(false)

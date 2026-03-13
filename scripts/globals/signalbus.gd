@@ -20,10 +20,11 @@ signal perform_skill
 signal skill_finished
 
 # Returns skill index of selected skill
-signal skill_button_pressed(index: int)
+signal skill_button_pressed(skill: Skill)
 
 # Display Signals
 signal display_option_info(op_name: String, op_desc: String, op_dmg: String)
+signal clear_option_text
 signal mana_changed(new_mana: float)
 
 # Dialogue Lines

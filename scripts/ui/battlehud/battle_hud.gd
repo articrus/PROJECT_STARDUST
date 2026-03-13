@@ -1,6 +1,6 @@
 extends Control
 # Written By: Gianni Coladonato
-# Date Created / Modified: 07-10-2025 / 17-02-2026
+# Date Created / Modified: 07-10-2025 / 13-03-2026
 @onready var player_buttons = $BottomBorder/PlayerButtons
 @onready var player_btns := {
 	"Attack": $BottomBorder/PlayerButtons/Attack,
@@ -59,13 +59,11 @@ func _populate_skill_container(actor: Character) -> void:
 	for child in skill_container.get_children():
 		child.queue_free()
 	# Add new buttons
-	var index = 0
 	for skill in actor.skill_list:
 		var new_button = skill_button.instantiate()
-		new_button._set_up_button(skill, index)
+		new_button._set_up_button(skill)
 		skill_container.add_child(new_button)
 		new_button.disabled = ManaManager.mana.x < skill.cost
-		index += 1
 
 # Add profile shots to box
 func _populate_profile_container(party) -> void:
