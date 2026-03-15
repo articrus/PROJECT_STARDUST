@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Mark_Effect" load_steps=2 format=3 uid="uid://cqhf63467wgwd"]
+
+[ext_resource type="Script" uid="uid://bedujuoj6ru1u" path="res://scripts/skills/effect_scripts/mark_effect.gd" id="1_luclf"]
+
+[resource]
+script = ExtResource("1_luclf")
+metadata/_custom_type_script = "uid://bedujuoj6ru1u"

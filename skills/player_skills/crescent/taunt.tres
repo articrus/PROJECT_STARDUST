@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=5 format=3 uid="uid://745a7mhgc1yx"]
+
+[ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="1_fc8ei"]
+[ext_resource type="Script" uid="uid://3tni8mbuetvh" path="res://scripts/skills/effect_scripts/skill_effect.gd" id="2_4ai5v"]
+[ext_resource type="Resource" uid="uid://cqhf63467wgwd" path="res://skill_effects/misc_debuffs/mark.tres" id="3_0lxgp"]
+[ext_resource type="Resource" uid="uid://s1lebuan3vke" path="res://skill_effects/evasion/eva_stage_1_2.tres" id="4_0lxgp"]
+
+[resource]
+script = ExtResource("1_fc8ei")
+skill_name = "Taunt"
+skill_description = "Mark self, grant self evasion++"
+cost = 20
+skill_target = 3
+skill_effects = Array[ExtResource("2_4ai5v")]([ExtResource("3_0lxgp"), ExtResource("4_0lxgp")])
+metadata/_custom_type_script = "uid://dcmm7hpqos27p"

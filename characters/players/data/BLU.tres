@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Player_Data" load_steps=7 format=3 uid="uid://07dsrcr5bx08"]
 
 [ext_resource type="Script" uid="uid://djyxh3ytb5htx" path="res://scripts/data/player_data.gd" id="1_ck4of"]
-[ext_resource type="Resource" uid="uid://bv5il7vrqchxc" path="res://scripts/skills/player_skills/crescent/blu_attack.tres" id="1_rnx7r"]
+[ext_resource type="Resource" uid="uid://bv5il7vrqchxc" path="res://skills/player_skills/crescent/blu_attack.tres" id="1_rnx7r"]
 [ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="2_4cd4j"]
-[ext_resource type="Resource" uid="uid://bp10wsf84uvqw" path="res://scripts/skills/player_skills/crescent/steal.tres" id="4_rnx7r"]
-[ext_resource type="Resource" uid="uid://745a7mhgc1yx" path="res://scripts/skills/player_skills/crescent/taunt.tres" id="5_rnx7r"]
-[ext_resource type="Resource" uid="uid://dek0ppbwqgc1a" path="res://scripts/skills/test_skills/test_stat_buff.tres" id="5_tvyo5"]
+[ext_resource type="Resource" uid="uid://bp10wsf84uvqw" path="res://skills/player_skills/crescent/steal.tres" id="4_rnx7r"]
+[ext_resource type="Resource" uid="uid://745a7mhgc1yx" path="res://skills/player_skills/crescent/taunt.tres" id="5_rnx7r"]
+[ext_resource type="Resource" uid="uid://dek0ppbwqgc1a" path="res://skills/test_skills/test_stat_buff.tres" id="5_tvyo5"]
 
 [resource]
 script = ExtResource("1_ck4of")

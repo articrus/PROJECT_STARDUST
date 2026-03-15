@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Damage_All_Effect" load_steps=2 format=3 uid="uid://chqh0wiabr5p6"]
+
+[ext_resource type="Script" uid="uid://cit5twkv0qij8" path="res://scripts/skills/effect_scripts/damage_all_effect.gd" id="1_1qcaa"]
+
+[resource]
+script = ExtResource("1_1qcaa")
+damage_roll = 8
+metadata/_custom_type_script = "uid://cit5twkv0qij8"

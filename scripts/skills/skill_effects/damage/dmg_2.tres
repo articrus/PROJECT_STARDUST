@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="Damage_Effect" load_steps=2 format=3 uid="uid://drb5ojc3dfyqv"]
-
-[ext_resource type="Script" uid="uid://sem4e4mitqhq" path="res://scripts/skills/skill_effects_scripts/damage_effect.gd" id="1_sriwr"]
-
-[resource]
-script = ExtResource("1_sriwr")
-damage_roll = 8
-metadata/_custom_type_script = "uid://sem4e4mitqhq"

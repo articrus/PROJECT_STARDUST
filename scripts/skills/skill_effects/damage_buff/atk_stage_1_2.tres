@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="Attack_Buff_Effect" load_steps=2 format=3 uid="uid://caasggrsuwox3"]
-
-[ext_resource type="Script" uid="uid://cqfp6lsdf1liv" path="res://scripts/skills/skill_effects_scripts/attack_buff.gd" id="1_0v15x"]
-
-[resource]
-script = ExtResource("1_0v15x")
-buff_stage = 2
-metadata/_custom_type_script = "uid://cqfp6lsdf1liv"

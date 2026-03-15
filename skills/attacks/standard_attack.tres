@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=5 format=3 uid="uid://cssbun0kcxr3g"]
+
+[ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="1_l24c0"]
+[ext_resource type="Script" uid="uid://3tni8mbuetvh" path="res://scripts/skills/effect_scripts/skill_effect.gd" id="2_tnjjo"]
+[ext_resource type="Resource" uid="uid://dw5dgcvog3r6j" path="res://skill_effects/attack/standard_attack_effect.tres" id="3_3q3ms"]
+[ext_resource type="PackedScene" uid="uid://bh0h1qxtd8i21" path="res://fx/hit_fx/hit_fx.tscn" id="4_c158m"]
+
+[resource]
+script = ExtResource("1_l24c0")
+skill_name = "Melee / Ranged"
+skill_description = "Attack an enemy"
+skill_effects = Array[ExtResource("2_tnjjo")]([ExtResource("3_3q3ms")])
+skill_anim_index = -1
+skill_fx = ExtResource("4_c158m")
+metadata/_custom_type_script = "uid://dcmm7hpqos27p"

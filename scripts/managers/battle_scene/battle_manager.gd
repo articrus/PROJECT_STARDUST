@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 27-10-2025 | 13-03-2026
+# Date Created/Modificed: 27-10-2025 | 14-03-2026
 # Scene Components
 @onready var party_node = $Players
 @onready var enemies_node = $Enemies
@@ -15,7 +15,6 @@ extends Node2D
 var player_turn: bool 
 var targeting_index: int
 var turn_index: int
-var targetor_offset: = Vector2(0, -10)
 #Testing something new
 var player_dictionary = {}
 var player_entry = {
@@ -103,12 +102,12 @@ func _attack_option_selected():
 	player_dictionary[current_player].Choice = enums.PLAYER_CHOICE.ATTACK
 	player_dictionary[current_player].Skill = current_player.char_stats.char_attack
 	_reset_targetor()
-	_adjust_targeting(enemies_node.get_child(0))
+	targetor._adjust_targeting(enemies_node.get_child(0))
 
 func _move_option_selected():
 	current_state = enums.STATE.CHANGING_POSITION
 	_reset_targetor()
-	_adjust_targeting(rank_manager.get_child(0))
+	targetor._adjust_targeting(rank_manager.get_child(0))
 
 func _skill_option_selected():
 	battle_hud._populate_skill_container(current_player.char_stats)
@@ -124,20 +123,20 @@ func _skill_selected(skill: Skill):
 	match skill.skill_target:
 		enums.TARGET.ENEMY:
 			current_state = enums.STATE.TARGETING_ENEMIES
-			_adjust_targeting(enemies_node.get_child(0))
+			targetor._adjust_targeting(enemies_node.get_child(0))
 		enums.TARGET.ALLY:
 			current_state = enums.STATE.TARGETING_PARTY
-			_adjust_targeting(party_node.get_child(0))
+			targetor._adjust_targeting(party_node.get_child(0))
 		enums.TARGET.SELF:
 			current_state = enums.STATE.TARGETING_SELF
 			targeting_index = turn_index
-			_adjust_targeting(current_player)
+			targetor._adjust_targeting(current_player)
 		enums.TARGET.ALL_ENEMIES:
 			current_state = enums.STATE.TARGETING_ALL_ENEMIES
-			_adjust_targeting(enemies_node)
+			targetor._adjust_targeting(enemies_node)
 		enums.TARGET.ALL_ALLIES:
 			current_state = enums.STATE.TARGETING_ALL_ENEMIES
-			_adjust_targeting(party_node)
+			targetor._adjust_targeting(party_node)
 
 func _skip_option_selected():
 	DialogueManager._skip_quip(current_player)
@@ -163,7 +162,7 @@ func _set_move_target():
 	_switch_to_next_player()
 
 # Sets ally skill target
-func _set_friendly_skill_target():
+func _set_friendly_target():
 	targetor.visible = false
 	player_dictionary[current_player].Target = party_node.get_child(targeting_index)
 	player_dictionary[current_player].Cost = player_dictionary[current_player].Skill.cost
@@ -237,7 +236,7 @@ func _select_ally():
 	Battle_Utils._handle_section_input(
 		func(): _cycle_allies(1),
 		func(): _cycle_allies(-1),
-		func(): _set_friendly_skill_target(), # Return friendly target
+		func(): _set_friendly_target(), # Return friendly target
 		func(): _cancel_targeting() )
 
 func _selecting_skill():
@@ -248,29 +247,19 @@ func _selecting_skill():
 func _selecting_self():
 		Battle_Utils._handle_section_input(
 		func(): pass, func(): pass,
-		func(): _set_friendly_skill_target(), #Return self
+		func(): _set_friendly_target(), #Return self
 		func(): _cancel_targeting() )
 
 # Cycle through enemy targets
 func _cycle_enemy_targets(newIndex: int) -> void:
-	_cycle_targets(enemies_node, newIndex)
+	targeting_index = targetor._cycle_targets(enemies_node, newIndex, targeting_index)
 
 # Cycle through player ranks
 func _cycle_ranks(newIndex: int) -> void:
-	_cycle_targets(rank_manager, newIndex)
+	targeting_index = targetor._cycle_targets(rank_manager, newIndex, targeting_index)
 
 func _cycle_allies(newIndex: int) -> void:
-	_cycle_targets(party_node, newIndex)
-
-func _cycle_targets(node : Node, delta: int):
-	var child_count = node.get_child_count()
-	targeting_index = (targeting_index + delta) % child_count
-	if targeting_index < 0:
-		targeting_index += child_count
-	_adjust_targeting(node.get_child(targeting_index))
-
-func _adjust_targeting(target: Node2D) -> void:
-	targetor.fixed_position = target.global_position + targetor_offset
+	targeting_index = targetor._cycle_targets(party_node, newIndex, targeting_index)
 
 # End the turn and switch sides
 func _end_turn():
@@ -340,7 +329,7 @@ func _resolve_player_choices():
 	turn_change.start() #_end_turn()
 
 # Process the player's attack/skill (Check to see if there's any oppertunities for missed calls
-func _process_player_skill(player, skill, target) -> void:
+func _process_player_skill(player, skill, target):
 	await Signalbus.perform_skill
 	skill._execute_skill(player, target)
 	await Signalbus.skill_finished

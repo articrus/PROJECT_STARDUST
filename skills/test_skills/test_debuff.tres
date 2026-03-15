@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=5 format=3 uid="uid://4205krkwctoe"]
+
+[ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="1_yg0wu"]
+[ext_resource type="Script" uid="uid://3tni8mbuetvh" path="res://scripts/skills/effect_scripts/skill_effect.gd" id="2_vxvid"]
+[ext_resource type="Resource" uid="uid://dqbbxhqedbk3t" path="res://skill_effects/defense_debuff/def_dbf_1.tres" id="3_j8sgh"]
+[ext_resource type="Resource" uid="uid://cwupde2pkwxs" path="res://skill_effects/damage_debuff/atk_dbf_1.tres" id="4_dp6pl"]
+
+[resource]
+script = ExtResource("1_yg0wu")
+skill_name = "Debuff"
+skill_description = "Debuff attack of a target"
+cost = 15
+skill_effects = Array[ExtResource("2_vxvid")]([ExtResource("3_j8sgh"), ExtResource("4_dp6pl")])
+metadata/_custom_type_script = "uid://dcmm7hpqos27p"

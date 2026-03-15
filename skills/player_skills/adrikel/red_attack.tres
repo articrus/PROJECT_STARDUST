@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://c33s4kbgwwbkg"]
+
+[ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="1_aw1u6"]
+[ext_resource type="Script" uid="uid://3tni8mbuetvh" path="res://scripts/skills/effect_scripts/skill_effect.gd" id="2_ggn3r"]
+[ext_resource type="Resource" uid="uid://dyvacon3lrc2b" path="res://skill_effects/attack/player/red_attack_effect.tres" id="3_ggn3r"]
+
+[resource]
+script = ExtResource("1_aw1u6")
+skill_name = "Axe Swipe / Knife Toss"
+skill_description = "Attack an enemy, heal 10% when target is marked"
+skill_effects = Array[ExtResource("2_ggn3r")]([ExtResource("3_ggn3r")])
+skill_anim_index = -1
+metadata/_custom_type_script = "uid://dcmm7hpqos27p"

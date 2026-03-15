@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Heal_Effect" load_steps=2 format=3 uid="uid://bbm2xqxuw8jfd"]
+
+[ext_resource type="Script" uid="uid://b4n8o3s6oqiqy" path="res://scripts/skills/effect_scripts/heal_effect.gd" id="1_xi2wk"]
+
+[resource]
+script = ExtResource("1_xi2wk")
+heal_percentage = 0.1
+metadata/_custom_type_script = "uid://b4n8o3s6oqiqy"

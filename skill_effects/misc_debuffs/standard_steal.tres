@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Steal_Effect" load_steps=2 format=3 uid="uid://ctauuofuf52c6"]
+
+[ext_resource type="Script" uid="uid://cfgv1517qqvls" path="res://scripts/skills/steal_effect.gd" id="1_slipu"]
+
+[resource]
+script = ExtResource("1_slipu")
+steal_amount = 2
+metadata/_custom_type_script = "uid://cfgv1517qqvls"
