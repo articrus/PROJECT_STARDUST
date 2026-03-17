@@ -11,4 +11,5 @@ skill_name = "Debuff"
 skill_description = "Debuff attack of a target"
 cost = 15
 skill_effects = Array[ExtResource("2_vxvid")]([ExtResource("3_j8sgh"), ExtResource("4_dp6pl")])
+skill_anim_index = 2
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

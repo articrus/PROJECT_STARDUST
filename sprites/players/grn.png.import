@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xekbv4sk8d0l"
-path="res://.godot/imported/valeria.png-19f170767054d94b81d7297c71192549.ctex"
+uid="uid://ix8ddcj6ktas"
+path="res://.godot/imported/grn.png-ee4d646a061a0071c5736360a177bb38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/players/valeria.png"
-dest_files=["res://.godot/imported/valeria.png-19f170767054d94b81d7297c71192549.ctex"]
+source_file="res://sprites/players/grn.png"
+dest_files=["res://.godot/imported/grn.png-ee4d646a061a0071c5736360a177bb38.ctex"]
 
 [params]
 

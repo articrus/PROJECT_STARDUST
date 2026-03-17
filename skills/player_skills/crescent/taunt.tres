@@ -12,4 +12,5 @@ skill_description = "Mark self, grant self evasion++"
 cost = 20
 skill_target = 3
 skill_effects = Array[ExtResource("2_4ai5v")]([ExtResource("3_0lxgp"), ExtResource("4_0lxgp")])
+skill_anim_index = 3
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

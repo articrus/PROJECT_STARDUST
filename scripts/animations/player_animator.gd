@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created / Modified : 23-10-2025 / 12-02-2026
+# Date Created / Modified : 23-10-2025 / 17-03-2026
 # Object Components
 @onready var sprite = $Sprite2D
 @onready var anim_player = $AnimationPlayer
@@ -37,8 +37,10 @@ func _play_animation():
 			target_anim = Animation_Strings.player_melee_attack
 		enums.PLAYER_STATE.R_ATTACK:
 			target_anim = Animation_Strings.player_ranged_attack
-		enums.PLAYER_STATE.SKILL:
-			target_anim = Animation_Strings.player_skill
+		enums.PLAYER_STATE.SKILL_A:
+			target_anim = Animation_Strings.player_skill_a
+		enums.PLAYER_STATE.SKILL_B:
+			target_anim = Animation_Strings.player_skill_b
 		enums.PLAYER_STATE.HIT:
 			target_anim = Animation_Strings.player_hit
 		enums.PLAYER_STATE.DOWN:
@@ -66,19 +68,18 @@ func _hit():
 func _perform_skill():
 	Signalbus.perform_skill.emit()
 
-func _skill():
-	player_state = enums.PLAYER_STATE.SKILL
-
-func __skill(index: int) -> void:
+func _skill(index: int) -> void:
 	match index:
 		0: # Melee Attack
 			player_state = enums.PLAYER_STATE.M_ATTACK
 		1: # Ranged Attack
 			player_state = enums.PLAYER_STATE.R_ATTACK
 		2: # Skill 1
-			player_state = enums.PLAYER_STATE.SKILL
-		3: # Skill 2... ect...
-			player_state = enums.PLAYER_STATE.SKILL
+			player_state = enums.PLAYER_STATE.SKILL_A
+		3: # Skill 2
+			player_state = enums.PLAYER_STATE.SKILL_B
+		4: # Item
+			player_state = enums.PLAYER_STATE.ITEM
 
 func _down():
 	player_state = enums.PLAYER_STATE.DOWN
@@ -88,7 +89,8 @@ func _revive():
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name in [Animation_Strings.player_melee_attack, Animation_Strings.player_ranged_attack,
-	Animation_Strings.player_skill, Animation_Strings.player_hit]:
+	Animation_Strings.player_skill_a, Animation_Strings.player_skill_b, 
+	Animation_Strings.player_item, Animation_Strings.player_hit]:
 		if is_battle:
 			player_state = enums.PLAYER_STATE.BATTLE
 		elif anim_name == Animation_Strings.player_down:

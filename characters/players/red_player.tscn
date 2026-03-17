@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://drqil0uv41l22"]
 
 [ext_resource type="Script" uid="uid://bfhkyey5kr6yu" path="res://scripts/player/player_controller.gd" id="1_eyuqq"]
-[ext_resource type="Texture2D" uid="uid://cwb16p0qhit24" path="res://sprites/players/adrikel.png" id="1_sylb7"]
 [ext_resource type="Script" uid="uid://bm801yc5miabv" path="res://scripts/general/character.gd" id="2_e3tjg"]
 [ext_resource type="PackedScene" uid="uid://cnlc23gohfmty" path="res://animations/players/player_animation_node.tscn" id="3_e3tjg"]
+[ext_resource type="Texture2D" uid="uid://crdf5j0i8vfq2" path="res://sprites/players/red.png" id="4_bepdh"]
 [ext_resource type="AudioStream" uid="uid://cw0aniygcr3o1" path="res://audio/voices/player/adrikel.wav" id="7_ty7vw"]
 [ext_resource type="PackedScene" uid="uid://bb5l5lx7e14gk" path="res://ui/actor_components/actor_ui.tscn" id="9_6i0sv"]
 [ext_resource type="PackedScene" uid="uid://bjvmx7hn82haj" path="res://characters/character_essentials.tscn" id="9_pddfh"]
@@ -18,7 +18,7 @@ chara_name = "Adrikel"
 metadata/_custom_type_script = "uid://bm801yc5miabv"
 
 [node name="PlayerAnimationNode" parent="." instance=ExtResource("3_e3tjg")]
-sprite_sheet = ExtResource("1_sylb7")
+sprite_sheet = ExtResource("4_bepdh")
 
 [node name="ActorUI" parent="." instance=ExtResource("9_6i0sv")]
 offset_top = 22.0

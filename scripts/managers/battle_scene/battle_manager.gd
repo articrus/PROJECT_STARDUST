@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 27-10-2025 | 14-03-2026
+# Date Created/Modificed: 27-10-2025 | 17-03-2026
 # Scene Components
 @onready var party_node = $Players
 @onready var enemies_node = $Enemies
@@ -87,12 +87,12 @@ func _start_turn():
 
 func _player_turn():
 	if Input.is_action_just_pressed("cancel") && turn_index > 0: # Go back one turn
+		current_state = enums.STATE.NONE # Prevent process from running this method a second time
 		_reset_choice(current_player)
 		turn_index -= 1
 		current_player = party_node.get_child(turn_index)
 		ManaManager._add_mana(player_dictionary[current_player].Cost)
 		_reset_choice(current_player)
-		current_state = enums.STATE.NONE # Prevent process from running this method a second time
 		battle_hud._set_option_name_and_descriptions(current_player.char_stats)
 		battle_hud._set_current_turn_profile(current_player)
 		current_state = enums.STATE.PLAYER_TURN
@@ -316,12 +316,13 @@ func _resolve_player_choices():
 				var target = Battle_Utils._get_valid_target(skill, choice_data)
 				# Execute skill against target
 				if is_instance_valid(target):
-					if choice_data.Choice == enums.PLAYER_CHOICE.ATTACK:
-						player.animation_node._attack(player.char_stats.rank)
-						ManaManager._attack_mana_bonus(player.char_stats)
-					else:
-						player.animation_node._skill()
-						#player.animation_node.__skill(skill.anim_type) # To implement soon
+					player.animation_node._skill(skill._get_anim_index(player))
+					#if choice_data.Choice == enums.PLAYER_CHOICE.ATTACK:
+						#player.animation_node._attack(player.char_stats.rank)
+						#ManaManager._attack_mana_bonus(player.char_stats)
+					#else:
+						#player.animation_node._skill()
+						##player.animation_node.__skill(skill.anim_type) # To implement soon
 					await _process_player_skill(player, skill, target)
 		await get_tree().process_frame
 	for entry in turn_order:
@@ -351,11 +352,12 @@ func _enemy_turn():
 		var target = Battle_Utils._get_skill_target(skill.skill_target, enemy, party_node, enemies_node)
 		print(enemy.char_stats.chara_name + " targets " + str(target) + " with " + skill.skill_name)
 		if is_instance_valid(target):
-			if decision == enums.ENEMY_CHOICE.ATTACK:
-				enemy.animation_node._attack(enemy.char_stats.rank)
-				ManaManager._damage_mana_bonus(enemy.char_stats)
-			else:
-				enemy.animation_node._skill()
+			enemy.animation_node._skill(skill._get_anim_index(enemy))
+			#if decision == enums.ENEMY_CHOICE.ATTACK:
+				#enemy.animation_node._attack(enemy.char_stats.rank)
+				#ManaManager._damage_mana_bonus(enemy.char_stats)
+			#else:
+				#enemy.animation_node._skill()
 			await Signalbus.perform_skill
 			skill._execute_skill(enemy, target)
 			await Signalbus.skill_finished

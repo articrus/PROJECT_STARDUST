@@ -10,5 +10,5 @@ skill_name = "Test Damage All"
 skill_description = "Damage all targets"
 skill_target = 5
 skill_effects = Array[ExtResource("2_uu0b1")]([ExtResource("3_1clsw")])
-skill_anim_index = 3
+skill_anim_index = 2
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

@@ -12,4 +12,5 @@ skill_description = "Mark self, add damage token"
 cost = 20
 skill_target = 3
 skill_effects = Array[ExtResource("2_hpcnk")]([ExtResource("3_hpcnk"), ExtResource("4_18l2b")])
+skill_anim_index = 2
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

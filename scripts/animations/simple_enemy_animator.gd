@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created / Modified : 26-10-2025 / 30-01-2026
+# Date Created / Modified : 26-10-2025 / 17-03-2026
 # Scene Components
 @onready var sprite = $Sprite2D
 @onready var anim_player = $AnimationPlayer
@@ -51,8 +51,14 @@ func _attack(rank: int):
 	else:
 		enemy_state = enums.ENEMY_STATE.R_ATTACK
 
-func _skill():
-	enemy_state = enums.ENEMY_STATE.SKILL
+func _skill(index: int) -> void:
+	match index:
+		0: # Melee Attack
+			enemy_state = enums.ENEMY_STATE.M_ATTACK
+		1: # Ranged Attack
+			enemy_state = enums.ENEMY_STATE.R_ATTACK
+		2: # Skill 1
+			enemy_state = enums.ENEMY_STATE.SKILL
 
 func _perform_skill():
 	Signalbus.perform_skill.emit()

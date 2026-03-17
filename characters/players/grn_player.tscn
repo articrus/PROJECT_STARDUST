@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bhwqamy1yenic"]
 
 [ext_resource type="Script" uid="uid://bfhkyey5kr6yu" path="res://scripts/player/player_controller.gd" id="1_tb88w"]
-[ext_resource type="Texture2D" uid="uid://xekbv4sk8d0l" path="res://sprites/players/valeria.png" id="2_g1122"]
 [ext_resource type="Script" uid="uid://bm801yc5miabv" path="res://scripts/general/character.gd" id="3_g1122"]
 [ext_resource type="PackedScene" uid="uid://cnlc23gohfmty" path="res://animations/players/player_animation_node.tscn" id="3_uywb8"]
+[ext_resource type="Texture2D" uid="uid://ix8ddcj6ktas" path="res://sprites/players/grn.png" id="4_jrooy"]
 [ext_resource type="PackedScene" uid="uid://bb5l5lx7e14gk" path="res://ui/actor_components/actor_ui.tscn" id="5_p3ey0"]
 [ext_resource type="AudioStream" uid="uid://b11hshdxlj54a" path="res://audio/voices/player/valeria.wav" id="7_5locy"]
 [ext_resource type="PackedScene" uid="uid://bjvmx7hn82haj" path="res://characters/character_essentials.tscn" id="9_sj85k"]
@@ -19,7 +19,7 @@ chara_name = "Valeria"
 metadata/_custom_type_script = "uid://bm801yc5miabv"
 
 [node name="PlayerAnimationNode" parent="." instance=ExtResource("3_uywb8")]
-sprite_sheet = ExtResource("2_g1122")
+sprite_sheet = ExtResource("4_jrooy")
 
 [node name="ActorUI" parent="." instance=ExtResource("5_p3ey0")]
 offset_top = 22.0

@@ -9,4 +9,5 @@ script = ExtResource("1_johpo")
 skill_name = "Big Boom"
 skill_description = "Deal damage to everyone"
 skill_effects = Array[ExtResource("2_yov2y")]([ExtResource("3_yov2y")])
+skill_anim_index = 2
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

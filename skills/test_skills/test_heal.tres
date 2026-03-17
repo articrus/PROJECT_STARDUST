@@ -10,4 +10,5 @@ skill_name = "Big Heal"
 skill_description = "Give Big HP"
 skill_target = 2
 skill_effects = Array[ExtResource("2_kymv0")]([ExtResource("3_kymv0")])
+skill_anim_index = 2
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

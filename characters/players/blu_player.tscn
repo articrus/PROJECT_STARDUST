@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bm801yc5miabv" path="res://scripts/general/character.gd" id="2_kjuie"]
 [ext_resource type="AudioStream" uid="uid://bjeyij230y6t1" path="res://audio/voices/player/crescent.wav" id="3_a7ju7"]
 [ext_resource type="PackedScene" uid="uid://cnlc23gohfmty" path="res://animations/players/player_animation_node.tscn" id="3_y5y4t"]
-[ext_resource type="Texture2D" uid="uid://didf64ukdiubj" path="res://sprites/players/crescent.png" id="4_kjuie"]
+[ext_resource type="Texture2D" uid="uid://bxhrswc2frh64" path="res://sprites/players/blu.png" id="4_a7ju7"]
 [ext_resource type="PackedScene" uid="uid://bjvmx7hn82haj" path="res://characters/character_essentials.tscn" id="9_3p33f"]
 [ext_resource type="PackedScene" uid="uid://bb5l5lx7e14gk" path="res://ui/actor_components/actor_ui.tscn" id="10_c6umf"]
 
@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://bm801yc5miabv"
 
 [node name="PlayerAnimationNode" parent="." instance=ExtResource("3_y5y4t")]
 y_sort_enabled = true
-sprite_sheet = ExtResource("4_kjuie")
+sprite_sheet = ExtResource("4_a7ju7")
 
 [node name="ActorUI" parent="." instance=ExtResource("10_c6umf")]
 offset_top = 22.0

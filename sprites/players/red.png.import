@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwb16p0qhit24"
-path="res://.godot/imported/adrikel.png-77d50d665328c7822efaf7c54be82b30.ctex"
+uid="uid://crdf5j0i8vfq2"
+path="res://.godot/imported/red.png-e153621214af8726075da38488a74a1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/players/adrikel.png"
-dest_files=["res://.godot/imported/adrikel.png-77d50d665328c7822efaf7c54be82b30.ctex"]
+source_file="res://sprites/players/red.png"
+dest_files=["res://.godot/imported/red.png-e153621214af8726075da38488a74a1f.ctex"]
 
 [params]
 

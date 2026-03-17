@@ -13,4 +13,5 @@ skill_description = "Buffs Every Token"
 cost = 30
 skill_target = 2
 skill_effects = Array[ExtResource("2_4uowt")]([ExtResource("3_un0mi"), ExtResource("4_8nv4x"), ExtResource("5_x6chh")])
+skill_anim_index = 2
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

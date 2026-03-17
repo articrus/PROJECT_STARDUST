@@ -142,6 +142,7 @@ position = Vector2(-24, 25)
 texture = ExtResource("3_tjibp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="TestUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3

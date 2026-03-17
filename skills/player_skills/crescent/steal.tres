@@ -10,4 +10,5 @@ skill_name = "Steal"
 skill_description = "Steal 2 positive tokens from an enemy, if none, heal 10%"
 cost = 25
 skill_effects = Array[ExtResource("2_aw0wn")]([ExtResource("3_aw0wn")])
+skill_anim_index = 2
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

@@ -12,5 +12,5 @@ skill_name = "Group Up"
 skill_description = "Increase self and target's ATK and DEF"
 skill_target = 2
 skill_effects = Array[ExtResource("2_r75jw")]([ExtResource("3_xhpv1"), ExtResource("4_vfnye"), ExtResource("5_vfnye")])
-skill_anim_index = 3
+skill_anim_index = 2
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

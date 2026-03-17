@@ -11,4 +11,5 @@ skill_description = "Heal target by 15%"
 cost = 25
 skill_target = 2
 skill_effects = Array[ExtResource("2_wfu7j")]([ExtResource("3_wfu7j")])
+skill_anim_index = 3
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

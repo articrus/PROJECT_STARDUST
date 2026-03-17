@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://didf64ukdiubj"
-path="res://.godot/imported/crescent.png-110615d5137a91ef40f9ffb42ef09ba0.ctex"
+uid="uid://bxhrswc2frh64"
+path="res://.godot/imported/blu.png-3c41465431e34b54bf755792aeadb4ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/players/crescent.png"
-dest_files=["res://.godot/imported/crescent.png-110615d5137a91ef40f9ffb42ef09ba0.ctex"]
+source_file="res://sprites/players/blu.png"
+dest_files=["res://.godot/imported/blu.png-3c41465431e34b54bf755792aeadb4ad.ctex"]
 
 [params]
 
