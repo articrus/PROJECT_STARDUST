@@ -1,7 +1,7 @@
 extends Control
 # Written By: Gianni Coladonato
-# Date Created / Modified: 07-10-2025 / 13-03-2026
-@onready var player_buttons = $BottomBorder/PlayerButtons
+# Date Created / Modified: 07-10-2025 / 18-03-2026
+@onready var option_buttons = $BottomBorder/PlayerButtons
 @onready var player_btns := {
 	"Attack": $BottomBorder/PlayerButtons/Attack,
 	"Skill": $BottomBorder/PlayerButtons/Skill,
@@ -14,21 +14,18 @@ extends Control
 var profile_ref = [] # Save playertype for use later
 @onready var profile_texture: PackedScene = preload("res://sprites/ui/profiles/profile.tscn")
 @onready var mana_bar = $Border/ManaMeter
-@onready var skill_container = $BottomBorder/SkillContainer
-@onready var skill_button: PackedScene = preload("res://ui/skill_button.tscn")
+@onready var skill_buttons = $BottomBorder/SkillContainer
+@onready var skill_btn: PackedScene = preload("res://ui/skill_button.tscn")
 @onready var desc_box = $BottomBorder/DescriptionBox
 
 func _ready() -> void:
-	skill_container.visible = false
+	_toggle_buttons_lists(true, false)
 	Signalbus.mana_changed.connect(_set_mana)
 	ManaManager._add_mana(0)
 
-func _toggle_player_buttons(toggle: bool):
-	player_buttons.visible = toggle 
-
-func _toggle_skill_list(toggle: bool) -> void:
-	skill_container.visible = toggle
-	player_buttons.visible = !toggle
+func _toggle_buttons_lists(options: bool, skill: bool) -> void:
+	option_buttons.visible = options
+	skill_buttons.visible = skill
 
 func _set_mana(amount: float) -> void:
 	mana_bar._update_mp_bar(amount)
@@ -51,18 +48,18 @@ func _on_help_pressed() -> void:
 
 func _on_skill_pressed() -> void:
 	Signalbus.skill_selected.emit()
-	_toggle_skill_list(true)
+	_toggle_buttons_lists(false, true)
 
 # Spawn all necessary buttons for the character's skills
 func _populate_skill_container(actor: Character) -> void:
 	# Empty all existing children
-	for child in skill_container.get_children():
+	for child in skill_buttons.get_children():
 		child.queue_free()
 	# Add new buttons
 	for skill in actor.skill_list:
-		var new_button = skill_button.instantiate()
+		var new_button = skill_btn.instantiate()
 		new_button._set_up_button(skill)
-		skill_container.add_child(new_button)
+		skill_buttons.add_child(new_button)
 		new_button.disabled = ManaManager.mana.x < skill.cost
 
 # Add profile shots to box

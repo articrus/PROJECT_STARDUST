@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 27-10-2025 | 17-03-2026
+# Date Created/Modificed: 27-10-2025 | 18-03-2026
 # Scene Components
 @onready var party_node = $Players
 @onready var enemies_node = $Enemies
@@ -22,7 +22,7 @@ var turn_index: int
 var player_dictionary = {}
 var player_entry = {
 	"Target": Node2D,
-	"Choice": enums.PLAYER_CHOICE.NONE,
+	"Choice": enums.PLAYER_CHOICE.NONE, 
 	"Cost": 0,
 	"Skill": Skill,
 	"Rank": 0 }
@@ -103,7 +103,7 @@ func _start_turn():
 	if player_turn:
 		turn_index = 0
 		current_state = enums.STATE.PLAYER_TURN
-		battle_hud._toggle_player_buttons(true)
+		battle_hud._toggle_buttons_lists(true, false)
 		current_player = party_node.get_child(turn_index)
 		battle_hud._set_current_turn_profile(current_player)
 		if !current_player.char_stats.is_alive:
@@ -126,33 +126,31 @@ func _player_turn():
 		battle_hud._set_current_turn_profile(current_player)
 		current_state = enums.STATE.PLAYER_TURN
 
-func _attack_option_selected():
+func _attack_option_selected(): # When the attack option is selected
 	current_state = enums.STATE.TARGETING_ENEMIES
 	player_dictionary[current_player].Choice = enums.PLAYER_CHOICE.ATTACK
 	player_dictionary[current_player].Skill = current_player.char_stats.char_attack
 	_reset_targetor()
 	targetor._adjust_targeting(enemies_node.get_child(0))
-	battle_hud._toggle_player_buttons(false)
+	battle_hud._toggle_buttons_lists(false, false)
 
-func _move_option_selected():
+func _move_option_selected(): # When the move option is seletec
 	current_state = enums.STATE.CHANGING_POSITION
 	_reset_targetor()
 	targetor._adjust_targeting(rank_manager.get_child(0))
-	battle_hud._toggle_player_buttons(false)
+	battle_hud._toggle_buttons_lists(false, false)
 
-func _skill_option_selected():
-	battle_hud._toggle_player_buttons(false)
+func _skill_option_selected(): # When the skill option is selected
+	battle_hud._toggle_buttons_lists(false, true)
 	battle_hud._populate_skill_container(current_player.char_stats)
 	current_state = enums.STATE.CHOOSING_SKILL
 
-# Handle logic of a specific skill chosen (assigning target)
-func _skill_selected(skill: Skill):
+func _skill_selected(skill: Skill): # When a specific skill is selected
 	player_dictionary[current_player].Choice = enums.PLAYER_CHOICE.SKILL 
 	player_dictionary[current_player].Skill = skill 
-	battle_hud._toggle_skill_list(false)
-	# Add a handle for not_self (should be easy enough to configure)
+	battle_hud._toggle_buttons_lists(false, true)
 	_reset_targetor()
-	match skill.skill_target:
+	match skill.skill_target: # Add a handle for not_self (should be easy enough to configure)
 		enums.TARGET.ENEMY:
 			current_state = enums.STATE.TARGETING_ENEMIES
 			targetor._adjust_targeting(enemies_node.get_child(0))
@@ -170,16 +168,15 @@ func _skill_selected(skill: Skill):
 			current_state = enums.STATE.TARGETING_ALL_ALLIES
 			targetor._adjust_targeting(party_node)
 
-func _skip_option_selected():
+func _skip_option_selected() -> void: # When the skip option is selected
 	DialogueManager._skip_quip(current_player)
 	player_dictionary[current_player].Choice = enums.PLAYER_CHOICE.NONE 
 	player_dictionary[current_player].Cost = -15.0 # Save Cost
-	battle_hud._toggle_player_buttons(false)
+	battle_hud._toggle_buttons_lists(true, false)
 	_switch_to_next_player()
 
 ###---TARGETING FUNCTIONS---###
-# Sets a single target
-func _set_single_target(node: Node) -> void:
+func _set_single_target(node: Node) -> void: # Sets a single target
 	targetor.visible = false
 	player_dictionary[current_player].Target = node.get_child(targeting_index)
 	player_dictionary[current_player].Cost = player_dictionary[current_player].Skill.cost
@@ -222,17 +219,17 @@ func _switch_to_next_player():
 			_switch_to_next_player()
 		else:
 			current_state = enums.STATE.PLAYER_TURN
-			battle_hud._toggle_player_buttons(true)
+			battle_hud._toggle_buttons_lists(true, false)
 
 func _cancel_targeting():
-	battle_hud._toggle_skill_list(false)
+	battle_hud._toggle_buttons_lists(false, false)
 	targetor.visible = false
 	current_state = enums.STATE.NONE
 	var refund = player_dictionary[current_player].Cost
 	_reset_choice(current_player)
 	ManaManager._add_mana(refund)
 	current_state = enums.STATE.PLAYER_TURN
-	battle_hud._toggle_player_buttons(true)
+	battle_hud._toggle_buttons_lists(true, false)
 
 func _reset_choice(player) -> void:
 	player_dictionary[player].Choice = enums.PLAYER_CHOICE.NONE
@@ -271,8 +268,7 @@ func _select_ally():
 		func(): _cancel_targeting() )
 
 func _selecting_skill():
-	Battle_Utils._handle_section_input(
-		func(): pass, func(): pass, func(): pass,
+	Battle_Utils._handle_section_input( func(): pass, func(): pass, func(): pass,
 		func(): _cancel_targeting() )
 
 func _selecting_self():
@@ -324,7 +320,6 @@ func _resolve_player_choices():
 					await sig
 			enums.PLAYER_CHOICE.SKILL, enums.PLAYER_CHOICE.ATTACK:
 				skill = choice_data.Skill
-				print(skill.skill_name)
 				var target = Battle_Utils._get_valid_target(skill, choice_data)
 				# Execute skill against target
 				if is_instance_valid(target):
@@ -335,19 +330,6 @@ func _resolve_player_choices():
 	for entry in turn_order:
 		entry.Key.char_stats._end_of_turn_checks()
 	timers.turn_change.start() #_end_turn()
-
-# Process the player's attack/skill (Check to see if there's any oppertunities for missed calls
-func _process_player_skill(player, skill, target):
-	await Signalbus.perform_skill
-	skill._execute_skill(player, target)
-	await Signalbus.skill_finished
-	return
-
-func _sort_turn_order():
-	turn_order.clear()
-	for key in player_dictionary.keys():
-		turn_order.append({"Key": key, "Value": player_dictionary[key].Choice})
-	turn_order.sort_custom(Battle_Utils._sort_turn_order_values)
 
 # Enemy turn logic (Do similar things to player logic (attack and skill handling)
 func _enemy_turn():
@@ -373,6 +355,19 @@ func _enemy_turn():
 	for enemy in enemies_node.get_children():
 		enemy.enemy_brain._end_of_turn_check()
 	timers.turn_change.start() #_end_turn()
+
+# Process the player's attack/skill (Check to see if there's any oppertunities for missed calls
+func _process_player_skill(player, skill, target):
+	await Signalbus.perform_skill
+	skill._execute_skill(player, target)
+	await Signalbus.skill_finished
+	return
+
+func _sort_turn_order():
+	turn_order.clear()
+	for key in player_dictionary.keys():
+		turn_order.append({"Key": key, "Value": player_dictionary[key].Choice})
+	turn_order.sort_custom(Battle_Utils._sort_turn_order_values)
 
 func _on_battle_end():
 	Battle_Utils._save_player_data(party_node)
