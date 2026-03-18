@@ -66,6 +66,17 @@ static func _sort_turn_order_values(a,b):
 static func _get_skill_cost(skill: Skill) -> int:
 	return skill.cost
 
+static func _position_players(rank_manager: Node2D, enemy_rank_manager: Node2D, party_node: Node2D, enemies_node: Node2D):
+	var index = 0
+	for player in party_node.get_children():
+		rank_manager._init_positions(player, index)
+		player._enter_battle()
+		index += 1
+	index = 0
+	for enemy in enemies_node.get_children():
+		enemy_rank_manager._init_positions(enemy, index)
+		index += 1
+
 static func _save_player_data(party_node):
 	for player in party_node.get_children():
 		if !player.char_stats.is_alive:

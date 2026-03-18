@@ -9,13 +9,18 @@ extends Node2D
 @onready var battle_hud = $CanvasLayer/BattleHUD
 @onready var targetor = $Targetor
 @onready var battle_cam = $BattleCam
-@onready var turn_change = $TurnChange
+@onready var timers = $Timers
+# The Current Sate of the Battle
+@export var current_state : enums.STATE = enums.STATE.SETUP:
+	get:
+		return current_state
+	set(value):
+		if value != current_state:
+			current_state = value
 # Variables
-@export var current_state : enums.STATE = enums.STATE.SETUP
 var player_turn: bool 
 var targeting_index: int
 var turn_index: int
-#Testing something new
 var player_dictionary = {}
 var player_entry = {
 	"Target": Node2D,
@@ -26,19 +31,51 @@ var player_entry = {
 var current_player
 var turn_order = []
 
-func _add_entry_to_dictionary(player):
-	player_dictionary[player] = player_entry.duplicate()
-
-func _sort_turn_order():
-	turn_order.clear()
-	for key in player_dictionary.keys():
-		turn_order.append({"Key": key, "Value": player_dictionary[key].Choice})
-	turn_order.sort_custom(Battle_Utils._sort_turn_order_values)
-
 func _ready() -> void:
 	player_turn = true
 	_connect_signals()
+	timers._connect_to_battle_manager(self)
 
+###---INITIATION FUNCTIONS---###
+# Connect all signals for battle hud
+func _connect_signals():
+	Signalbus.attack_selected.connect(_attack_option_selected) # Connect attack option
+	Signalbus.move_selected.connect(_move_option_selected) # Connect move option
+	Signalbus.skipped_selected.connect(_skip_option_selected) # Connect skip option
+	Signalbus.skill_selected.connect(_skill_option_selected) # Connect skill select
+	Signalbus.skill_button_pressed.connect(_skill_selected) # Connect specific chosen skill
+
+# Called when Node is loaded
+func _on_battle_scene_ready():
+	_load_players_into_scene(GameManager.current_party)
+	#_load_enemies_into_scene(encounter_data) #Instantiates enemies (make a manager class?)
+
+func _scene_set_up():
+	targetor.visible = false
+	turn_index = 0
+	battle_cam.make_current()
+	Battle_Utils._position_players(rank_manager, enemy_rank_manager, party_node, enemies_node)
+	battle_hud._populate_profile_container(party_node)
+	current_state = enums.STATE.TURN_START
+
+# Grab player data and initialize players
+func _load_players_into_scene(current_party):
+	for player_type in current_party:
+		var new_player = GameManager.player_templates[player_type].instantiate()
+		call_deferred("_add_child_to_party_node", new_player)
+		new_player.pending_data = GameManager.player_data_saves[player_type].duplicate(true)
+		new_player.pending_quips = Dialogue_Parser._get_player_quip_lines(player_type)
+		_add_entry_to_dictionary(new_player)
+	await get_tree().process_frame
+	_scene_set_up()
+
+func _add_child_to_party_node(child):
+	party_node.add_child(child)
+
+func _add_entry_to_dictionary(player):
+	player_dictionary[player] = player_entry.duplicate()
+
+###---PROCESS AND MAIN FUNCTIONS---#
 func _process(_delta) -> void:
 	match(current_state):
 		enums.STATE.TURN_START:
@@ -48,27 +85,21 @@ func _process(_delta) -> void:
 		enums.STATE.ENEMY_TURN:
 			pass
 		enums.STATE.TARGETING_ENEMIES:
-			battle_hud._toggle_player_buttons(false)
 			_select_target()
 		enums.STATE.TARGETING_PARTY:
-			battle_hud._toggle_player_buttons(false)
 			_select_ally()
 		enums.STATE.TARGETING_SELF:
-			battle_hud._toggle_player_buttons(false)
 			_selecting_self()
 		enums.STATE.TARGETING_ALL_ENEMIES:
-			battle_hud._toggle_player_buttons(false)
 			_select_all()
 		enums.STATE.TARGETING_ALL_ALLIES:
-			battle_hud._toggle_player_buttons(false)
 			_select_all()
 		enums.STATE.CHANGING_POSITION:
-			battle_hud._toggle_player_buttons(false)
 			_select_rank()
 		enums.STATE.CHOOSING_SKILL:
 			_selecting_skill()
 		enums.STATE.COMBAT_OVER:
-			print("Victory")
+			pass
 
 func _start_turn():
 	if player_turn:
@@ -103,13 +134,16 @@ func _attack_option_selected():
 	player_dictionary[current_player].Skill = current_player.char_stats.char_attack
 	_reset_targetor()
 	targetor._adjust_targeting(enemies_node.get_child(0))
+	battle_hud._toggle_player_buttons(false)
 
 func _move_option_selected():
 	current_state = enums.STATE.CHANGING_POSITION
 	_reset_targetor()
 	targetor._adjust_targeting(rank_manager.get_child(0))
+	battle_hud._toggle_player_buttons(false)
 
 func _skill_option_selected():
+	battle_hud._toggle_player_buttons(false)
 	battle_hud._populate_skill_container(current_player.char_stats)
 	current_state = enums.STATE.CHOOSING_SKILL
 
@@ -145,7 +179,7 @@ func _skip_option_selected():
 	battle_hud._toggle_player_buttons(false)
 	_switch_to_next_player()
 
-###--- TARGET FUNCTIONS ---###
+###---TARGETING FUNCTIONS---###
 # Sets player to attack target
 func _set_attack_target():
 	targetor.visible = false
@@ -198,16 +232,18 @@ func _switch_to_next_player():
 func _cancel_targeting():
 	battle_hud._toggle_skill_list(false)
 	targetor.visible = false
-	current_state = enums.STATE.PLAYER_TURN
+	current_state = enums.STATE.NONE
 	var refund = player_dictionary[current_player].Cost
 	_reset_choice(current_player)
 	ManaManager._add_mana(refund)
+	current_state = enums.STATE.PLAYER_TURN
 	battle_hud._toggle_player_buttons(true)
 
 func _reset_choice(player) -> void:
 	player_dictionary[player].Choice = enums.PLAYER_CHOICE.NONE
 	player_dictionary[player].Cost = 0.0
 
+###---SELECTING FUNCTIONS---###
 # Select an enemy target
 func _select_target():
 	Battle_Utils._handle_section_input(
@@ -266,6 +302,7 @@ func _end_turn():
 	player_turn = !player_turn
 	if Battle_Utils._check_if_no_enemies_remain(enemies_node):
 		current_state = enums.STATE.COMBAT_OVER
+		print("Victory")
 		_on_battle_end()
 	elif Battle_Utils._check_if_all_players_downed(party_node):
 		current_state = enums.STATE.GAME_OVER
@@ -275,26 +312,6 @@ func _end_turn():
 func _reset_targetor():
 	targetor.visible = true
 	targeting_index = 0
-
-# Positioning Functions (Maybe reolocate?)
-func _position_players():
-	var index = 0
-	for player in party_node.get_children():
-		rank_manager._init_positions(player, index)
-		player._enter_battle()
-		index += 1
-	index = 0
-	for enemy in enemies_node.get_children():
-		enemy_rank_manager._init_positions(enemy, index)
-		index += 1
-
-# Connect all signals for battle hud
-func _connect_signals():
-	Signalbus.attack_selected.connect(_attack_option_selected) # Connect attack option
-	Signalbus.move_selected.connect(_move_option_selected) # Connect move option
-	Signalbus.skipped_selected.connect(_skip_option_selected) # Connect skip option
-	Signalbus.skill_selected.connect(_skill_option_selected) # Connect skill select
-	Signalbus.skill_button_pressed.connect(_skill_selected) # Connect specific chosen skill
 
 func _resolve_player_choices():
 	_sort_turn_order()
@@ -317,17 +334,12 @@ func _resolve_player_choices():
 				# Execute skill against target
 				if is_instance_valid(target):
 					player.animation_node._skill(skill._get_anim_index(player))
-					#if choice_data.Choice == enums.PLAYER_CHOICE.ATTACK:
-						#player.animation_node._attack(player.char_stats.rank)
-						#ManaManager._attack_mana_bonus(player.char_stats)
-					#else:
-						#player.animation_node._skill()
-						##player.animation_node.__skill(skill.anim_type) # To implement soon
+					#ManaManager._attack_mana_bonus(player.char_stats)
 					await _process_player_skill(player, skill, target)
 		await get_tree().process_frame
 	for entry in turn_order:
 		entry.Key.char_stats._end_of_turn_checks()
-	turn_change.start() #_end_turn()
+	timers.turn_change.start() #_end_turn()
 
 # Process the player's attack/skill (Check to see if there's any oppertunities for missed calls
 func _process_player_skill(player, skill, target):
@@ -335,6 +347,12 @@ func _process_player_skill(player, skill, target):
 	skill._execute_skill(player, target)
 	await Signalbus.skill_finished
 	return
+
+func _sort_turn_order():
+	turn_order.clear()
+	for key in player_dictionary.keys():
+		turn_order.append({"Key": key, "Value": player_dictionary[key].Choice})
+	turn_order.sort_custom(Battle_Utils._sort_turn_order_values)
 
 # Enemy turn logic (Do similar things to player logic (attack and skill handling)
 func _enemy_turn():
@@ -350,55 +368,17 @@ func _enemy_turn():
 			enums.ENEMY_CHOICE.ATTACK:
 				skill = enemy.enemy_brain.attack
 		var target = Battle_Utils._get_skill_target(skill.skill_target, enemy, party_node, enemies_node)
-		print(enemy.char_stats.chara_name + " targets " + str(target) + " with " + skill.skill_name)
 		if is_instance_valid(target):
 			enemy.animation_node._skill(skill._get_anim_index(enemy))
-			#if decision == enums.ENEMY_CHOICE.ATTACK:
-				#enemy.animation_node._attack(enemy.char_stats.rank)
-				#ManaManager._damage_mana_bonus(enemy.char_stats)
-			#else:
-				#enemy.animation_node._skill()
+			#ManaManager._damage_mana_bonus(enemy.char_stats)
 			await Signalbus.perform_skill
 			skill._execute_skill(enemy, target)
 			await Signalbus.skill_finished
 		await get_tree().process_frame
 	for enemy in enemies_node.get_children():
 		enemy.enemy_brain._end_of_turn_check()
-	turn_change.start() #_end_turn()
-
-func _scene_set_up():
-	targetor.visible = false
-	turn_index = 0
-	battle_cam.make_current()
-	_position_players()
-	battle_hud._populate_profile_container(party_node)
-	current_state = enums.STATE.TURN_START
-
-# Called when everything is loaded
-func _on_battle_scene_ready():
-	_load_players_into_scene(GameManager.current_party)
-	#_load_enemies_into_scene(encounter_data) #Instantiates enemies (make a manager class?)
-
-func _add_child_to_party_node(child):
-	party_node.add_child(child)
-
-# Grab player data and initialize players
-func _load_players_into_scene(current_party):
-	for player_type in current_party:
-		var new_player = GameManager.player_templates[player_type].instantiate()
-		call_deferred("_add_child_to_party_node", new_player)
-		new_player.pending_data = GameManager.player_data_saves[player_type].duplicate(true)
-		new_player.pending_quips = Dialogue_Parser._get_player_quip_lines(player_type)
-		_add_entry_to_dictionary(new_player) # New Things
-	await get_tree().process_frame
-	_scene_set_up()
-
-func _on_turn_change_timeout() -> void:
-	_end_turn()
+	timers.turn_change.start() #_end_turn()
 
 func _on_battle_end():
 	Battle_Utils._save_player_data(party_node)
-	$Temp_End_Timer.start()
-
-func _on_temp_end_timer_timeout() -> void:
-	Signalbus.end_encounter.emit()
+	timers.battle_end.start()
