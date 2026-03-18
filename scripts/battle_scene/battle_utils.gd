@@ -1,19 +1,19 @@
 extends Node
 class_name Battle_Utils
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 09-11-2025 | 12-02-2026
+# Date Created/Modificed: 09-11-2025 | 17-03-2026
 # This class is used to store some simple functions to reduce the complexity of the battle_manager script
 
-# Return a valid target for skills and attacks
+# Return a valid target for skills and attacks (FIXXXX)
 static func _get_valid_target(skill, choice_data):
 	var target = choice_data.Target
-	if skill.skill_target == enums.TARGET.ENEMY: # Check if targeting a single enemy
-		if not Battle_Utils._check_if_is_alive(target):
+	var single_target_types = [enums.TARGET.ENEMY, enums.TARGET.ALLY, enums.TARGET.SELF]
+	if skill.skill_target in single_target_types:
+		if not _check_if_is_alive(target):
 			return null
 	if is_instance_valid(target):
 		return target
-	else:
-		return null
+	return null
 
 # Is valid still applies when waiting for death, let's see if is_alive is a good marker
 static func _check_if_is_alive(target) -> bool:
@@ -54,28 +54,19 @@ static func _check_if_no_enemies_remain(enemies_node) -> bool:
 	return enemies_node.get_child_count() == 0
 
 static func _check_if_all_players_downed(party_node) -> bool:
-	var checker = 0
-	for player in party_node.get_children():
-		if !player.char_stats.is_alive:
-			checker += 1
-	return checker == party_node.get_child_count()
+	return party_node.get_children().all(func(p): return !p.char_stats.is_alive)
 
 static func _sort_turn_order_values(a,b):
 	return a.Value < b.Value
 
-static func _get_skill_cost(skill: Skill) -> int:
-	return skill.cost
-
 static func _position_players(rank_manager: Node2D, enemy_rank_manager: Node2D, party_node: Node2D, enemies_node: Node2D):
-	var index = 0
-	for player in party_node.get_children():
-		rank_manager._init_positions(player, index)
+	for i in party_node.get_child_count():
+		var player = party_node.get_child(i)
+		rank_manager._init_positions(player, i)
 		player._enter_battle()
-		index += 1
-	index = 0
-	for enemy in enemies_node.get_children():
-		enemy_rank_manager._init_positions(enemy, index)
-		index += 1
+	for i in enemies_node.get_child_count():
+		var enemy = enemies_node.get_child(i)
+		enemy_rank_manager._init_positions(enemy, i)
 
 static func _save_player_data(party_node):
 	for player in party_node.get_children():

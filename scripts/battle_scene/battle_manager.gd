@@ -12,8 +12,6 @@ extends Node2D
 @onready var timers = $Timers
 # The Current Sate of the Battle
 @export var current_state : enums.STATE = enums.STATE.SETUP:
-	get:
-		return current_state
 	set(value):
 		if value != current_state:
 			current_state = value
@@ -119,7 +117,7 @@ func _start_turn():
 func _player_turn():
 	if Input.is_action_just_pressed("cancel") && turn_index > 0: # Go back one turn
 		current_state = enums.STATE.NONE # Prevent process from running this method a second time
-		_reset_choice(current_player)
+		#_reset_choice(current_player)
 		turn_index -= 1
 		current_player = party_node.get_child(turn_index)
 		ManaManager._add_mana(player_dictionary[current_player].Cost)
@@ -169,7 +167,7 @@ func _skill_selected(skill: Skill):
 			current_state = enums.STATE.TARGETING_ALL_ENEMIES
 			targetor._adjust_targeting(enemies_node)
 		enums.TARGET.ALL_ALLIES:
-			current_state = enums.STATE.TARGETING_ALL_ENEMIES
+			current_state = enums.STATE.TARGETING_ALL_ALLIES
 			targetor._adjust_targeting(party_node)
 
 func _skip_option_selected():
@@ -180,12 +178,16 @@ func _skip_option_selected():
 	_switch_to_next_player()
 
 ###---TARGETING FUNCTIONS---###
-# Sets player to attack target
-func _set_attack_target():
+# Sets a single target
+func _set_single_target(node: Node) -> void:
 	targetor.visible = false
-	player_dictionary[current_player].Target = enemies_node.get_child(targeting_index)
+	player_dictionary[current_player].Target = node.get_child(targeting_index)
 	player_dictionary[current_player].Cost = player_dictionary[current_player].Skill.cost
 	_switch_to_next_player()
+
+# Single target functions
+func _set_attack_target(): _set_single_target(enemies_node)
+func _set_friendly_target(): _set_single_target(party_node)
 
 # Set player move target
 func _set_move_target():
@@ -193,13 +195,6 @@ func _set_move_target():
 	player_dictionary[current_player].Choice = enums.PLAYER_CHOICE.MOVE
 	player_dictionary[current_player].Rank = targeting_index
 	player_dictionary[current_player].Cost = 0.0
-	_switch_to_next_player()
-
-# Sets ally skill target
-func _set_friendly_target():
-	targetor.visible = false
-	player_dictionary[current_player].Target = party_node.get_child(targeting_index)
-	player_dictionary[current_player].Cost = player_dictionary[current_player].Skill.cost
 	_switch_to_next_player()
 
 func _set_all_target():
