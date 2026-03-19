@@ -1,10 +1,10 @@
 extends Node
 class_name Dialogue_Parser
 # Written By: Gianni Coladonato
-# Date Created / Modified: 27-02-2026 / 18-03-2026
+# Date Created / Modified: 27-02-2026 / 19-03-2026
 
 static func _get_player_quip_lines(player: enums.PLAYERS) -> Character_Quips:
-	var quips: Character_Quips = Character_Quips.new()
+	var quips:= Character_Quips.new()
 	quips = _create_quips_from_json(JSON_Strings.player_quips[player])
 	return quips
 
