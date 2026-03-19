@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 27-10-2025 | 18-03-2026
+# Date Created/Modificed: 27-10-2025 | 19-03-2026
 # Scene Components
 @onready var party_node = $Players
 @onready var enemies_node = $Enemies
@@ -45,8 +45,9 @@ func _connect_signals():
 
 # Called when Node is loaded
 func _on_battle_scene_ready():
-	_load_players_into_scene(GameManager.current_party)
-	#_load_enemies_into_scene(encounter_data) #Instantiates enemies (make a manager class?)
+	await _load_players_into_scene(GameManager.current_party)
+	#await _load_enemies_into_scene(encounter_data)
+	_scene_set_up()
 
 func _scene_set_up():
 	targetor.visible = false
@@ -56,19 +57,24 @@ func _scene_set_up():
 	battle_hud._populate_profile_container(party_node)
 	current_state = enums.STATE.TURN_START
 
-# Grab player data and initialize players
-func _load_players_into_scene(current_party):
+func _load_players_into_scene(current_party): # Grab player data and instantiate players
 	for player_type in current_party:
 		var new_player = GameManager.player_templates[player_type].instantiate()
-		call_deferred("_add_child_to_party_node", new_player)
+		call_deferred("_add_child_to_node", new_player, party_node)
 		new_player.pending_data = GameManager.player_data_saves[player_type].duplicate(true)
 		new_player.pending_quips = Dialogue_Parser._get_player_quip_lines(player_type)
 		_add_entry_to_dictionary(new_player)
 	await get_tree().process_frame
-	_scene_set_up()
 
-func _add_child_to_party_node(child):
-	party_node.add_child(child)
+func _load_enemies_into_scene(encounter: Encounter_Data) -> void: # Grab encoutner data and instantiate enemies
+	for monster in encounter.enemies:
+		var new_enemy = Enemy_List._get_monster(monster).instantiate()
+		call_deferred("_add_child_to_node", new_enemy, enemies_node)
+		# Pass any necessary data/modifiers here
+	await get_tree().process_frame
+
+func _add_child_to_node(child, node):
+	node.add_child(child)
 
 func _add_entry_to_dictionary(player):
 	player_dictionary[player] = player_entry.duplicate()

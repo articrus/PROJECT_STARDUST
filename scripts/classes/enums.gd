@@ -28,8 +28,7 @@ const STRING_TO_PLAYER = {
 	"pur": enums.PLAYERS.PUR,
 }
 
-enum PLAYER_CONTROL_STATUS 
-{
+enum PLAYER_CONTROL_STATUS {
 	CONTROLLED,
 	FOLLOWING,
 	BATTLE
@@ -78,8 +77,7 @@ enum STATE {
 	NONE
 }
 
-enum TARGET
-{
+enum TARGET {
 	ENEMY,
 	RANK,
 	ALLY,
@@ -89,19 +87,23 @@ enum TARGET
 	ALL_ALLIES
 }
 
-enum PLAYER_CHOICE 
-{
+enum PLAYER_CHOICE {
 	NONE,
 	SKILL,
 	MOVE,
 	ATTACK
 }
 
-enum ENEMY_CHOICE 
-{
+enum ENEMY_CHOICE {
 	ATTACK,
 	SKILL,
 	SIG_SKILL,
 	MOVE,
 	NONE
+}
+
+enum MONSTERS {
+	SLIME,
+	GHOUL,
+	NYMPH
 }
