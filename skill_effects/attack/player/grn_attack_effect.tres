@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Attack_Effect" load_steps=5 format=3 uid="uid://2ag2hrfbtg27"]
 
-[ext_resource type="Script" uid="uid://3tni8mbuetvh" path="res://scripts/skills/effect_scripts/skill_effect.gd" id="1_ua7vn"]
+[ext_resource type="Script" uid="uid://3tni8mbuetvh" path="res://scripts/skills/skill_effect.gd" id="1_ua7vn"]
 [ext_resource type="PackedScene" uid="uid://bjisixs78wf7q" path="res://fx/hit_fx/player/grn_hit.tscn" id="2_a136c"]
 [ext_resource type="Script" uid="uid://3u43jex5m5y0" path="res://scripts/skills/effect_scripts/attack.gd" id="2_oga2b"]
 [ext_resource type="PackedScene" uid="uid://7q3aierlg6tv" path="res://fx/hit_fx/player/grn_r_hit.tscn" id="3_a136c"]

@@ -21,10 +21,10 @@ var targeting_index: int
 var turn_index: int
 var player_dictionary = {}
 var player_entry = {
-	"Target": Node2D,
+	"Target": null,
 	"Choice": enums.PLAYER_CHOICE.NONE, 
 	"Cost": 0,
-	"Skill": Skill,
+	"Skill": null,
 	"Rank": 0 }
 var current_player
 var turn_order = []
@@ -96,6 +96,8 @@ func _process(_delta) -> void:
 			_select_rank()
 		enums.STATE.CHOOSING_SKILL:
 			_selecting_skill()
+		enums.STATE.RESOLVE_CHOICES:
+			pass
 		enums.STATE.COMBAT_OVER:
 			pass
 
@@ -222,9 +224,9 @@ func _switch_to_next_player():
 			battle_hud._toggle_buttons_lists(true, false)
 
 func _cancel_targeting():
-	battle_hud._toggle_buttons_lists(false, false)
-	targetor.visible = false
 	current_state = enums.STATE.NONE
+	battle_hud._toggle_buttons_lists(false, false)
+	_reset_targetor()
 	var refund = player_dictionary[current_player].Cost
 	_reset_choice(current_player)
 	ManaManager._add_mana(refund)
@@ -234,6 +236,9 @@ func _cancel_targeting():
 func _reset_choice(player) -> void:
 	player_dictionary[player].Choice = enums.PLAYER_CHOICE.NONE
 	player_dictionary[player].Cost = 0.0
+	player_dictionary[player].Target = null
+	player_dictionary[player].Skill = null
+	player_dictionary[player].Rank = 0
 
 ###---SELECTING FUNCTIONS---###
 # Select an enemy target

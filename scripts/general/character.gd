@@ -1,7 +1,7 @@
 class_name Character
 extends Node
 # Written By: Gianni Coladonato
-# Date Created / Modified: 06-10-2025 / 12-02-2026
+# Date Created / Modified: 06-10-2025 / 18-03-2026
 # Basic Info
 @export var chara_name : String = "BLANK"
 @export var hp: Vector2i = Vector2i(100, 100) # Current / Max
@@ -16,8 +16,6 @@ extends Node
 @export var eva: Vector3i = Vector3i(0, 0, 3) # Evasion chance, Min / Max
 # General
 @export var is_alive: bool = true:
-	get:
-		return is_alive
 	set(value):
 		is_alive = value
 		if animation_node:

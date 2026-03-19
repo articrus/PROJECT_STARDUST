@@ -1,7 +1,7 @@
 extends Node
 class_name Dialogue_Parser
 # Written By: Gianni Coladonato
-# Date Created / Modified: 27-02-2026 / 06-03-2026
+# Date Created / Modified: 27-02-2026 / 18-03-2026
 
 static func _get_player_quip_lines(player: enums.PLAYERS) -> Character_Quips:
 	var quips: Character_Quips = Character_Quips.new()
@@ -20,6 +20,7 @@ static func _create_quips_from_json(path: String) -> Character_Quips:
 		quips.battle_start = lines["B_START"]
 		quips.crit_quotes = lines["CRIT"]
 		quips.skip_quotes = lines["SKIP"]
+		#quotes.XXX = lines["XXX]
 	return quips
 
 static func _create_two_char_from_json(path: String) -> Character_Dialogue_Tree:
