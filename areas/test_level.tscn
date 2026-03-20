@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=4 uid="uid://dn47xkxk5qm7w"]
+[gd_scene load_steps=11 format=4 uid="uid://dn47xkxk5qm7w"]
 
 [ext_resource type="Texture2D" uid="uid://bp0egh5asyhmb" path="res://sprites/enviormnet/plains_tileset.png" id="1_w2jdf"]
 [ext_resource type="PackedScene" uid="uid://dvuah4vdyumyc" path="res://areas/area_components/enviornment.tscn" id="2_34trp"]
-[ext_resource type="PackedScene" uid="uid://clrnsxdcmxkr1" path="res://characters/enemies/slime.tscn" id="2_tjibp"]
 [ext_resource type="Texture2D" uid="uid://cgug7hf7n8dp5" path="res://ui/tokens/def_1.tres" id="3_tjibp"]
 [ext_resource type="PackedScene" uid="uid://ctbbghcvamcqk" path="res://areas/room pieces/plains/plains_0.tscn" id="5_b2428"]
+[ext_resource type="PackedScene" uid="uid://jntk3b32bt0h" path="res://characters/overworld/overworld_enemy.tscn" id="5_fvryb"]
 [ext_resource type="Script" uid="uid://d0mn2mh4ua42" path="res://scripts/test/test_ui.gd" id="6_fvryb"]
+[ext_resource type="Texture2D" uid="uid://bcyc4k0o54xrr" path="res://sprites/enemies/grn_slime.png" id="6_wavu5"]
+[ext_resource type="Resource" uid="uid://bfumwfyb7v5k1" path="res://scripts/encounter/test_encoutner.tres" id="7_yl4s8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tjibp"]
 texture = ExtResource("1_w2jdf")
@@ -134,12 +136,14 @@ position = Vector2(304, 0)
 y_sort_enabled = true
 position = Vector2(624, 0)
 
-[node name="Slime" parent="Enviornment" instance=ExtResource("2_tjibp")]
-position = Vector2(95, 0)
-
 [node name="Sprite2D" type="Sprite2D" parent="Enviornment"]
 position = Vector2(-24, 25)
 texture = ExtResource("3_tjibp")
+
+[node name="OverworldEnemy" parent="Enviornment" instance=ExtResource("5_fvryb")]
+position = Vector2(75, 0)
+texture = ExtResource("6_wavu5")
+encounter = ExtResource("7_yl4s8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false

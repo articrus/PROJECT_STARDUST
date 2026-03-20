@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://ce3jrk18e5djc"]
+[gd_scene load_steps=8 format=3 uid="uid://ce3jrk18e5djc"]
 
 [ext_resource type="Script" uid="uid://xp2vr1bek8lm" path="res://scripts/battle_scene/battle_manager.gd" id="1_rum4d"]
 [ext_resource type="Texture2D" uid="uid://dg7ejffvctiai" path="res://sprites/backgrounds/back.png" id="2_3oc74"]
 [ext_resource type="PackedScene" uid="uid://bftnuo2e8h6yn" path="res://ui/battle_hud.tscn" id="2_pxwbd"]
 [ext_resource type="PackedScene" uid="uid://cw2bjqbq15fyu" path="res://battlescene/ranks.tscn" id="3_svpld"]
-[ext_resource type="PackedScene" uid="uid://clrnsxdcmxkr1" path="res://characters/enemies/slime.tscn" id="4_8qdv8"]
 [ext_resource type="PackedScene" uid="uid://r0003kmvyu2y" path="res://battlescene/enemy_ranks.tscn" id="4_rum4d"]
 [ext_resource type="PackedScene" uid="uid://dqtelk0e4uhoc" path="res://ui/targetor.tscn" id="6_1i8jf"]
-[ext_resource type="PackedScene" uid="uid://qnu8ixlmht3h" path="res://characters/enemies/new_slime.tscn" id="7_rum4d"]
 [ext_resource type="Script" uid="uid://bdgjd8etils3a" path="res://scripts/battle_scene/timers.gd" id="9_3oc74"]
 
 [node name="BattleScene" type="Node2D"]
@@ -42,23 +40,6 @@ position = Vector2(-90, 0)
 [node name="Enemies" type="Node2D" parent="."]
 position = Vector2(90, 0)
 
-[node name="Slime" parent="Enemies" instance=ExtResource("4_8qdv8")]
-
-[node name="Character" parent="Enemies/Slime" index="0"]
-chara_name = "Slime Number 1"
-
-[node name="Slime2" parent="Enemies" instance=ExtResource("4_8qdv8")]
-position = Vector2(28, -34)
-
-[node name="Character" parent="Enemies/Slime2" index="0"]
-chara_name = "Slime Number 2"
-
-[node name="Slime3" parent="Enemies" instance=ExtResource("7_rum4d")]
-position = Vector2(-4, -69)
-
-[node name="Character" parent="Enemies/Slime3" index="0"]
-chara_name = "Support Slime"
-
 [node name="BattleCam" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 
@@ -77,10 +58,3 @@ one_shot = true
 
 [connection signal="timeout" from="Timers/TurnChange" to="Timers" method="_on_turn_change_timeout"]
 [connection signal="timeout" from="Timers/EndTimer" to="Timers" method="_on_end_timer_timeout"]
-
-[editable path="Enemies/Slime"]
-[editable path="Enemies/Slime/CharacterEssentials"]
-[editable path="Enemies/Slime2"]
-[editable path="Enemies/Slime2/CharacterEssentials"]
-[editable path="Enemies/Slime3"]
-[editable path="Enemies/Slime3/CharacterEssentials"]

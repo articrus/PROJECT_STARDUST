@@ -1,6 +1,6 @@
 extends Node
 # Written By: Gianni Coladonato
-# Date Created / Modified: 06-10-2025 / 28-11-2025
+# Date Created / Modified: 06-10-2025 / 20-03-2026
 @onready var battle_scene = load("res://scenes/battle_scene.tscn")
 # Player Scenes stored alongside enum keys
 var player_templates: ={
@@ -22,6 +22,7 @@ var player_data_saves: ={
 }
 @export var current_party: Array[enums.PLAYERS] = [enums.PLAYERS.RED, enums.PLAYERS.BLU, enums.PLAYERS.GRN]
 var current_battle
+var current_encounter: Encounter_Data
 var is_in_battle 
 
 func _ready() -> void:
@@ -33,18 +34,19 @@ func _ready() -> void:
 func _on_world_ready():
 	Signalbus.pass_party_to_load.emit(current_party)
 
-func _load_battle_scene():
+func _load_battle_scene(encounter: Encounter_Data):
 	if !is_in_battle:
 		is_in_battle = true
 		GlobalVariables.can_move = false
 		current_battle = battle_scene.instantiate()
 		get_tree().current_scene.visible = false
+		current_encounter = encounter
 		call_deferred("_add_battle_scene")
 
 func _add_battle_scene():
 	add_child(current_battle)
 	await get_tree().process_frame
-	current_battle._on_battle_scene_ready()
+	current_battle._on_battle_scene_ready(current_encounter)
 
 func _destroy_battle_scene():
 	current_battle.queue_free()

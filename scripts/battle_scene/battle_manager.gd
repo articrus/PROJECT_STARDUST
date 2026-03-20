@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 27-10-2025 | 19-03-2026
+# Date Created/Modificed: 27-10-2025 | 20-03-2026
 # Scene Components
 @onready var party_node = $Players
 @onready var enemies_node = $Enemies
@@ -44,9 +44,9 @@ func _connect_signals():
 	Signalbus.skill_button_pressed.connect(_skill_selected) # Connect specific chosen skill
 
 # Called when Node is loaded
-func _on_battle_scene_ready():
+func _on_battle_scene_ready(encounter: Encounter_Data):
 	await _load_players_into_scene(GameManager.current_party)
-	#await _load_enemies_into_scene(encounter_data)
+	await _load_enemies_into_scene(encounter)
 	_scene_set_up()
 
 func _scene_set_up():

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Encounter_Data" load_steps=2 format=3 uid="uid://bfumwfyb7v5k1"]
+
+[ext_resource type="Script" uid="uid://b1wqtgeexy4m6" path="res://scripts/encounter/encounter_data.gd" id="1_71v62"]
+
+[resource]
+script = ExtResource("1_71v62")
+enemies = Array[int]([0, 0, 2])
+metadata/_custom_type_script = "uid://b1wqtgeexy4m6"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://qnu8ixlmht3h"]
+[gd_scene load_steps=10 format=3 uid="uid://qnu8ixlmht3h"]
 
 [ext_resource type="Script" uid="uid://bawbbde4vk0q3" path="res://scripts/enemies/base_enemy.gd" id="1_wl4o4"]
 [ext_resource type="Resource" uid="uid://nd00pm5cjqk" path="res://scripts/enemy_ai/test_brains/test_support_1.tres" id="2_fmj2u"]
@@ -8,12 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bb5l5lx7e14gk" path="res://ui/actor_components/actor_ui.tscn" id="7_4pilr"]
 [ext_resource type="PackedScene" uid="uid://ca6jueyhukwyt" path="res://animations/enemies/simple_enemy.tscn" id="8_f2xpl"]
 [ext_resource type="Texture2D" uid="uid://bcyc4k0o54xrr" path="res://sprites/enemies/grn_slime.png" id="9_58d7d"]
-[ext_resource type="Script" uid="uid://b0ojmt4abulyw" path="res://scripts/enemies/encounter_trigger.gd" id="10_cus1y"]
 [ext_resource type="PackedScene" uid="uid://bjvmx7hn82haj" path="res://characters/character_essentials.tscn" id="13_hm4ux"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_32d6h"]
-radius = 6.0
-height = 18.0
 
 [node name="Slime" type="Node2D" groups=["Enemies"]]
 y_sort_enabled = true
@@ -30,17 +25,6 @@ metadata/_custom_type_script = "uid://bm801yc5miabv"
 [node name="SimpleEnemy" parent="." instance=ExtResource("8_f2xpl")]
 modulate = Color(0.5278309, 0.00024079815, 0.5410437, 1)
 sprite_sheet = ExtResource("9_58d7d")
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, 11)
-collision_layer = 4
-collision_mask = 2
-script = ExtResource("10_cus1y")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_32d6h")
-debug_color = Color(0.870294, 0.079178, 0.822579, 0.42)
 
 [node name="ActorUI" parent="." instance=ExtResource("7_4pilr")]
 offset_top = 20.0
@@ -59,7 +43,5 @@ position = Vector2(11, 3)
 
 [node name="HitMarker" parent="CharacterEssentials" index="2"]
 position = Vector2(0, 11)
-
-[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
 
 [editable path="CharacterEssentials"]

@@ -1,7 +1,7 @@
 extends Node
 
 # Loading battle scene
-signal trigger_encounter
+signal trigger_encounter(encounter_data)
 signal end_encounter
 signal refresh_player_data
 
