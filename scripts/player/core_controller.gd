@@ -1,8 +1,8 @@
 extends CharacterBody2D
-@export var move_speed := 300.0
-@export var distance_spacing := 24.0
-var ACCELERATION := 24.5
-var FRICTION := 25
+@export var move_speed: float
+@export var distance_spacing:= 24.0
+var ACCELERATION:= 20
+var FRICTION:= 25
 var followers : Array[Node2D] = []
 var trail_points : Array[Vector2] = []
 var is_moving := false

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1e2v8vhwgr6v"]
+
+[ext_resource type="FontFile" uid="uid://bbqsfwvetobnj" path="res://ui/fonts/m6x11plus.ttf" id="1_jv4kx"]
+
+[node name="VolumeSlider" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jv4kx")
+theme_override_font_sizes/font_size = 28
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="MasterVol" type="HSlider" parent="."]
+layout_mode = 2

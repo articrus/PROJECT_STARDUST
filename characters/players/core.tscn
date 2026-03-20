@@ -14,7 +14,7 @@ height = 32.0
 [node name="CORE" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_katpf")
-move_speed = 250.0
+move_speed = 175.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
