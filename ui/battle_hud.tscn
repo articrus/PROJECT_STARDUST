@@ -88,13 +88,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlayerButtons" type="BoxContainer" parent="BottomBorder"]
-clip_contents = true
 custom_minimum_size = Vector2(100, 60)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_vertical = 2
 theme_override_constants/separation = 10
 
 [node name="Attack" type="Button" parent="BottomBorder/PlayerButtons"]
@@ -166,7 +166,6 @@ option_name = "Skip Turn"
 option_desc = "Skip this character's turn"
 
 [node name="SkillContainer" type="BoxContainer" parent="BottomBorder"]
-clip_contents = true
 custom_minimum_size = Vector2(100, 60)
 layout_mode = 1
 anchors_preset = -1

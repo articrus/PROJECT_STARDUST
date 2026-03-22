@@ -1,6 +1,6 @@
 extends Control
 # Written By: Gianni Coladonato
-# Date Created / Modified: 12-02-2026 / 12-02-2026
+# Date Created / Modified: 12-02-2026 / 22-03-2026
 @onready var top = $TopBar
 @onready var bottom = $BottomBar
 @onready var buff_container = $BuffContainer
@@ -32,4 +32,4 @@ func _on_top_bar_mouse_entered() -> void:
 	Signalbus.display_option_info.emit(chara_name, hp_display, "")
 
 func _on_top_bar_mouse_exited() -> void:
-	Signalbus.display_option_info.emit("", "", "")
+	Signalbus.clear_option_text.emit()

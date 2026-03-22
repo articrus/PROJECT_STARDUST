@@ -1,6 +1,6 @@
 extends Control
 # Written By: Gianni Coladonato
-# Date Created / Modified: 07-10-2025 / 18-03-2026
+# Date Created / Modified: 07-10-2025 / 22-03-2026
 @onready var option_buttons = $BottomBorder/PlayerButtons
 @onready var player_btns := {
 	"Attack": $BottomBorder/PlayerButtons/Attack,
@@ -25,7 +25,10 @@ func _ready() -> void:
 
 func _toggle_buttons_lists(options: bool, skill: bool) -> void:
 	option_buttons.visible = options
+	if !skill:
+		_clear_skill_buttons()
 	skill_buttons.visible = skill
+	_grab_button_focus()
 
 func _set_mana(amount: float) -> void:
 	mana_bar._update_mp_bar(amount)
@@ -52,9 +55,7 @@ func _on_skill_pressed() -> void:
 
 # Spawn all necessary buttons for the character's skills
 func _populate_skill_container(actor: Character) -> void:
-	# Empty all existing children
-	for child in skill_buttons.get_children():
-		child.queue_free()
+	_clear_skill_buttons()
 	# Add new buttons
 	for skill in actor.skill_list:
 		var new_button = skill_btn.instantiate()
@@ -78,6 +79,10 @@ func _populate_profile_container(party) -> void:
 				new_box.texture = load("res://sprites/ui/profiles/PLF_BLU.tres")
 		profile_box.add_child(new_box)
 
+func _clear_skill_buttons() -> void:
+	for child in skill_buttons.get_children():
+		child.queue_free()
+
 func _set_current_turn_profile(current_player) -> void:
 	var index = 0
 	for profile in profile_box.get_children():
@@ -86,6 +91,12 @@ func _set_current_turn_profile(current_player) -> void:
 		else:
 			profile.modulate = Color.WHITE
 		index += 1
+
+func _grab_button_focus() -> void:
+	if(option_buttons.visible):
+		player_btns["Attack"].grab_focus()
+	elif skill_buttons.get_child_count() > 0:
+		skill_buttons.get_child(0).grab_focus()
 
 func _get_attack_option_damage_text(chara: Character) -> String:
 	var to_return = ""

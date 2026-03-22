@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://ce3jrk18e5djc"]
+
+[ext_resource type="Script" uid="uid://xp2vr1bek8lm" path="res://scripts/battle_scene/battle_manager.gd" id="1_rum4d"]
+[ext_resource type="Texture2D" uid="uid://dg7ejffvctiai" path="res://sprites/backgrounds/back.png" id="2_3oc74"]
+[ext_resource type="PackedScene" uid="uid://bftnuo2e8h6yn" path="res://ui/battle_hud.tscn" id="2_pxwbd"]
+[ext_resource type="PackedScene" uid="uid://cw2bjqbq15fyu" path="res://battlescene/ranks.tscn" id="3_svpld"]
+[ext_resource type="PackedScene" uid="uid://r0003kmvyu2y" path="res://battlescene/enemy_ranks.tscn" id="4_rum4d"]
+[ext_resource type="PackedScene" uid="uid://dqtelk0e4uhoc" path="res://ui/targetor.tscn" id="6_1i8jf"]
+[ext_resource type="Script" uid="uid://bdgjd8etils3a" path="res://scripts/battle_scene/timers.gd" id="9_3oc74"]
+
+[node name="BattleScene" type="Node2D"]
+script = ExtResource("1_rum4d")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3oc74")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="BattleHUD" parent="CanvasLayer" instance=ExtResource("2_pxwbd")]
+
+[node name="Ranks" parent="." instance=ExtResource("3_svpld")]
+position = Vector2(-90, -15)
+
+[node name="EnemyRanks" parent="." instance=ExtResource("4_rum4d")]
+position = Vector2(90, -15)
+
+[node name="Players" type="Node2D" parent="."]
+position = Vector2(-90, 0)
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2(90, 0)
+
+[node name="BattleCam" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="Targetor" parent="." instance=ExtResource("6_1i8jf")]
+
+[node name="Timers" type="Node" parent="."]
+script = ExtResource("9_3oc74")
+
+[node name="TurnChange" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="EndTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timers/TurnChange" to="Timers" method="_on_turn_change_timeout"]
+[connection signal="timeout" from="Timers/EndTimer" to="Timers" method="_on_end_timer_timeout"]

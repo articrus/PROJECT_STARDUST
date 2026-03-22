@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 27-10-2025 | 20-03-2026
+# Date Created/Modificed: 27-10-2025 | 22-03-2026
 # Scene Components
 @onready var party_node = $Players
 @onready var enemies_node = $Enemies
@@ -156,7 +156,7 @@ func _skill_option_selected(): # When the skill option is selected
 func _skill_selected(skill: Skill): # When a specific skill is selected
 	player_dictionary[current_player].Choice = enums.PLAYER_CHOICE.SKILL 
 	player_dictionary[current_player].Skill = skill 
-	battle_hud._toggle_buttons_lists(false, true)
+	battle_hud._toggle_buttons_lists(false, false)
 	_reset_targetor()
 	match skill.skill_target: # Add a handle for not_self (should be easy enough to configure)
 		enums.TARGET.ENEMY:
@@ -232,7 +232,7 @@ func _switch_to_next_player():
 func _cancel_targeting():
 	current_state = enums.STATE.NONE
 	battle_hud._toggle_buttons_lists(false, false)
-	_reset_targetor()
+	targetor.visible = false
 	var refund = player_dictionary[current_player].Cost
 	_reset_choice(current_player)
 	ManaManager._add_mana(refund)
