@@ -23,3 +23,9 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	Signalbus.clear_option_text.emit()
+
+func _on_focus_entered() -> void:
+	Signalbus.display_option_info.emit(option_name, option_desc, option_dmg)
+
+func _on_focus_exited() -> void:
+	Signalbus.clear_option_text.emit()

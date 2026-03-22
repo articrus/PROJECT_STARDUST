@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bp0egh5asyhmb" path="res://sprites/enviormnet/plains_tileset.png" id="1_w2jdf"]
 [ext_resource type="PackedScene" uid="uid://dvuah4vdyumyc" path="res://areas/area_components/enviornment.tscn" id="2_34trp"]
-[ext_resource type="Texture2D" uid="uid://cgug7hf7n8dp5" path="res://ui/tokens/def_1.tres" id="3_tjibp"]
+[ext_resource type="Texture2D" uid="uid://cgug7hf7n8dp5" path="res://ui/textures/tokens/def_1.tres" id="3_tjibp"]
 [ext_resource type="PackedScene" uid="uid://ctbbghcvamcqk" path="res://areas/room pieces/plains/plains_0.tscn" id="5_b2428"]
 [ext_resource type="PackedScene" uid="uid://jntk3b32bt0h" path="res://characters/overworld/overworld_enemy.tscn" id="5_fvryb"]
 [ext_resource type="Script" uid="uid://d0mn2mh4ua42" path="res://scripts/test/test_ui.gd" id="6_fvryb"]

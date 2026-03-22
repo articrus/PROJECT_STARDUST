@@ -102,6 +102,15 @@ enum ENEMY_CHOICE {
 	NONE
 }
 
+enum OPTION {
+	ATTACK,
+	SKILL,
+	ITEM,
+	MOVE,
+	HELP,
+	SKIP
+}
+
 enum MONSTERS {
 	SLIME,
 	GHOUL,

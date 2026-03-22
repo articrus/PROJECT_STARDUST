@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvkkyaffhtk84"]
+
+[ext_resource type="Texture2D" uid="uid://cbor7k7yacuhu" path="res://ui/textures/buttons/option_atk.tres" id="1_aqy3h"]
+[ext_resource type="Script" uid="uid://c3v4nocoklmxv" path="res://scripts/ui/battlehud/buttons/option_button.gd" id="2_iysld"]
+
+[node name="Option" type="Button"]
+custom_minimum_size = Vector2(60, 60)
+size_flags_vertical = 4
+icon = ExtResource("1_aqy3h")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_iysld")
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

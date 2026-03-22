@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://drrc8d1f6xk3c"]
 
 [ext_resource type="Script" uid="uid://b1ky0fne46e7k" path="res://scripts/ui/tokens/buff_counter_container.gd" id="1_t7fbn"]
-[ext_resource type="Texture2D" uid="uid://b3ktu6ldxdxm5" path="res://ui/tokens/test_projectile.png" id="2_rjp0j"]
+[ext_resource type="Texture2D" uid="uid://b3ktu6ldxdxm5" path="res://ui/textures/tokens/test_projectile.png" id="2_rjp0j"]
 
 [node name="CounterContainer" type="BoxContainer"]
 custom_minimum_size = Vector2(6, 0)

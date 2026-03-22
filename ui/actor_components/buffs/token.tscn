@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvr3c3gqwtwur"]
 
-[ext_resource type="Texture2D" uid="uid://dckmg387c3s6j" path="res://ui/tokens/atk_1.tres" id="1_c0a5w"]
+[ext_resource type="Texture2D" uid="uid://dckmg387c3s6j" path="res://ui/textures/tokens/atk_1.tres" id="1_c0a5w"]
 [ext_resource type="Script" uid="uid://c553lijc1ryd1" path="res://scripts/ui/tokens/token.gd" id="2_6hx1m"]
 [ext_resource type="PackedScene" uid="uid://drrc8d1f6xk3c" path="res://ui/actor_components/buffs/counter_container.tscn" id="3_ituvj"]
 

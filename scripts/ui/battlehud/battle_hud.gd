@@ -8,7 +8,7 @@ extends Control
 	"Move": $BottomBorder/PlayerButtons/Move,
 	"Item": $BottomBorder/PlayerButtons/Item,
 	"Help": $BottomBorder/PlayerButtons/Help,
-	"Skip": $BottomBorder/PlayerButtons/EndTurn
+	"Skip": $BottomBorder/PlayerButtons/Skip
 }
 @onready var profile_box = $Border/ProfileBox
 var profile_ref = [] # Save playertype for use later
@@ -19,9 +19,18 @@ var profile_ref = [] # Save playertype for use later
 @onready var desc_box = $BottomBorder/DescriptionBox
 
 func _ready() -> void:
+	_bind_option_buttons()
 	_toggle_buttons_lists(true, false)
 	Signalbus.mana_changed.connect(_set_mana)
 	ManaManager._add_mana(0)
+
+func _bind_option_buttons() -> void:
+	player_btns["Attack"].pressed.connect(_on_option_pressed.bind(enums.OPTION.ATTACK))
+	player_btns["Skill"].pressed.connect(_on_option_pressed.bind(enums.OPTION.SKILL))
+	player_btns["Item"].pressed.connect(_on_option_pressed.bind(enums.OPTION.ITEM))
+	player_btns["Move"].pressed.connect(_on_option_pressed.bind(enums.OPTION.MOVE))
+	player_btns["Help"].pressed.connect(_on_option_pressed.bind(enums.OPTION.HELP))
+	player_btns["Skip"].pressed.connect(_on_option_pressed.bind(enums.OPTION.SKIP))
 
 func _toggle_buttons_lists(options: bool, skill: bool) -> void:
 	option_buttons.visible = options
@@ -33,25 +42,21 @@ func _toggle_buttons_lists(options: bool, skill: bool) -> void:
 func _set_mana(amount: float) -> void:
 	mana_bar._update_mp_bar(amount)
 
-# Player Skips their turn
-func _on_end_turn_pressed() -> void:
-	Signalbus.skipped_selected.emit()
-
-func _on_attack_pressed() -> void:
-	Signalbus.attack_selected.emit()
-
-func _on_move_pressed() -> void:
-	Signalbus.move_selected.emit()
-
-func _on_item_pressed() -> void:
-	print("NOT YET IMPLEMENTED")
-
-func _on_help_pressed() -> void:
-	print("NOT YET IMPLEMENTED")
-
-func _on_skill_pressed() -> void:
-	Signalbus.skill_selected.emit()
-	_toggle_buttons_lists(false, true)
+func _on_option_pressed(option: enums.OPTION) -> void:
+	match option:
+		enums.OPTION.ATTACK:
+			Signalbus.attack_selected.emit()
+		enums.OPTION.SKILL:
+			Signalbus.skill_selected.emit()
+			_toggle_buttons_lists(false, true)
+		enums.OPTION.ITEM:
+			print("NOT YET IMPLEMENTED")
+		enums.OPTION.MOVE:
+			Signalbus.move_selected.emit()
+		enums.OPTION.HELP:
+			print("NOT YET IMPLEMENTED")
+		enums.OPTION.SKIP:
+			Signalbus.skipped_selected.emit()
 
 # Spawn all necessary buttons for the character's skills
 func _populate_skill_container(actor: Character) -> void:
