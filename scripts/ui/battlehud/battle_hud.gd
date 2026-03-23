@@ -15,7 +15,7 @@ var profile_ref = [] # Save playertype for use later
 @onready var profile_texture: PackedScene = preload("res://sprites/ui/profiles/profile.tscn")
 @onready var mana_bar = $Border/ManaMeter
 @onready var skill_buttons = $BottomBorder/SkillContainer
-@onready var skill_btn: PackedScene = preload("res://ui/skill_button.tscn")
+@onready var skill_btn: PackedScene = preload("res://ui/buttons/skill_button.tscn")
 @onready var desc_box = $BottomBorder/DescriptionBox
 
 func _ready() -> void:

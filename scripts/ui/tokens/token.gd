@@ -13,7 +13,7 @@ func _set_mark_or_combo(is_mark: bool) -> void:
 	else:
 		token_name = "Combo"
 		token_description = "Attacks trigger additional effects"
-		self.texture = load("res://ui/tokens/combo.tres")
+		self.texture = load("res://ui/textures/tokens/combo.tres")
 
 func _on_mouse_entered() -> void:
 	Signalbus.display_option_info.emit(token_name, token_description, "")
