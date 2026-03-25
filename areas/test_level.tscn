@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dn47xkxk5qm7w"]
+[gd_scene load_steps=12 format=4 uid="uid://dn47xkxk5qm7w"]
 
 [ext_resource type="Texture2D" uid="uid://bp0egh5asyhmb" path="res://sprites/enviormnet/plains_tileset.png" id="1_w2jdf"]
 [ext_resource type="PackedScene" uid="uid://dvuah4vdyumyc" path="res://areas/area_components/enviornment.tscn" id="2_34trp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://d0mn2mh4ua42" path="res://scripts/test/test_ui.gd" id="6_fvryb"]
 [ext_resource type="Texture2D" uid="uid://bcyc4k0o54xrr" path="res://sprites/enemies/grn_slime.png" id="6_wavu5"]
 [ext_resource type="Resource" uid="uid://bfumwfyb7v5k1" path="res://scripts/encounter/test_encoutner.tres" id="7_yl4s8"]
+[ext_resource type="Script" uid="uid://bdovuecava3de" path="res://scripts/level_generation/level_generator.gd" id="9_yl4s8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tjibp"]
 texture = ExtResource("1_w2jdf")
@@ -197,6 +198,10 @@ text = "ADD MANA"
 [node name="ManaRem" type="Button" parent="CanvasLayer/TestUI/Panel/HBoxContainer"]
 layout_mode = 2
 text = "REMOVE MANA"
+
+[node name="Level_Generator" type="Node" parent="."]
+script = ExtResource("9_yl4s8")
+metadata/_custom_type_script = "uid://bdovuecava3de"
 
 [connection signal="pressed" from="CanvasLayer/TestUI/Panel/HBoxContainer/QuipButton" to="CanvasLayer/TestUI" method="_on_quip_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TestUI/Panel/HBoxContainer/ChatButton" to="CanvasLayer/TestUI" method="_on_chat_button_pressed"]
