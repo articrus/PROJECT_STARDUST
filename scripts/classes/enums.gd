@@ -102,6 +102,12 @@ enum ENEMY_CHOICE {
 	NONE
 }
 
+enum PATHS {
+	UP,
+	MIDDLE,
+	DOWN
+}
+
 enum OPTION {
 	ATTACK,
 	SKILL,
