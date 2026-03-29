@@ -1,7 +1,7 @@
 extends Node
 class_name Level_Generator
 # Written By: Gianni Coladonato
-# Date Created / Modified: 25-03-2026 / 25-03-2026
+# Date Created / Modified: 25-03-2026 / 29-03-2026
 @export var level_nodes: Vector2i = Vector2i(3, 5)# Length / Node Count
 var col_index: int
 var prev_rooms: Array[Room] = []
@@ -33,6 +33,7 @@ func _generate_level() -> void:
 	for prev in prev_rooms:
 		prev._connect_to_room(rm_end)
 	_print_graph(rm_start)
+	Signalbus.temp_pass_level.emit(rm_start)
 
 func _connect_rooms_array(current: Room, last_array: Array[Room]):
 	for last_child in last_array:

@@ -32,3 +32,4 @@ signal text_finished
 
 # Temporaty until better solution
 signal temp_do_chatter
+signal temp_pass_level(starting_room: Room)
