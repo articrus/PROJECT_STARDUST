@@ -1,19 +1,27 @@
 extends Node
 class_name Token_Utils
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 02-12-2025 | 17-12-2025
+# Date Created/Modificed: 02-12-2025 | 04-04-2026
 
 # Buff a stat
-static func _apply_stat_buff(stat: Vector3i, value: int, use_zero_min: bool = false) -> int:
-	var min_val = 0 if use_zero_min else stat.y
-	if value >= 10: # Greater buff
-		var small_buffs = int(fmod(stat.x, 10)) # Seperate buffs
-		var big_buffs = (stat.x / 10) * 10 #print(str(big_buffs) + ", " + str(small_buffs))
-		var new_value = big_buffs + value
-		stat.x = clamp(new_value, min_val, (stat.z * 10)) + small_buffs
+static func _apply_stat_buff(stat: Vector3i, value: int) -> int:
+	var big_buffs = (stat.x / 10)
+	var small_buffs = int(fmod(stat.x, 10))
+	if value < 0: # Debuff
+		if big_buffs > 0: # If has a big buff, remove it and add a small buff
+			var new_big = clamp(((big_buffs + value) * 10), 0, (stat.z * 10))
+			var new_small = clamp(small_buffs + abs(value), stat.y, stat.z)
+			stat.x = new_big + new_small
+		elif small_buffs > 0: # If has a small buff, absorb it
+			stat.x = clamp(small_buffs + value, stat.y, stat.z)
+		else: # No buffs present, just debuff
+			stat.x = clamp((stat.x + value), stat.y, stat.z)
+	elif value >= 10: # Greater buff
+		var new_value = (big_buffs * 10) + value
+		stat.x = clamp(new_value, 0, (stat.z * 10)) + small_buffs
 	else: # Regular buff
 		var new_value = stat.x + value
-		stat.x = clamp(new_value, min_val, stat.z)
+		stat.x = clamp(new_value, 0, stat.z)
 	return stat.x
 
 static func _atk_buff(chara: Character, buff_amount: int) -> void:

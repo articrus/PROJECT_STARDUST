@@ -4,8 +4,7 @@ extends BoxContainer
 @onready var counter2 = $Counter2
 
 func _ready() -> void:
-	counter.visible = false
-	counter2.visible = false
+	_toggle_additional_counters(0)
 
 func _toggle_additional_counters(count: int) -> void:
 	counter.visible = false

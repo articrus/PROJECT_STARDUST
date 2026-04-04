@@ -1,6 +1,6 @@
 extends BoxContainer
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 11-11-2025 | 30-01-2026
+# Date Created/Modificed: 11-11-2025 | 03-04-2026
 # Tokens with no counters
 @onready var mark = $Mark
 @onready var stun = $Stun
@@ -66,16 +66,15 @@ func _update_multi_token_stat(stat_name: String, value: float) -> void:
 	if value > 0: 
 		var small_buffs = int(fmod(value, 10))
 		var big_buffs = int(value / 10)
-		#print("Big buffs: " + str(big_buffs) + ", Small buffs: " + str(small_buffs))
 		# Setting visibility of main tokens
 		tokens.buff.visible = small_buffs > 0
+		tokens.big_buff.visible = big_buffs > 0
+		# Enabling additional counters
 		if tokens.buff.visible:
 			tokens.buff.counter._toggle_additional_counters(small_buffs)
-		# Toggling big buffs
-		tokens.big_buff.visible = big_buffs > 0
 		if tokens.big_buff.visible and tokens.big_buff.counter:
 			tokens.big_buff.counter._toggle_additional_counters(big_buffs)
-	elif value < 0:
+	elif value < 0 and is_instance_valid(tokens.debuff):
 		var abs_value = abs(value)
 		# Set visibility of main token
 		tokens.debuff.visible = true

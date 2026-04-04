@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_8ttht")
-buff_stage = -2
+buff_stage = -1
 metadata/_custom_type_script = "uid://cqfp6lsdf1liv"
