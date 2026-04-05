@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 27-10-2025 | 22-03-2026
+# Date Created/Modificed: 27-10-2025 | 05-04-2026
 # Scene Components
 @onready var party_node = $Players
 @onready var enemies_node = $Enemies
@@ -216,6 +216,7 @@ func _switch_to_next_player():
 	turn_index += 1
 	ManaManager._remove_mana(player_dictionary[current_player].Cost)
 	if turn_index >= party_node.get_child_count():
+		battle_hud._toggle_buttons_lists(false, false)
 		current_state = enums.STATE.RESOLVE_CHOICES
 		_resolve_player_choices()
 	else:

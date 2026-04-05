@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://ca6jueyhukwyt"]
 
 [ext_resource type="Script" uid="uid://mvfx88g3bqyu" path="res://scripts/animations/simple_enemy_animator.gd" id="1_xsvd3"]
-[ext_resource type="Texture2D" uid="uid://bcyc4k0o54xrr" path="res://sprites/enemies/grn_slime.png" id="2_xsvd3"]
+[ext_resource type="Texture2D" uid="uid://cbdinhwtkrggq" path="res://sprites/enemies/slime_grn.png" id="2_xsvd3"]
 
 [sub_resource type="Animation" id="Animation_fka47"]
 length = 0.001
@@ -16,6 +16,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SimpleEnemy/Sprite2D:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_8um7j"]
@@ -59,10 +71,22 @@ tracks/1/path = NodePath("SimpleEnemy/Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [36, 37, 38, 39]
+"values": [42]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SimpleEnemy/Sprite2D:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.9848098638467492, 0.9404700696468352, 0.8705727756023407, 0.7807806208729744, 0.6783680692315102, 0.5716319531202316, 0.4692194014787674, 0.37942722, 0.30952993, 0.26519015, 0.25, 1.0]
 }
 
 [sub_resource type="Animation" id="Animation_1u0jk"]
@@ -75,10 +99,10 @@ tracks/0/path = NodePath("SimpleEnemy/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [1, 2, 4]
+"values": [36, 37]
 }
 
 [sub_resource type="Animation" id="Animation_ksikx"]
@@ -224,7 +248,7 @@ script = ExtResource("1_xsvd3")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_xsvd3")
 hframes = 6
-vframes = 7
+vframes = 8
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

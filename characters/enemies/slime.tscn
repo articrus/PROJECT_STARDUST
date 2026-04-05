@@ -6,8 +6,8 @@
 [ext_resource type="Resource" uid="uid://cmopuf7wc8ybk" path="res://dialogue/enemy_quips/slime.tres" id="3_7gskj"]
 [ext_resource type="PackedScene" uid="uid://ca6jueyhukwyt" path="res://animations/enemies/simple_enemy.tscn" id="4_1u0jk"]
 [ext_resource type="AudioStream" uid="uid://di1pscii653xw" path="res://audio/voices/player/hope.wav" id="4_tt4in"]
+[ext_resource type="Texture2D" uid="uid://cbdinhwtkrggq" path="res://sprites/enemies/slime_grn.png" id="5_dwe6s"]
 [ext_resource type="PackedScene" uid="uid://bb5l5lx7e14gk" path="res://ui/actor_components/actor_ui.tscn" id="7_7gskj"]
-[ext_resource type="Texture2D" uid="uid://bcyc4k0o54xrr" path="res://sprites/enemies/grn_slime.png" id="9_uejvu"]
 [ext_resource type="PackedScene" uid="uid://bjvmx7hn82haj" path="res://characters/character_essentials.tscn" id="13_aodrb"]
 
 [node name="Slime" type="Node2D" groups=["Enemies"]]
@@ -23,7 +23,7 @@ abilities = Vector3i(6, 4, 2)
 metadata/_custom_type_script = "uid://bm801yc5miabv"
 
 [node name="SimpleEnemy" parent="." instance=ExtResource("4_1u0jk")]
-sprite_sheet = ExtResource("9_uejvu")
+sprite_sheet = ExtResource("5_dwe6s")
 
 [node name="ActorUI" parent="." instance=ExtResource("7_7gskj")]
 offset_top = 20.0

@@ -1,7 +1,7 @@
 class_name Character
 extends Node
 # Written By: Gianni Coladonato
-# Date Created / Modified: 06-10-2025 / 18-03-2026
+# Date Created / Modified: 06-10-2025 / 05-04-2026
 # Basic Info
 @export var chara_name : String = "BLANK"
 @export var hp: Vector2i = Vector2i(100, 100) # Current / Max

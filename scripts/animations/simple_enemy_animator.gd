@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created / Modified : 26-10-2025 / 17-03-2026
+# Date Created / Modified : 26-10-2025 / 05-04-2026
 # Scene Components
 @onready var sprite = $Sprite2D
 @onready var anim_player = $AnimationPlayer
@@ -76,11 +76,11 @@ func _kill_target():
 	self.get_parent().queue_free()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == Animation_Strings.enemy_die:
+		return
 	if anim_name in [Animation_Strings.enemy_melee_attack, Animation_Strings.enemy_ranged_attack,
 	Animation_Strings.enemy_skill, Animation_Strings.enemy_hit]:
 		if is_battle:
 			enemy_state = enums.PLAYER_STATE.BATTLE
-		elif anim_name == Animation_Strings.enemy_die:
-			pass # Stay in down/dead animation
 		else:
 			enemy_state = enums.PLAYER_STATE.IDLE

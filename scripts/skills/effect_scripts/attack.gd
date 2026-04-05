@@ -1,7 +1,7 @@
 extends Skill_Effect
 class_name Attack_Effect
 # Written By: Gianni Coladonato
-# Date Created / Modified: Sometime in 2025 / 30-01-2026
+# Date Created / Modified: Sometime in 2025 / 05-04-2026
 # Additonal Effects
 @export var additional_effects_self: Array[Skill_Effect]
 @export var additional_effects_enemy: Array[Skill_Effect]
@@ -31,6 +31,8 @@ func _apply_effect(actor: Node2D, target: Node2D):
 	# Target doesn't dodge, proceed with attack damage
 	var reduction = target.char_stats._damage_reduction(damage)
 	target.char_stats._hurt(reduction)
+	if target.char_stats.is_alive:
+		target.animation_node._hit()
 	# Apply combo effects (if combo)
 	if target.char_stats.is_marked && can_combo:
 		for effect in additional_effects_self:

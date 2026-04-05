@@ -1,14 +1,12 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created / Modified : 23-10-2025 / 17-03-2026
+# Date Created / Modified : 23-10-2025 / 05-04-2026
 # Object Components
 @onready var sprite = $Sprite2D
 @onready var anim_player = $AnimationPlayer
 # Variables
 @export var player_state: enums.PLAYER_STATE
-@export var is_moving : bool :
-	get:
-		return is_moving
+@export var is_moving: bool:
 	set(new_value):
 		if new_value:
 			player_state = enums.PLAYER_STATE.MOVING
@@ -88,12 +86,12 @@ func _revive():
 	_enter_battle(is_battle)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == Animation_Strings.player_down:
+		return
 	if anim_name in [Animation_Strings.player_melee_attack, Animation_Strings.player_ranged_attack,
 	Animation_Strings.player_skill_a, Animation_Strings.player_skill_b, 
 	Animation_Strings.player_item, Animation_Strings.player_hit]:
 		if is_battle:
 			player_state = enums.PLAYER_STATE.BATTLE
-		elif anim_name == Animation_Strings.player_down:
-			pass # Skip if down
 		else:
 			player_state = enums.PLAYER_STATE.IDLE
