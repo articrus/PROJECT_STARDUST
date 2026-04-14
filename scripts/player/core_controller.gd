@@ -16,6 +16,9 @@ func _physics_process(_delta: float) -> void:
 
 # Handle movement input
 func _handle_input():
+	if Input.is_action_just_pressed("pause"):
+		GameManager._on_pause()
+		return
 	if !GlobalVariables.can_move:
 		velocity = Vector2.ZERO
 		is_moving = false

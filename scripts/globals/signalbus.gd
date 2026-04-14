@@ -8,6 +8,9 @@ signal refresh_player_data
 #Passing variables to party manager
 signal pass_party_to_load(current_party)
 
+#Player controls
+signal pause(toggle: bool)
+
 #Player Buttons
 signal skipped_selected
 signal attack_selected

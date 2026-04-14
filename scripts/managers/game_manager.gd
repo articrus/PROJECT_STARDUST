@@ -1,6 +1,6 @@
 extends Node
 # Written By: Gianni Coladonato
-# Date Created / Modified: 06-10-2025 / 20-03-2026
+# Date Created / Modified: 06-10-2025 / 13-04-2026
 @onready var battle_scene = load("res://scenes/battle_scene.tscn")
 # Player Scenes stored alongside enum keys
 var player_templates: ={
@@ -24,6 +24,7 @@ var player_data_saves: ={
 var current_battle
 var current_encounter: Encounter_Data
 var is_in_battle 
+var is_paused = false
 
 func _ready() -> void:
 	Signalbus.trigger_encounter.connect(_load_battle_scene)
@@ -54,6 +55,16 @@ func _destroy_battle_scene():
 	GlobalVariables.can_move = true
 	get_tree().current_scene.visible = true
 	Signalbus.refresh_player_data.emit()
+
+func _on_pause():
+	if is_paused:
+		Signalbus.pause.emit(true)
+		GlobalVariables.can_move = false
+		is_paused = false
+	else:
+		Signalbus.pause.emit(false)
+		GlobalVariables.can_move = true
+		is_paused = true
 
 func _get_player_data(player_type: enums.PLAYERS):
 	return player_data_saves[player_type]

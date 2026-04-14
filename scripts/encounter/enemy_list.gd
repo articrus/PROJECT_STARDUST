@@ -1,10 +1,10 @@
 extends Node
 class_name Enemy_List
 # Written By: Gianni Coladonato
-# Date Created / Modified: 19-03-2026 / 19-03-2026
+# Date Created / Modified: 19-03-2026 / 13-04-2026
 static var paths = {
 	enums.MONSTERS.SLIME: "res://characters/enemies/slime.tscn",
-	enums.MONSTERS.NYMPH: "res://characters/enemies/new_slime.tscn"
+	enums.MONSTERS.NYMPH: "res://characters/enemies/nymph.tscn"
 }
 static var monster_cache: Dictionary = {}
 

@@ -19,3 +19,5 @@ horizontal_alignment = 1
 
 [node name="MasterVol" type="HSlider" parent="."]
 layout_mode = 2
+max_value = 1.0
+step = 0.001

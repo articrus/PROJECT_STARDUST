@@ -6,7 +6,10 @@
 script = ExtResource("1_7bqlt")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [node name="Voice" type="AudioStreamPlayer" parent="."]
+bus = &"Voice"

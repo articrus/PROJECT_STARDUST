@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://cufo8jsq5nevh"]
 
-[ext_resource type="Texture2D" uid="uid://bp0egh5asyhmb" path="res://sprites/enviormnet/plains_tileset.png" id="1_15iqo"]
+[ext_resource type="Texture2D" uid="uid://bp0egh5asyhmb" path="res://sprites/enviornment/plains_tileset.png" id="1_15iqo"]
 [ext_resource type="PackedScene" uid="uid://dvuah4vdyumyc" path="res://areas/area_components/enviornment.tscn" id="2_4sumk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4sumk"]

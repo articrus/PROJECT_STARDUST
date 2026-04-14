@@ -12,3 +12,6 @@ func _on_chat_button_pressed() -> void:
 func _on_quip_button_pressed() -> void:
 	var quips: Character_Quips = Dialogue_Parser._get_player_quip_lines(enums.PLAYERS.RED)
 	print(quips)
+
+func _on_hide_pressed() -> void:
+	self.visible = false

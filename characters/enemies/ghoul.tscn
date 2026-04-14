@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbqpgc2ejckxe"]
+
+[ext_resource type="Script" uid="uid://bawbbde4vk0q3" path="res://scripts/enemies/base_enemy.gd" id="1_hh2bn"]
+[ext_resource type="Resource" uid="uid://cc5iq5qpkb1bn" path="res://scripts/enemy_ai/test_brains/test_normal_1.tres" id="2_5mq1e"]
+[ext_resource type="Script" uid="uid://bm801yc5miabv" path="res://scripts/general/character.gd" id="3_qdlbt"]
+[ext_resource type="PackedScene" uid="uid://ca6jueyhukwyt" path="res://animations/enemies/simple_enemy.tscn" id="4_v13y7"]
+[ext_resource type="Texture2D" uid="uid://b4gm6hs283j87" path="res://sprites/enemies/ghoul.png" id="5_hh2bn"]
+[ext_resource type="PackedScene" uid="uid://bb5l5lx7e14gk" path="res://ui/actor_components/actor_ui.tscn" id="6_k8nv0"]
+[ext_resource type="PackedScene" uid="uid://bjvmx7hn82haj" path="res://characters/character_essentials.tscn" id="7_t8ptp"]
+[ext_resource type="AudioStream" uid="uid://di1pscii653xw" path="res://audio/voices/player/hope.wav" id="8_07rpv"]
+[ext_resource type="Resource" uid="uid://cmopuf7wc8ybk" path="res://dialogue/enemy_quips/slime.tres" id="9_qung8"]
+
+[node name="Ghoul" type="Node2D" groups=["Enemies"]]
+y_sort_enabled = true
+script = ExtResource("1_hh2bn")
+enemy_brain = ExtResource("2_5mq1e")
+
+[node name="Character" type="Node" parent="."]
+script = ExtResource("3_qdlbt")
+chara_name = "Slime"
+hp = Vector2i(10, 10)
+abilities = Vector3i(6, 4, 2)
+metadata/_custom_type_script = "uid://bm801yc5miabv"
+
+[node name="SimpleEnemy" parent="." instance=ExtResource("4_v13y7")]
+sprite_sheet = ExtResource("5_hh2bn")
+
+[node name="ActorUI" parent="." instance=ExtResource("6_k8nv0")]
+offset_top = 20.0
+offset_bottom = 20.0
+
+[node name="CharacterEssentials" parent="." instance=ExtResource("7_t8ptp")]
+voice = ExtResource("8_07rpv")
+quips = ExtResource("9_qung8")
+text_color = Color(1, 1, 1, 1)
+
+[node name="DialogueMarker" parent="CharacterEssentials" index="0"]
+position = Vector2(0, -2)
+
+[node name="DamageMarker" parent="CharacterEssentials" index="1"]
+position = Vector2(11, 3)
+
+[node name="HitMarker" parent="CharacterEssentials" index="2"]
+position = Vector2(0, 11)
+
+[editable path="CharacterEssentials"]

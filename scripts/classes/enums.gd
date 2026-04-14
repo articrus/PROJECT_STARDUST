@@ -111,6 +111,13 @@ enum OPTION {
 	SKIP
 }
 
+enum VOL_BUSSES {
+	MASTER,
+	MUSIC,
+	SFX,
+	VOICE
+}
+
 enum MONSTERS {
 	SLIME,
 	GHOUL,
