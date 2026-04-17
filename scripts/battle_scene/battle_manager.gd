@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 27-10-2025 | 05-04-2026
+# Date Created/Modificed: 27-10-2025 | 16-04-2026
 # Scene Components
 @onready var party_node = $Players
 @onready var enemies_node = $Enemies
@@ -59,9 +59,9 @@ func _scene_set_up():
 
 func _load_players_into_scene(current_party): # Grab player data and instantiate players
 	for player_type in current_party:
-		var new_player = GameManager.player_templates[player_type].instantiate()
+		var new_player = Player_Loader._load_player(player_type).instantiate()
 		call_deferred("_add_child_to_node", new_player, party_node)
-		new_player.pending_data = GameManager.player_data_saves[player_type].duplicate(true)
+		new_player.pending_data = Player_Loader._load_player_data(player_type).duplicate(true)
 		new_player.pending_quips = Dialogue_Parser._get_player_quip_lines(player_type)
 		_add_entry_to_dictionary(new_player)
 	await get_tree().process_frame

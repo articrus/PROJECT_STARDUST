@@ -1,7 +1,7 @@
 class_name Character
 extends Node
 # Written By: Gianni Coladonato
-# Date Created / Modified: 06-10-2025 / 05-04-2026
+# Date Created / Modified: 06-10-2025 / 16-04-2026
 # Basic Info
 @export var chara_name : String = "BLANK"
 @export var hp: Vector2i = Vector2i(100, 100) # Current / Max
@@ -23,8 +23,6 @@ extends Node
 				animation_node._revive()
 			else:
 				animation_node._down()
-@export var skill_list: Array[Skill]
-@export var char_attack : Skill
 # Marked and Debuffs
 var is_marked: bool = false
 var mark_duration: int = 0

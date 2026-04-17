@@ -3,7 +3,7 @@ extends Node
 # Loading battle scene
 signal trigger_encounter(encounter_data)
 signal end_encounter
-signal refresh_player_data
+signal refresh_player_data(new_data)
 
 #Passing variables to party manager
 signal pass_party_to_load(current_party)

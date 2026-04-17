@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://clrnsxdcmxkr1"]
 
-[ext_resource type="Script" uid="uid://bm801yc5miabv" path="res://scripts/general/character.gd" id="1_32d6h"]
+[ext_resource type="Script" uid="uid://bm801yc5miabv" path="res://scripts/character/character.gd" id="1_32d6h"]
 [ext_resource type="Script" uid="uid://bawbbde4vk0q3" path="res://scripts/enemies/base_enemy.gd" id="1_yqynm"]
 [ext_resource type="Resource" uid="uid://cc5iq5qpkb1bn" path="res://scripts/enemy_ai/test_brains/test_normal_1.tres" id="2_dwe6s"]
 [ext_resource type="Resource" uid="uid://cmopuf7wc8ybk" path="res://dialogue/enemy_quips/slime.tres" id="3_7gskj"]

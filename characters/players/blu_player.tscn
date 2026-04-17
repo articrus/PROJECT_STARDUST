@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cdg4slj77gca3"]
 
 [ext_resource type="Script" uid="uid://bfhkyey5kr6yu" path="res://scripts/player/player_controller.gd" id="1_y5y4t"]
-[ext_resource type="Script" uid="uid://bm801yc5miabv" path="res://scripts/general/character.gd" id="2_kjuie"]
+[ext_resource type="Script" uid="uid://dcqkwm5en602j" path="res://scripts/character/player_character.gd" id="2_a7ju7"]
 [ext_resource type="AudioStream" uid="uid://bjeyij230y6t1" path="res://audio/voices/player/crescent.wav" id="3_a7ju7"]
 [ext_resource type="PackedScene" uid="uid://cnlc23gohfmty" path="res://animations/players/player_animation_node.tscn" id="3_y5y4t"]
 [ext_resource type="Texture2D" uid="uid://bxhrswc2frh64" path="res://sprites/players/blu.png" id="4_a7ju7"]
@@ -14,9 +14,19 @@ script = ExtResource("1_y5y4t")
 player_type = 4
 
 [node name="Character" type="Node" parent="."]
-script = ExtResource("2_kjuie")
+script = ExtResource("2_a7ju7")
+skill_list = null
 chara_name = "Crescent"
-metadata/_custom_type_script = "uid://bm801yc5miabv"
+hp = null
+abilities = null
+rank = null
+atk = null
+def = null
+crt = null
+eva = null
+is_alive = null
+char_attack = null
+metadata/_custom_type_script = "uid://dcqkwm5en602j"
 
 [node name="PlayerAnimationNode" parent="." instance=ExtResource("3_y5y4t")]
 y_sort_enabled = true

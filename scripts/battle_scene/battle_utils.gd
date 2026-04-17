@@ -1,7 +1,7 @@
 extends Node
 class_name Battle_Utils
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 09-11-2025 | 17-03-2026
+# Date Created/Modificed: 09-11-2025 | 17-04-2026
 # This class is used to store some simple functions to reduce the complexity of the battle_manager script
 
 # Return a valid target for skills and attacks (FIXXXX)
@@ -72,4 +72,4 @@ static func _save_player_data(party_node):
 	for player in party_node.get_children():
 		if !player.char_stats.is_alive:
 			player.char_stats._heal(1)
-		GameManager._save_player_data_from_node(player)
+	GameManager._save_and_pass_data(party_node)

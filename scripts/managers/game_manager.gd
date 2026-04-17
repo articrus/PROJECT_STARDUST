@@ -1,30 +1,14 @@
 extends Node
 # Written By: Gianni Coladonato
-# Date Created / Modified: 06-10-2025 / 13-04-2026
+# Date Created / Modified: 06-10-2025 / 16-04-2026
 @onready var battle_scene = load("res://scenes/battle_scene.tscn")
-# Player Scenes stored alongside enum keys
-var player_templates: ={
-	enums.PLAYERS.RED: load("res://characters/players/red_player.tscn"),
-	#enums.PLAYERS.ORG: load("res://characters/players/org_player.tscn")
-	#enums.PLAYERS.YLW: load("res://characters/players/ylw_player.tscn")
-	enums.PLAYERS.GRN: load("res://characters/players/grn_player.tscn"),
-	enums.PLAYERS.BLU: load("res://characters/players/blu_player.tscn")
-	#enums.PLAYERS.PUR: load("res://characters/players/pur_player.tscn")
-}
 # Player Data stored alongside enum keys
-var player_data_saves: ={
-	enums.PLAYERS.RED: load("res://characters/players/data/RED.tres"),
-	enums.PLAYERS.ORG: load("res://characters/players/data/ORG.tres"),
-	enums.PLAYERS.YLW: load("res://characters/players/data/YLW.tres"),
-	enums.PLAYERS.GRN: load("res://characters/players/data/GRN.tres"),
-	enums.PLAYERS.BLU: load("res://characters/players/data/BLU.tres"),
-	enums.PLAYERS.PUR: load("res://characters/players/data/PUR.tres")
-}
 @export var current_party: Array[enums.PLAYERS] = [enums.PLAYERS.RED, enums.PLAYERS.BLU, enums.PLAYERS.GRN]
 var current_battle
 var current_encounter: Encounter_Data
 var is_in_battle 
 var is_paused = false
+var new_data = {}
 
 func _ready() -> void:
 	Signalbus.trigger_encounter.connect(_load_battle_scene)
@@ -54,7 +38,7 @@ func _destroy_battle_scene():
 	is_in_battle = false
 	GlobalVariables.can_move = true
 	get_tree().current_scene.visible = true
-	Signalbus.refresh_player_data.emit()
+	Signalbus.refresh_player_data.emit(new_data)
 
 func _on_pause():
 	if is_paused:
@@ -66,9 +50,9 @@ func _on_pause():
 		GlobalVariables.can_move = true
 		is_paused = true
 
-func _get_player_data(player_type: enums.PLAYERS):
-	return player_data_saves[player_type]
-
-func _save_player_data_from_node(player_node):
-	var data = player_data_saves[player_node.player_type]
-	data._save_player_data(player_node.char_stats)
+func _save_and_pass_data(player_node):
+	new_data.clear()
+	for player in player_node.get_children():
+		var data = Player_Loader._load_player_data(player.player_type).duplicate(true)
+		data._save_player_data(player.char_stats)
+		new_data[player.player_type] = data
