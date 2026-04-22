@@ -1,7 +1,7 @@
 class_name Character
 extends Node
 # Written By: Gianni Coladonato
-# Date Created / Modified: 06-10-2025 / 16-04-2026
+# Date Created / Modified: 06-10-2025 / 22-04-2026
 # Basic Info
 @export var chara_name : String = "BLANK"
 @export var hp: Vector2i = Vector2i(100, 100) # Current / Max
@@ -14,6 +14,8 @@ extends Node
 @export var def: Vector3i = Vector3i(0, -2, 3) # Defense Bonus, Min / Max
 @export var crt: Vector3i = Vector3i(0, 0, 2) # Crit Bonus Min / Max
 @export var eva: Vector3i = Vector3i(0, 0, 3) # Evasion chance, Min / Max
+# DOTS
+@export var dot: Vector2i = Vector2i(0, 0) # Hurt x for y turns
 # General
 @export var is_alive: bool = true:
 	set(value):
@@ -87,6 +89,14 @@ func _remove_mark() -> void:
 	is_marked = false
 	buff_container._toggle_mark(false)
 	mark_duration = 0
+
+func _start_of_turn_checks() -> void:
+	if dot.x > 0: #If actor has dot damage, apply it and subtract one
+		dot.y -= 1
+		var damage = dot.x
+		if dot.y <= 0:
+			dot = Vector2i.ZERO
+		_hurt(damage)
 
 func _end_of_turn_checks() -> void:
 	if mark_duration > 0 && is_marked:
