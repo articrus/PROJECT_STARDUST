@@ -14,7 +14,6 @@ signal pause(toggle: bool)
 #Player Buttons
 signal skipped_selected
 signal attack_selected
-signal move_selected
 signal skill_selected
 
 # Attack & Skill animations

@@ -6,8 +6,8 @@
 
 [resource]
 script = ExtResource("1_n6ork")
-skill_name = "Dagger / Bow Shot"
+skill_name = "Bow Shot"
 skill_description = "Combo targets take +50% damage"
 skill_effects = Array[ExtResource("2_bqhpx")]([ExtResource("3_bqhpx")])
-skill_anim_index = -1
+skill_anim_index = 1
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

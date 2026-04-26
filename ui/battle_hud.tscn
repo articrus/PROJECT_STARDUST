@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bftnuo2e8h6yn"]
+[gd_scene load_steps=9 format=3 uid="uid://bftnuo2e8h6yn"]
 
 [ext_resource type="Script" uid="uid://dch6yowujxr58" path="res://scripts/ui/battlehud/battle_hud.gd" id="1_rj6uh"]
 [ext_resource type="Script" uid="uid://dyoviw2jwd6ad" path="res://scripts/ui/battlehud/description_box.gd" id="4_d1oia"]
 [ext_resource type="PackedScene" uid="uid://bvkkyaffhtk84" path="res://ui/buttons/option_button.tscn" id="4_rd5di"]
 [ext_resource type="Texture2D" uid="uid://c8pd0e7pyqo8c" path="res://ui/textures/buttons/option_skl.tres" id="6_guxl1"]
-[ext_resource type="Texture2D" uid="uid://c0q3626syn3hv" path="res://ui/textures/buttons/option_mve.tres" id="7_5qs3c"]
 [ext_resource type="Texture2D" uid="uid://duwuvtopeh2ep" path="res://ui/textures/buttons/option_itm.tres" id="7_jg505"]
 [ext_resource type="Texture2D" uid="uid://deoe3sseobcpy" path="res://ui/textures/buttons/option_hlp.tres" id="9_wpe1y"]
 [ext_resource type="Texture2D" uid="uid://qlyqiglmrr2v" path="res://ui/textures/buttons/option_skp.tres" id="10_rd5di"]
@@ -110,12 +109,6 @@ layout_mode = 2
 icon = ExtResource("7_jg505")
 option_name = "Item"
 option_desc = "Use an Item"
-
-[node name="Move" parent="BottomBorder/PlayerButtons" instance=ExtResource("4_rd5di")]
-layout_mode = 2
-icon = ExtResource("7_5qs3c")
-option_name = "Move"
-option_desc = "Change ranks"
 
 [node name="Help" parent="BottomBorder/PlayerButtons" instance=ExtResource("4_rd5di")]
 layout_mode = 2

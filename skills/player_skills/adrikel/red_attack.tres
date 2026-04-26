@@ -6,8 +6,7 @@
 
 [resource]
 script = ExtResource("1_aw1u6")
-skill_name = "Axe Swipe / Knife Toss"
+skill_name = "Axe Swipe"
 skill_description = "Attack an enemy, heal 10% when target is marked"
 skill_effects = Array[ExtResource("2_ggn3r")]([ExtResource("3_ggn3r")])
-skill_anim_index = -1
 metadata/_custom_type_script = "uid://dcmm7hpqos27p"

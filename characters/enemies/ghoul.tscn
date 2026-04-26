@@ -19,7 +19,6 @@ enemy_brain = ExtResource("2_5mq1e")
 script = ExtResource("3_qdlbt")
 chara_name = "Slime"
 hp = Vector2i(10, 10)
-abilities = Vector3i(6, 4, 2)
 metadata/_custom_type_script = "uid://bm801yc5miabv"
 
 [node name="SimpleEnemy" parent="." instance=ExtResource("4_v13y7")]

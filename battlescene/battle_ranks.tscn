@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf4trkbnlqwna"]
+
+[ext_resource type="Script" uid="uid://cv0k7uw5qy8d" path="res://scripts/battle_scene/rank_manager.gd" id="1_nyy41"]
+[ext_resource type="Texture2D" uid="uid://bsevbs0a2j40h" path="res://sprites/ui/shadow.png" id="2_qa521"]
+
+[node name="Ranks" type="Node2D"]
+script = ExtResource("1_nyy41")
+
+[node name="Players" type="Node2D" parent="."]
+position = Vector2(-90, 0)
+
+[node name="Rank 1" type="Marker2D" parent="Players"]
+position = Vector2(35, -25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Players/Rank 1"]
+texture = ExtResource("2_qa521")
+
+[node name="Rank 2" type="Marker2D" parent="Players"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Players/Rank 2"]
+texture = ExtResource("2_qa521")
+
+[node name="Rank 3" type="Marker2D" parent="Players"]
+position = Vector2(-35, 25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Players/Rank 3"]
+texture = ExtResource("2_qa521")
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2(90, 0)
+
+[node name="Rank 1" type="Marker2D" parent="Enemies"]
+position = Vector2(-35, -25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemies/Rank 1"]
+texture = ExtResource("2_qa521")
+
+[node name="Rank 2" type="Marker2D" parent="Enemies"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemies/Rank 2"]
+texture = ExtResource("2_qa521")
+
+[node name="Rank 3" type="Marker2D" parent="Enemies"]
+position = Vector2(35, 25)
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemies/Rank 3"]
+texture = ExtResource("2_qa521")
+
+[node name="Rank 4" type="Marker2D" parent="Enemies"]
+position = Vector2(-36, 30)
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemies/Rank 4"]
+texture = ExtResource("2_qa521")
+
+[node name="Rank 5" type="Marker2D" parent="Enemies"]
+position = Vector2(36, -30)
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemies/Rank 5"]
+texture = ExtResource("2_qa521")

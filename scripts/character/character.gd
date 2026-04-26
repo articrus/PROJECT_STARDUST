@@ -1,12 +1,12 @@
 class_name Character
 extends Node
 # Written By: Gianni Coladonato
-# Date Created / Modified: 06-10-2025 / 22-04-2026
+# Date Created / Modified: 06-10-2025 / 25-04-2026
 # Basic Info
 @export var chara_name : String = "BLANK"
 @export var hp: Vector2i = Vector2i(100, 100) # Current / Max
 # Skills & stats
-@export var abilities: Vector3i = Vector3i(6, 6, 6) # Melee Damage / Ranged Damage / Skill Damage
+@export var abilities: Vector2i = Vector2i(6, 6) # Melee Damage / Skill Damage
 # Position
 @export var rank : int = 0
 # Modifiers/Tokens
@@ -64,10 +64,7 @@ func _is_crit() -> bool:
 
 func _attack_damage() -> int:
 	var damage = 1 + Token_Utils._get_atk_bonus(self)
-	if rank < 2:
-		damage *= randi_range(ceil(abilities.x / 2.0), abilities.x) # Melee Damage
-	else:
-		damage *= randi_range(ceil(abilities.y / 2.0), abilities.y) # Ranged Damage
+	damage *= randi_range(ceil(abilities.x / 2.0), abilities.x) # Melee Damage
 	return int(damage)
 
 func _damage_reduction(damage: int) -> float:

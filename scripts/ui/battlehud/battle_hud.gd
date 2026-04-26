@@ -1,11 +1,10 @@
 extends Control
 # Written By: Gianni Coladonato
-# Date Created / Modified: 07-10-2025 / 22-03-2026
+# Date Created / Modified: 07-10-2025 / 25-04-2026
 @onready var option_buttons = $BottomBorder/PlayerButtons
 @onready var player_btns := {
 	"Attack": $BottomBorder/PlayerButtons/Attack,
 	"Skill": $BottomBorder/PlayerButtons/Skill,
-	"Move": $BottomBorder/PlayerButtons/Move,
 	"Item": $BottomBorder/PlayerButtons/Item,
 	"Help": $BottomBorder/PlayerButtons/Help,
 	"Skip": $BottomBorder/PlayerButtons/Skip
@@ -28,7 +27,6 @@ func _bind_option_buttons() -> void:
 	player_btns["Attack"].pressed.connect(_on_option_pressed.bind(enums.OPTION.ATTACK))
 	player_btns["Skill"].pressed.connect(_on_option_pressed.bind(enums.OPTION.SKILL))
 	player_btns["Item"].pressed.connect(_on_option_pressed.bind(enums.OPTION.ITEM))
-	player_btns["Move"].pressed.connect(_on_option_pressed.bind(enums.OPTION.MOVE))
 	player_btns["Help"].pressed.connect(_on_option_pressed.bind(enums.OPTION.HELP))
 	player_btns["Skip"].pressed.connect(_on_option_pressed.bind(enums.OPTION.SKIP))
 
@@ -51,8 +49,6 @@ func _on_option_pressed(option: enums.OPTION) -> void:
 			_toggle_buttons_lists(false, true)
 		enums.OPTION.ITEM:
 			print("NOT YET IMPLEMENTED")
-		enums.OPTION.MOVE:
-			Signalbus.move_selected.emit()
 		enums.OPTION.HELP:
 			print("NOT YET IMPLEMENTED")
 		enums.OPTION.SKIP:
@@ -121,5 +117,5 @@ func _get_attack_option_damage_text(chara: Character) -> String:
 
 # Prepare all the option text/hover ui
 func _set_option_name_and_descriptions(actor: Character) -> void:
-	player_btns["Attack"]._set_attack_option_text(actor.char_attack, actor.rank, _get_attack_option_damage_text(actor))
+	player_btns["Attack"]._set_skill_option_text(actor.char_attack, _get_attack_option_damage_text(actor))
 	# Do this again for help and skip, since they'll have different effects

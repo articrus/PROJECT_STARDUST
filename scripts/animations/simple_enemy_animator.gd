@@ -1,6 +1,6 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created / Modified : 26-10-2025 / 05-04-2026
+# Date Created / Modified : 26-10-2025 / 25-04-2026
 # Scene Components
 @onready var sprite = $Sprite2D
 @onready var anim_player = $AnimationPlayer
@@ -44,12 +44,6 @@ func _enter_battle(toggle: bool):
 	else:
 		enemy_state = enums.ENEMY_STATE.BATTLE
 	is_battle = toggle
-
-func _attack(rank: int):
-	if rank < 2:
-		enemy_state = enums.ENEMY_STATE.M_ATTACK
-	else:
-		enemy_state = enums.ENEMY_STATE.R_ATTACK
 
 func _skill(index: int) -> void:
 	match index:

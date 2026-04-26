@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="Player_Data" load_steps=6 format=3 uid="uid://dyh7h4q1hw8v4"]
+[gd_resource type="Resource" script_class="Player_Data" load_steps=7 format=3 uid="uid://dyh7h4q1hw8v4"]
 
 [ext_resource type="Script" uid="uid://djyxh3ytb5htx" path="res://scripts/data/player_data.gd" id="1_rj0u6"]
 [ext_resource type="Script" uid="uid://dcmm7hpqos27p" path="res://scripts/skills/skill.gd" id="2_60jeg"]
 [ext_resource type="Resource" uid="uid://yqy0aej0q3r8" path="res://skills/player_skills/adrikel/rage.tres" id="3_p14bx"]
 [ext_resource type="Resource" uid="uid://4205krkwctoe" path="res://skills/test_skills/test_debuff.tres" id="5_hdrfv"]
+[ext_resource type="Resource" uid="uid://dmm8mk5sga7q0" path="res://skills/player_skills/adrikel/command.tres" id="5_mk1wp"]
 [ext_resource type="Resource" uid="uid://c33s4kbgwwbkg" path="res://skills/player_skills/adrikel/red_attack.tres" id="5_p14bx"]
 
 [resource]
 script = ExtResource("1_rj0u6")
 hp = Vector2i(50, 50)
-abilities = Vector3i(12, 4, 2)
-skill_list = Array[ExtResource("2_60jeg")]([ExtResource("3_p14bx"), ExtResource("5_hdrfv")])
+abilities = Vector2i(10, 2)
+skill_list = Array[ExtResource("2_60jeg")]([ExtResource("3_p14bx"), ExtResource("5_mk1wp"), ExtResource("5_hdrfv")])
 char_attack = ExtResource("5_p14bx")
 metadata/_custom_type_script = "uid://djyxh3ytb5htx"

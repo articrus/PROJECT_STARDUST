@@ -1,16 +1,14 @@
 extends Node2D
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 27-10-2025 | 16-04-2026
+# Date Created/Modificed: 27-10-2025 | 25-04-2026
 # Scene Components
 @onready var party_node = $Players
 @onready var enemies_node = $Enemies
-@onready var rank_manager = $Ranks
-@onready var enemy_rank_manager = $EnemyRanks
+@onready var ranks = $Ranks
 @onready var battle_hud = $CanvasLayer/BattleHUD
 @onready var targetor = $Targetor
 @onready var battle_cam = $BattleCam
 @onready var timers = $Timers
-# The Current Sate of the Battle
 @export var current_state : enums.STATE = enums.STATE.SETUP:
 	set(value):
 		if value != current_state:
@@ -24,8 +22,7 @@ var player_entry = {
 	"Target": null,
 	"Choice": enums.PLAYER_CHOICE.NONE, 
 	"Cost": 0,
-	"Skill": null,
-	"Rank": 0 }
+	"Skill": null }
 var current_player
 var turn_order = []
 
@@ -35,16 +32,13 @@ func _ready() -> void:
 	timers._connect_to_battle_manager(self)
 
 ###---INITIATION FUNCTIONS---###
-# Connect all signals for battle hud
-func _connect_signals():
+func _connect_signals(): # Connect all signals for battle hud
 	Signalbus.attack_selected.connect(_attack_option_selected) # Connect attack option
-	Signalbus.move_selected.connect(_move_option_selected) # Connect move option
 	Signalbus.skipped_selected.connect(_skip_option_selected) # Connect skip option
 	Signalbus.skill_selected.connect(_skill_option_selected) # Connect skill select
 	Signalbus.skill_button_pressed.connect(_skill_selected) # Connect specific chosen skill
 
-# Called when Node is loaded
-func _on_battle_scene_ready(encounter: Encounter_Data):
+func _on_battle_scene_ready(encounter: Encounter_Data): # Called when Node is loaded
 	await _load_players_into_scene(GameManager.current_party)
 	await _load_enemies_into_scene(encounter)
 	_scene_set_up()
@@ -53,7 +47,7 @@ func _scene_set_up():
 	targetor.visible = false
 	turn_index = 0
 	battle_cam.make_current()
-	Battle_Utils._position_players(rank_manager, enemy_rank_manager, party_node, enemies_node)
+	Battle_Utils._position_players(ranks, party_node, enemies_node)
 	battle_hud._populate_profile_container(party_node)
 	current_state = enums.STATE.TURN_START
 
@@ -92,14 +86,14 @@ func _process(_delta) -> void:
 			_select_target()
 		enums.STATE.TARGETING_PARTY:
 			_select_ally()
+		enums.STATE.TARGETING_PARTY_NOT_SELF:
+			_select_ally_not_self()
 		enums.STATE.TARGETING_SELF:
 			_selecting_self()
 		enums.STATE.TARGETING_ALL_ENEMIES:
 			_select_all()
 		enums.STATE.TARGETING_ALL_ALLIES:
 			_select_all()
-		enums.STATE.CHANGING_POSITION:
-			_select_rank()
 		enums.STATE.CHOOSING_SKILL:
 			_selecting_skill()
 		enums.STATE.RESOLVE_CHOICES:
@@ -110,16 +104,20 @@ func _process(_delta) -> void:
 func _start_turn():
 	if player_turn:
 		turn_index = 0
-		current_state = enums.STATE.PLAYER_TURN
+		for player in party_node.get_children(): #Apply dot damage
+			player.char_stats._start_of_turn_checks()
 		battle_hud._toggle_buttons_lists(true, false)
 		current_player = party_node.get_child(turn_index)
 		battle_hud._set_current_turn_profile(current_player)
+		current_state = enums.STATE.PLAYER_TURN
 		if !current_player.char_stats.is_alive:
 			_switch_to_next_player()
 		else:
 			battle_hud._set_option_name_and_descriptions(current_player.char_stats)
 	else: 
 		current_state = enums.STATE.ENEMY_TURN
+		for enemy in enemies_node.get_children(): # Apply dot damage
+			enemy.char_stats._start_of_turn_checks()
 		_enemy_turn()
 
 func _player_turn():
@@ -142,12 +140,6 @@ func _attack_option_selected(): # When the attack option is selected
 	targetor._adjust_targeting(enemies_node.get_child(0))
 	battle_hud._toggle_buttons_lists(false, false)
 
-func _move_option_selected(): # When the move option is seletec
-	current_state = enums.STATE.CHANGING_POSITION
-	_reset_targetor()
-	targetor._adjust_targeting(rank_manager.get_child(0))
-	battle_hud._toggle_buttons_lists(false, false)
-
 func _skill_option_selected(): # When the skill option is selected
 	battle_hud._toggle_buttons_lists(false, true)
 	battle_hud._populate_skill_container(current_player.char_stats)
@@ -158,7 +150,7 @@ func _skill_selected(skill: Skill): # When a specific skill is selected
 	player_dictionary[current_player].Skill = skill 
 	battle_hud._toggle_buttons_lists(false, false)
 	_reset_targetor()
-	match skill.skill_target: # Add a handle for not_self (should be easy enough to configure)
+	match skill.skill_target: 
 		enums.TARGET.ENEMY:
 			current_state = enums.STATE.TARGETING_ENEMIES
 			targetor._adjust_targeting(enemies_node.get_child(0))
@@ -169,6 +161,10 @@ func _skill_selected(skill: Skill): # When a specific skill is selected
 			current_state = enums.STATE.TARGETING_SELF
 			targeting_index = turn_index
 			targetor._adjust_targeting(current_player)
+		enums.TARGET.ALLY_NOT_SELF:
+			current_state = enums.STATE.TARGETING_PARTY_NOT_SELF
+			targeting_index = turn_index + 1 #Add check for when last in order
+			targetor._adjust_targeting(party_node.get_child(targeting_index))
 		enums.TARGET.ALL_ENEMIES:
 			current_state = enums.STATE.TARGETING_ALL_ENEMIES
 			targetor._adjust_targeting(enemies_node)
@@ -193,14 +189,6 @@ func _set_single_target(node: Node) -> void: # Sets a single target
 # Single target functions
 func _set_attack_target(): _set_single_target(enemies_node)
 func _set_friendly_target(): _set_single_target(party_node)
-
-# Set player move target
-func _set_move_target():
-	targetor.visible = false
-	player_dictionary[current_player].Choice = enums.PLAYER_CHOICE.MOVE
-	player_dictionary[current_player].Rank = targeting_index
-	player_dictionary[current_player].Cost = 0.0
-	_switch_to_next_player()
 
 func _set_all_target():
 	targetor.visible = false
@@ -245,34 +233,22 @@ func _reset_choice(player) -> void:
 	player_dictionary[player].Cost = 0.0
 	player_dictionary[player].Target = null
 	player_dictionary[player].Skill = null
-	player_dictionary[player].Rank = 0
 
 ###---SELECTING FUNCTIONS---###
-# Select an enemy target
-func _select_target():
+func _select_target(): # Select an enemy target
 	Battle_Utils._handle_section_input(
 		func(): _cycle_enemy_targets(1),
 		func(): _cycle_enemy_targets(-1),
 		func(): _set_attack_target(), # Return attack target
 		func(): _cancel_targeting() )
 
-# For selecting all enemies or allies (handled in _set_all_target())
-func _select_all():
+func _select_all(): # For selecting all enemies or allies (handled in _set_all_target())
 	Battle_Utils._handle_section_input(
 		func(): pass, func(): pass,
 		func(): _set_all_target(),
 		func(): _cancel_targeting())
 
-# Select a rank to swap to
-func _select_rank():
-	Battle_Utils._handle_section_input(
-		func(): _cycle_ranks(1),
-		func(): _cycle_ranks(-1),
-		func(): _set_move_target(), # Return new rank
-		func(): _cancel_targeting() )
-
-# Select an ally
-func _select_ally():
+func _select_ally(): # Select an ally
 	Battle_Utils._handle_section_input(
 		func(): _cycle_allies(1),
 		func(): _cycle_allies(-1),
@@ -289,19 +265,26 @@ func _selecting_self():
 		func(): _set_friendly_target(), #Return self
 		func(): _cancel_targeting() )
 
-# Cycle through enemy targets
-func _cycle_enemy_targets(newIndex: int) -> void:
-	targeting_index = targetor._cycle_targets(enemies_node, newIndex, targeting_index)
+func _select_ally_not_self():
+		Battle_Utils._handle_section_input(
+			func(): _cycle_non_self_target(1),
+			func(): _cycle_non_self_target(-1),
+			func(): _set_friendly_target(),
+			func(): _cancel_targeting() )
 
-# Cycle through player ranks
-func _cycle_ranks(newIndex: int) -> void:
-	targeting_index = targetor._cycle_targets(rank_manager, newIndex, targeting_index)
+func _cycle_non_self_target(newIndex: int) -> void:
+	targeting_index = targetor._cycle_targets(party_node, newIndex, targeting_index)
+	if party_node.get_child(targeting_index) == current_player:
+		targeting_index += newIndex
+		_cycle_allies(targeting_index) #Move to next ally
+
+func _cycle_enemy_targets(newIndex: int) -> void: # Cycle through enemy targets
+	targeting_index = targetor._cycle_targets(enemies_node, newIndex, targeting_index)
 
 func _cycle_allies(newIndex: int) -> void:
 	targeting_index = targetor._cycle_targets(party_node, newIndex, targeting_index)
 
-# End the turn and switch sides
-func _end_turn():
+func _end_turn(): # End the turn and switch sides
 	player_turn = !player_turn
 	if Battle_Utils._check_if_no_enemies_remain(enemies_node):
 		current_state = enums.STATE.COMBAT_OVER
@@ -325,17 +308,12 @@ func _resolve_player_choices():
 		match choice_data.Choice:
 			enums.PLAYER_CHOICE.NONE:
 				pass
-			enums.PLAYER_CHOICE.MOVE:
-				var new_rank = choice_data.Rank
-				var move_signals = rank_manager._change_target_position(player, new_rank, party_node)
-				for sig in move_signals:
-					await sig
 			enums.PLAYER_CHOICE.SKILL, enums.PLAYER_CHOICE.ATTACK:
 				skill = choice_data.Skill
 				var target = Battle_Utils._get_valid_target(skill, choice_data)
 				# Execute skill against target
 				if is_instance_valid(target):
-					player.animation_node._skill(skill._get_anim_index(player))
+					player.animation_node._skill(skill.skill_anim_index)
 					#ManaManager._attack_mana_bonus(player.char_stats)
 					await _process_player_skill(player, skill, target)
 		await get_tree().process_frame
@@ -343,8 +321,7 @@ func _resolve_player_choices():
 		entry.Key.char_stats._end_of_turn_checks()
 	timers.turn_change.start() #_end_turn()
 
-# Enemy turn logic (Do similar things to player logic (attack and skill handling)
-func _enemy_turn():
+func _enemy_turn(): # Enemy turn logic (Do similar things to player logic (attack and skill handling)
 	for enemy in enemies_node.get_children():
 		var decision = enemy.enemy_brain._make_decision(party_node, enemies_node)
 		await get_tree().process_frame
@@ -358,7 +335,7 @@ func _enemy_turn():
 				skill = enemy.enemy_brain.attack
 		var target = Battle_Utils._get_skill_target(skill.skill_target, enemy, party_node, enemies_node)
 		if is_instance_valid(target):
-			enemy.animation_node._skill(skill._get_anim_index(enemy))
+			enemy.animation_node._skill(skill.skill_anim_index)
 			#ManaManager._damage_mana_bonus(enemy.char_stats)
 			await Signalbus.perform_skill
 			skill._execute_skill(enemy, target)
@@ -368,8 +345,7 @@ func _enemy_turn():
 		enemy.enemy_brain._end_of_turn_check()
 	timers.turn_change.start() #_end_turn()
 
-# Process the player's attack/skill (Check to see if there's any oppertunities for missed calls
-func _process_player_skill(player, skill, target):
+func _process_player_skill(player, skill, target): # Process the player's skill
 	await Signalbus.perform_skill
 	skill._execute_skill(player, target)
 	await Signalbus.skill_finished

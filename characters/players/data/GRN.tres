@@ -10,7 +10,7 @@
 [resource]
 script = ExtResource("1_bfi7m")
 hp = Vector2i(30, 30)
-abilities = Vector3i(4, 8, 4)
+abilities = Vector2i(8, 4)
 skill_list = Array[ExtResource("2_qabm6")]([ExtResource("6_fs1mv"), ExtResource("5_scnu5"), ExtResource("6_av07w")])
 char_attack = ExtResource("1_fs1mv")
 metadata/_custom_type_script = "uid://djyxh3ytb5htx"

@@ -1,9 +1,9 @@
 extends Resource
 class_name Player_Data
 # Written By: Gianni Coladonato
-# Date Created / Modified : 10-11-2025 / 05-12-2025
+# Date Created / Modified : 10-11-2025 / 25-04-2025
 @export var hp: Vector2i = Vector2i(0,0)
-@export var abilities: Vector3i = Vector3i(0,0,0)
+@export var abilities: Vector2i = Vector2i.ZERO
 @export var skill_list: Array[Skill]
 @export var char_attack: Skill
 

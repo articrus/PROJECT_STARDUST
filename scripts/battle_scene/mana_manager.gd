@@ -20,8 +20,8 @@ func _remove_mana(amount: int) -> void:
 
 # Every party memeber that attacks gives a small mana bonus equal to their skill + 5
 func _attack_mana_bonus(actor: Character) -> void:
-	_add_mana(base_attack_mana + actor.abilities.z)
+	_add_mana(base_attack_mana + actor.abilities.y)
 
 # When taking damage bonus, gain a small amount of mana
 func _damage_mana_bonus(actor: Character) -> void:
-	_add_mana(base_defense_mana + (actor.abilities.z/2))
+	_add_mana(base_defense_mana + (actor.abilities.y/2))

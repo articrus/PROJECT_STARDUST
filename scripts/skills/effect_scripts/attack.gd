@@ -1,7 +1,7 @@
 extends Skill_Effect
 class_name Attack_Effect
 # Written By: Gianni Coladonato
-# Date Created / Modified: Sometime in 2025 / 05-04-2026
+# Date Created / Modified: Sometime in 2025 / 25-04-2026
 # Additonal Effects
 @export var additional_effects_self: Array[Skill_Effect]
 @export var additional_effects_enemy: Array[Skill_Effect]
@@ -9,8 +9,7 @@ class_name Attack_Effect
 @export var can_combo: bool = false
 #@export var combo_crit_boost: int = 0
 # Attack Effects
-@export var melee_fx: PackedScene
-@export var ranged_fx: PackedScene
+@export var hit_fx: PackedScene
 
 func _apply_effect(actor: Node2D, target: Node2D):
 	# Get the attack damage
@@ -42,8 +41,6 @@ func _apply_effect(actor: Node2D, target: Node2D):
 		target.char_stats._remove_mark()
 	# Display FX
 	DamageNumbers._display_damage(target, reduction, crit)
-	if actor.char_stats.rank < 2 && melee_fx:
-		VfxManager._spawn_hit_effect(melee_fx, target)
-	elif ranged_fx:
-		VfxManager._spawn_hit_effect(ranged_fx, target)
+	if hit_fx:
+		VfxManager._spawn_hit_effect(hit_fx, target)
 	Signalbus.call_deferred("emit_signal", "skill_finished")

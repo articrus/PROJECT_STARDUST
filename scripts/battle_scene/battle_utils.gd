@@ -1,7 +1,7 @@
 extends Node
 class_name Battle_Utils
 # Written By: Gianni Coladonato
-# Date Created/Modificed: 09-11-2025 | 17-04-2026
+# Date Created/Modificed: 09-11-2025 | 25-04-2026
 # This class is used to store some simple functions to reduce the complexity of the battle_manager script
 
 # Return a valid target for skills and attacks (FIXXXX)
@@ -59,14 +59,14 @@ static func _check_if_all_players_downed(party_node) -> bool:
 static func _sort_turn_order_values(a,b):
 	return a.Value < b.Value
 
-static func _position_players(rank_manager: Node2D, enemy_rank_manager: Node2D, party_node: Node2D, enemies_node: Node2D):
+static func _position_players(ranks, party_node: Node2D, enemies_node: Node2D):
 	for i in party_node.get_child_count():
 		var player = party_node.get_child(i)
-		rank_manager._init_positions(player, i)
+		ranks._init_positions(player, i, true)
 		player._enter_battle()
 	for i in enemies_node.get_child_count():
 		var enemy = enemies_node.get_child(i)
-		enemy_rank_manager._init_positions(enemy, i)
+		ranks._init_positions(enemy, i, false)
 
 static func _save_player_data(party_node):
 	for player in party_node.get_children():
